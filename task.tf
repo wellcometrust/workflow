@@ -8,7 +8,10 @@ module "testtask" {
   memory = 2048
   cpu = 128
   log_group_name_prefix = "goobitest"
-  service_vars = { KEY = "VALUE" }
+  service_vars = { NGINX_PORT = "443"
+    APP_PORT = "80"
+    HTTPS_DOMAIN = "intranda.com"
+  }
   config_vars = { DUMMY = "DUMMY" }
   config_vars_length = 1
   container_path = "/tmp"
