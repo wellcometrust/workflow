@@ -1,6 +1,7 @@
-variable "access_key" {}
-variable "secret_key" {}
-
 variable "region" {
-  default = "eu-central-1"
+  default = "eu-west-1"
+}
+
+variable "profile" {
+  default = "wellcomedigitalworkflow"
 }
