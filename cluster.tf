@@ -2,8 +2,8 @@ module "ecs_cluster" {
   source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/cluster?ref=v6.4.0"
   name = "testcluster"
 
-  key_name = "wellcomedigitalworkflow"
-  admin_cidr_ingress = "188.40.71.142/32"
+  key_name           = "wellcomedigitalworkflow"
+  admin_cidr_ingress = "${var.admin_cidr_ingress}"
 
   asg_on_demand_min = 1
   asg_on_demand_desired = 1
