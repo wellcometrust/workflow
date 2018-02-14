@@ -10,14 +10,14 @@ module "ecs_cluster" {
   asg_on_demand_desired = 1
   asg_on_demand_max = 2
 
-  asg_on_demand_instance_type = "t2.large"
+  asg_on_demand_instance_type = "t2.medium"
 
   asg_spot_min = 0
   asg_spot_desired = 0
   asg_spot_max = 1
 
-  asg_spot_instance_type = "t2.large"
-  asg_spot_price = 0.1
+  asg_spot_instance_type = "t2.medium"
+  asg_spot_price         = 0.1
 
   vpc_id = "${module.network.vpc_id}"
   vpc_subnets = ["${module.network.subnets}"]
