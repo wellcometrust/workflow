@@ -1,6 +1,7 @@
 module "ecs_cluster" {
-  source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/cluster?ref=v6.4.0"
-  name = "testcluster"
+  #source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/cluster?ref=v6.4.1"
+  source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/cluster?ref=allow_efs_mount_in_ecs_cluster"
+  name   = "testcluster"
 
   key_name           = "wellcomedigitalworkflow"
   admin_cidr_ingress = "${var.admin_cidr_ingress}"
@@ -27,4 +28,6 @@ module "ecs_cluster" {
   ec2_terminating_topic_arn = "${module.ec2_terminating_topic.arn}"
   ec2_terminating_topic_publish_policy = "${module.ec2_terminating_topic.publish_policy}"
   ec2_instance_terminating_for_too_long_alarm_arn = "${module.ec2_instance_terminating_for_too_long_alarm.arn}"
+
+  efs_filesystem_id = "${module.testcluster_goobi_efs.efs_id}"
 }
