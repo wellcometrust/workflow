@@ -1,6 +1,6 @@
 module "ecs_cluster" {
   source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/cluster?ref=v7.0.0"
-  name   = "testcluster"
+  name   = "workflow-cluster"
 
   key_name           = "wellcomedigitalworkflow"
   admin_cidr_ingress = "${var.admin_cidr_ingress}"
