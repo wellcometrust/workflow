@@ -1,6 +1,5 @@
 module "ecs_cluster" {
-  #source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/cluster?ref=v6.4.1"
-  source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/cluster?ref=allow_efs_mount_in_ecs_cluster"
+  source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/cluster?ref=v7.0.0"
   name   = "testcluster"
 
   key_name           = "wellcomedigitalworkflow"

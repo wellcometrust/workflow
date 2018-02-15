@@ -1,8 +1,6 @@
 module "testcluster_goobi_efs" {
-  #source = "git::https://github.com/wellcometrust/terraform.git//efs?ref=v6.4.1"
-  source = "git::https://github.com/wellcometrust/terraform.git//efs?ref=efs_access_multiple_sg"
+  source = "git::https://github.com/wellcometrust/terraform.git//efs?ref=v7.0.0"
 
-  #source = "../repos/wellcome/terraform-modules/efs"
   name = "testcluster_goobi_efs"
 
   vpc_id  = "${module.network.vpc_id}"
