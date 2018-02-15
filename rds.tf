@@ -7,7 +7,7 @@ module "goobi_rds_cluster" {
   vpc_id             = "${module.network.vpc_id}"
   vpc_subnet_ids     = ["${module.network.subnets}"]
 
-  admin_cidr_ingress       = "${var.admin_cidr_ingress}"
+  admin_cidr_ingress       = "${var.rds_admin_cidr_ingress}"
   db_access_security_group = "${module.ecs_cluster.asg_security_group_ids}"
   vpc_security_group_ids   = "${module.ecs_cluster.asg_security_group_ids}"
 }
