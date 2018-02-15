@@ -21,7 +21,7 @@ module "ecs_cluster" {
   vpc_id      = "${module.network.vpc_id}"
   vpc_subnets = ["${module.network.subnets}"]
 
-  alb_certificate_domain = "goobi.wellcomecollection.org"
+  alb_certificate_domain = "${var.workflow_domain_name}"
   alb_log_bucket_id      = "${aws_s3_bucket.alb-logs.id}"
 
   ec2_terminating_topic_arn                       = "${module.ec2_terminating_topic.arn}"

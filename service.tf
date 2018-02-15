@@ -25,8 +25,8 @@ module "ecs_service" {
     HTTPD_PORT   = "80"
     APP_PATH     = "goobi"
     APP_PORT     = "8080"
-    SERVERNAME   = "goobi.wellcomecollection.org"
-    HTTPS_DOMAIN = "goobi.wellcomecollection.org"
+    SERVERNAME   = "${var.workflow_domain_name}"
+    HTTPS_DOMAIN = "${var.workflow_domain_name}"
     DB_SERVER    = "${module.goobi_rds_cluster.host}"
     DB_PORT      = "${module.goobi_rds_cluster.port}"
     DB_NAME      = "${module.goobi_rds_cluster.database_name}"
@@ -34,7 +34,7 @@ module "ecs_service" {
     DB_PASSWORD  = "${module.goobi_rds_cluster.password}"
   }
 
-  https_domain = "goobi.wellcomecollection.org"
+  https_domain = "${var.workflow_domain_name}"
   path_pattern = "/*"
 
   env_vars_length = 10

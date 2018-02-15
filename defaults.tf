@@ -13,3 +13,7 @@ variable "admin_cidr_ingress" {
 variable "rds_admin_cidr_ingress" {}
 variable "rds_password" {}
 variable "rds_username" {}
+
+variable "workflow_domain_name" {
+  default = "workflow.wellcomecollection.org"
+}
