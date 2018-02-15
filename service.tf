@@ -1,6 +1,6 @@
 module "ecs_service" {
   source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/service?ref=v6.4.0"
-  name   = "testservice"
+  name   = "goobi"
 
   cluster_id = "${module.ecs_cluster.cluster_name}"
   vpc_id     = "${module.network.vpc_id}"
