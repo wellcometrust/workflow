@@ -1,7 +1,7 @@
-module "testcluster_goobi_efs" {
+module "workflow-cluster_goobi_efs" {
   source = "git::https://github.com/wellcometrust/terraform.git//efs?ref=v7.0.0"
 
-  name = "testcluster_goobi_efs"
+  name = "workflow-cluster_goobi_efs"
 
   vpc_id  = "${module.network.vpc_id}"
   subnets = ["${module.network.subnets}"]

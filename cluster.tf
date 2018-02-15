@@ -28,5 +28,5 @@ module "ecs_cluster" {
   ec2_terminating_topic_publish_policy            = "${module.ec2_terminating_topic.publish_policy}"
   ec2_instance_terminating_for_too_long_alarm_arn = "${module.ec2_instance_terminating_for_too_long_alarm.arn}"
 
-  efs_filesystem_id = "${module.testcluster_goobi_efs.efs_id}"
+  efs_filesystem_id = "${module.workflow-cluster_goobi_efs.efs_id}"
 }
