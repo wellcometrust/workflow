@@ -23,6 +23,11 @@ endif
 	wget https://raw.githubusercontent.com/wellcometrust/docker_run/master/scripts/is_up_to_date_with_master.sh  -P .scripts
 	chmod u+x .scripts/is_up_to_date_with_master.sh
 
+# Get the build scripts required
+build_setup: \
+	.scripts/is_up_to_date_with_master.sh \
+	.scripts/docker_run.py
+
 # Run a 'terraform plan' step.
 #
 # Args:
@@ -30,7 +35,7 @@ endif
 #	$2 - true/false: is this a public-facing stack?
 #
 define terraform_plan
-	make uptodate-git .scripts/docker_run.py .scripts/is_up_to_date_with_master.sh
+	make uptodate-git build_setup
 	$(ROOT)/.scripts/docker_run.py --aws -- \
 		--volume $(1):/data \
 		--env OP=plan \
@@ -46,7 +51,7 @@ endef
 #   $1 - Path to the Terraform directory.
 #
 define terraform_apply
-	make uptodate-git .scripts/docker_run.py .scripts/is_up_to_date_with_master.sh
+	make uptodate-git build_setup
 	$(ROOT)/.scripts/docker_run.py --aws -- \
 		--volume $(1):/data \
 		--env OP=apply \
