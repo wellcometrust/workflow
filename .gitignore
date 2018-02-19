@@ -1,5 +1,32 @@
-.terraform
-terraform.tfstate
-terraform.tfstate.backup
+### Intellij+all Patch ###
+# Ignores the whole idea folder
+# See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
+
+.idea/
+
+### Terraform ###
+# Compiled files
+*.tfstate
+*.tfstate.backup
+
+# Module directory
+.terraform/
+
+### Terraform Patch ###
+*.tfvars
+
+### Vim ###
+# swap
+.sw[a-p]
+.*.sw[a-p]
+# session
+Session.vim
+# temporary
+.netrwhist
 *~
+# auto-generated tag files
+tags
+
+### Project specific ###
+.scripts
 secret.tfvars
