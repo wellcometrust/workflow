@@ -39,7 +39,9 @@ define terraform_plan
 	$(ROOT)/.scripts/docker_run.py --aws -- \
 		--volume $(1):/data \
 		--env OP=plan \
-		--env GET_PLATFORM_TFVARS=false \
+		--env GET_TFVARS=false \
+		--env bucket_name=wellcomecollection-workflow-infra \
+		--env object_key=terraform/workflow.tfvars \
 		--env IS_PUBLIC_FACING=$(2) \
 		wellcome/terraform_wrapper:latest
 endef
