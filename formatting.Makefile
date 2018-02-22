@@ -1,6 +1,6 @@
 ROOT = $(shell git rev-parse --show-toplevel)
 
-format-terraform: build_setup
+format-terraform:
 	$(ROOT)/.scripts/docker_run.py --aws -- \
 		--volume $(ROOT):/repo \
 		--workdir /repo \

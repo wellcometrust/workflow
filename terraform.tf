@@ -5,6 +5,7 @@ terraform {
     bucket         = "wellcomecollection-workflow-infra"
     key            = "terraform/workflow.tfstate"
     dynamodb_table = "terraform-locktable"
+
     profile        = "wellcomedigitalworkflow"
     region         = "eu-west-1"
   }

@@ -1,32 +1,38 @@
 ROOT = $(shell git rev-parse --show-toplevel)
-DOCKER_RUN_ROOT=$(ROOT)
-
-export DOCKER_RUN_ROOT
 
 ifndef UPTODATE_GIT_DEFINED
-uptodate-git: .scripts/is_up_to_date_with_master.sh
-	$(ROOT)/.scripts/is_up_to_date_with_master.sh
+
+# This target checks if you're up-to-date with the current master.
+# This avoids problems where Terraform goes backwards or breaks
+# already-applied changes.
+#
+# Consider the following scenario:
+#
+#     * --- * --- X --- Z                 master
+#                  \
+#                   Y --- Y --- Y         feature branch
+#
+# We cut a feature branch at X, then applied commits Y.  Meanwhile master
+# added commit Z, and ran `terraform apply`.  If we run `terraform apply` on
+# the feature branch, this would revert the changes in Z!  We'd rather the
+# branches looked like this:
+#
+#     * --- * --- X --- Z                 master
+#                        \
+#                         Y --- Y --- Y   feature branch
+#
+# So that the commits in the feature branch don't unintentionally revert Z.
+#
+uptodate-git:
+	@git fetch origin
+	@if ! git merge-base --is-ancestor origin/master HEAD; then \
+		echo "You need to be up-to-date with master before you can continue!"; \
+		exit 1; \
+	fi
 
 UPTODATE_GIT_DEFINED = true
+
 endif
-
-.scripts:
-	mkdir $(ROOT)/.scripts
-
-# Get docker_run.py script
-.scripts/docker_run.py: .scripts
-	wget https://raw.githubusercontent.com/wellcometrust/docker_run/master/docker_run.py -P .scripts
-	chmod u+x .scripts/docker_run.py
-
-# Get is_up_to_date_with_master.sh script
-.scripts/is_up_to_date_with_master.sh: .scripts
-	wget https://raw.githubusercontent.com/wellcometrust/docker_run/master/scripts/is_up_to_date_with_master.sh  -P .scripts
-	chmod u+x .scripts/is_up_to_date_with_master.sh
-
-# Get the build scripts required
-build_setup: \
-	.scripts/is_up_to_date_with_master.sh \
-	.scripts/docker_run.py
 
 # Run a 'terraform plan' step.
 #
@@ -35,14 +41,14 @@ build_setup: \
 #	$2 - true/false: is this a public-facing stack?
 #
 define terraform_plan
-	make uptodate-git build_setup
-	$(ROOT)/.scripts/docker_run.py --aws -- \
+	make uptodate-git
+	AWS_PROFILE="wellcomedigitalworkflow" $(ROOT)/docker_run.py --aws -- \
 		--volume $(1):/data \
 		--env OP=plan \
-		--env GET_TFVARS=false \
+		--env GET_TFVARS=true \
+		--env IS_PUBLIC_FACING=$(2) \
 		--env bucket_name=wellcomecollection-workflow-infra \
 		--env object_key=terraform/workflow.tfvars \
-		--env IS_PUBLIC_FACING=$(2) \
 		wellcome/terraform_wrapper:latest
 endef
 
@@ -53,9 +59,11 @@ endef
 #   $1 - Path to the Terraform directory.
 #
 define terraform_apply
-	make uptodate-git build_setup
-	$(ROOT)/.scripts/docker_run.py --aws -- \
+	make uptodate-git
+	$(ROOT)/docker_run.py --aws -- \
 		--volume $(1):/data \
 		--env OP=apply \
+		--env bucket_name=wellcomecollection-workflow-infra \
+		--env object_key=terraform/workflow.tfvars \
 		wellcome/terraform_wrapper:latest
 endef
