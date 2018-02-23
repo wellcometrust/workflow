@@ -47,8 +47,8 @@ define terraform_plan
 		--env OP=plan \
 		--env GET_TFVARS=true \
 		--env IS_PUBLIC_FACING=$(2) \
-		--env bucket_name=wellcomecollection-workflow-infra \
-		--env object_key=terraform/workflow.tfvars \
+		--env BUCKET_NAME=wellcomecollection-workflow-infra \
+		--env OBJECT_KEY=terraform/workflow.tfvars \
 		wellcome/terraform_wrapper:latest
 endef
 
