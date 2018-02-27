@@ -60,7 +60,7 @@ endef
 #
 define terraform_apply
 	make uptodate-git
-	$(ROOT)/docker_run.py --aws -- \
+	AWS_PROFILE="wellcomedigitalworkflow" $(ROOT)/docker_run.py --aws -- \
 		--volume $(1):/data \
 		--env OP=apply \
 		--env bucket_name=wellcomecollection-workflow-infra \
