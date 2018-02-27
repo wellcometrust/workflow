@@ -63,7 +63,7 @@ define terraform_apply
 	AWS_PROFILE="wellcomedigitalworkflow" $(ROOT)/docker_run.py --aws -- \
 		--volume $(1):/data \
 		--env OP=apply \
-		--env bucket_name=wellcomecollection-workflow-infra \
-		--env object_key=terraform/workflow.tfvars \
+		--env BUCKET_NAME=wellcomecollection-workflow-infra \
+		--env OBJECT_KEY=terraform/workflow.tfvars \
 		wellcome/terraform_wrapper:latest
 endef
