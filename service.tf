@@ -5,8 +5,8 @@ module "ecs_service" {
   cluster_id = "${module.ecs_cluster.cluster_name}"
   vpc_id     = "${module.network.vpc_id}"
 
-  nginx_uri                = "417078950171.dkr.ecr.eu-central-1.amazonaws.com/httpd_proxy"
-  app_uri                  = "417078950171.dkr.ecr.eu-central-1.amazonaws.com/goobi"
+  nginx_uri                = "${var.proxy_docker_uri}"
+  app_uri                  = "${var.goobi_docker_uri}"
   primary_container_port   = "80"
   secondary_container_port = "8080"
 

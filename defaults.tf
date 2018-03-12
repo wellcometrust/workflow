@@ -17,3 +17,6 @@ variable "rds_username" {}
 variable "workflow_domain_name" {
   default = "workflow.wellcomecollection.org"
 }
+
+variable "goobi_docker_uri" {}
+variable "proxy_docker_uri" {}
