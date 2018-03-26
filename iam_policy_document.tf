@@ -86,6 +86,7 @@ data "aws_iam_policy_document" "s3_read_workflow-configuration" {
 
     resources = [
       "${aws_s3_bucket.workflow-configuration.arn}",
+      "${aws_s3_bucket.workflow-configuration.arn}/*",
     ]
   }
 }
