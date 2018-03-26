@@ -22,16 +22,18 @@ module "ecs_service" {
   healthcheck_path = "/goobi/uii/index.xhtml"
 
   env_vars = {
-    HTTPD_PORT   = "80"
-    APP_PATH     = "goobi"
-    APP_PORT     = "8080"
-    SERVERNAME   = "${var.workflow_domain_name}"
-    HTTPS_DOMAIN = "${var.workflow_domain_name}"
-    DB_SERVER    = "${module.goobi_rds_cluster.host}"
-    DB_PORT      = "${module.goobi_rds_cluster.port}"
-    DB_NAME      = "${module.goobi_rds_cluster.database_name}"
-    DB_USER      = "${module.goobi_rds_cluster.username}"
-    DB_PASSWORD  = "${module.goobi_rds_cluster.password}"
+    HTTPD_PORT    = "80"
+    APP_PATH      = "goobi"
+    APP_PORT      = "8080"
+    SERVERNAME    = "${var.workflow_domain_name}"
+    HTTPS_DOMAIN  = "${var.workflow_domain_name}"
+    DB_SERVER     = "${module.goobi_rds_cluster.host}"
+    DB_PORT       = "${module.goobi_rds_cluster.port}"
+    DB_NAME       = "${module.goobi_rds_cluster.database_name}"
+    DB_USER       = "${module.goobi_rds_cluster.username}"
+    DB_PASSWORD   = "${module.goobi_rds_cluster.password}"
+    CONFIGSOURCE  = "s3"
+    AWS_S3_BUCKET = "${aws_s3_bucket.workflow-configuration.bucket}"
   }
 
   https_domain = "${var.workflow_domain_name}"
