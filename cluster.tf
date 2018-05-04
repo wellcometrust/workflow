@@ -1,5 +1,5 @@
 module "ecs_cluster" {
-  source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/cluster?ref=v7.0.0"
+  source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/cluster?ref=userdata-efs-ebs-mount"
   name   = "workflow-cluster"
 
   key_name           = "wellcomedigitalworkflow"
@@ -29,4 +29,6 @@ module "ecs_cluster" {
   ec2_instance_terminating_for_too_long_alarm_arn = "${module.ec2_instance_terminating_for_too_long_alarm.arn}"
 
   efs_filesystem_id = "${module.workflow-cluster_goobi_efs.efs_id}"
+  ebs_device_name = "/dev/xvdb"
+  ebs_size        = 180
 }
