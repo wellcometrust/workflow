@@ -29,6 +29,6 @@ module "ecs_cluster" {
   ec2_instance_terminating_for_too_long_alarm_arn = "${module.ec2_instance_terminating_for_too_long_alarm.arn}"
 
   efs_filesystem_id = "${module.workflow-cluster_goobi_efs.efs_id}"
-  ebs_device_name = "/dev/xvdb"
-  ebs_size        = 180
+  ebs_device_name   = "/dev/xvdb"
+  ebs_size          = 180
 }
