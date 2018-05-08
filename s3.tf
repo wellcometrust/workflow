@@ -30,3 +30,12 @@ resource "aws_s3_bucket" "workflow-configuration" {
     prevent_destroy = true
   }
 }
+
+resource "aws_s3_bucket" "workflow-data" {
+  bucket = "wellcomedigitalworkflow-workflow-data"
+  acl    = "private"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}

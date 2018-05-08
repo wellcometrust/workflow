@@ -14,3 +14,8 @@ resource "aws_iam_role_policy" "ecs_goobi_s3_config_read" {
   role   = "${module.ecs_service.task_role_name}"
   policy = "${data.aws_iam_policy_document.s3_read_workflow-configuration.json}"
 }
+
+resource "aws_iam_role_policy" "ecs_goobi_s3_data_rw" {
+  role   = "${module.ecs_service.task_role_name}"
+  policy = "${data.aws_iam_policy_document.s3_rw_workflow-data.json}"
+}
