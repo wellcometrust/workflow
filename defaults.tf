@@ -10,7 +10,7 @@ variable "platform_team_account_id" {
   default = "760097843905"
 }
 
-  variable "admin_cidr_ingress" {
+variable "admin_cidr_ingress" {
   type = "list"
 }
 
