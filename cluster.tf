@@ -31,4 +31,5 @@ module "ecs_cluster" {
   efs_filesystem_id = "${module.workflow-cluster_goobi_efs.efs_id}"
   ebs_device_name   = "/dev/xvdb"
   ebs_size          = 180
+  log_retention_in_days = 60
 }
