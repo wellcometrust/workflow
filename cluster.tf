@@ -1,5 +1,5 @@
 module "ecs_cluster" {
-  source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/cluster?ref=userdata-efs-ebs-mount"
+  source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/cluster?ref=v10.2.0"
   name   = "workflow-cluster"
 
   key_name           = "wellcomedigitalworkflow"
