@@ -1,5 +1,5 @@
 module "service" {
-  source = "../../../terraform-modules/ecs/modules/service/prebuilt/default"
+  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/service/prebuilt/default?ref=v11.1.0"
 
   service_name       = "${var.name}"
   task_desired_count = "${var.task_desired_count}"
@@ -21,7 +21,7 @@ module "service" {
 }
 
 module "task" {
-  source = "../../../terraform-modules/ecs/modules/task/prebuilt/single_container+ebs+efs"
+  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/task/prebuilt/single_container+ebs+efs?ref=v11.1.0"
 
   aws_region = "${var.region}"
   task_name  = "${var.name}"

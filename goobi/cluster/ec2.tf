@@ -1,5 +1,5 @@
 module "cluster_hosts" {
-  source = "../../terraform-modules/ecs/modules/ec2/prebuilt/ebs+exfs"
+  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/ec2/prebuilt/ebs+efs?ref=v11.1.0"
 
   cluster_name = "${var.cluster_name}"
   vpc_id       = "${var.vpc_id}"

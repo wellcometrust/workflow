@@ -1,5 +1,5 @@
 module "efs" {
-  source = "../../terraform-modules/efs"
+  source = "git::https://github.com/wellcometrust/terraform.git//efs?ref=v11.1.0"
 
   name = "${var.name}"
 
