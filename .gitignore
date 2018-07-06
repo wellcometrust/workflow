@@ -30,3 +30,4 @@ tags
 
 ### Project specific ###
 secret.tfvars
+.scripts/
