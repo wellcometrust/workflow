@@ -6,7 +6,11 @@ variable "asg_desired" {}
 variable "asg_max" {}
 variable "instance_type" {}
 variable "key_name" {}
-variable "controlled_access_cidr_ingress" {}
+
+variable "controlled_access_cidr_ingress" {
+  type = "list"
+}
+
 variable "public_subnets" {
   type = "list"
 }
