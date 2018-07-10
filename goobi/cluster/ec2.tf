@@ -23,7 +23,7 @@ module "cluster_hosts" {
 }
 
 module "bastion_host" {
-  source = "../../terraform-modules/ec2/prebuilt/bastion"
+  source = "git::https://github.com/wellcometrust/terraform.git//ec2/prebuilt/bastion"
 
   vpc_id = "${var.vpc_id}"
 
