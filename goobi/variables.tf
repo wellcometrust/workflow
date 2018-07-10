@@ -52,6 +52,7 @@ variable "shell_server_ebs_container_path" {}
 variable "shell_server_efs_container_path" {}
 variable "shell_server_container_port" {}
 variable "shell_server_container_image" {}
+
 variable "shell_server_env_vars" {
   type = "map"
 }
@@ -63,12 +64,14 @@ variable "shell_server_memory" {}
 
 variable "goobi_app_container_image" {}
 variable "goobi_app_container_port" {}
+
 variable "goobi_app_env_vars" {
   type = "map"
 }
 
 variable "goobi_sidecar_container_image" {}
 variable "goobi_sidecar_container_port" {}
+
 variable "goobi_sidecar_env_vars" {
   type = "map"
 }
@@ -89,12 +92,14 @@ variable "goobi_healthcheck_path" {}
 
 variable "itm_app_container_image" {}
 variable "itm_app_container_port" {}
+
 variable "itm_app_env_vars" {
   type = "map"
 }
 
 variable "itm_sidecar_container_image" {}
 variable "itm_sidecar_container_port" {}
+
 variable "itm_sidecar_env_vars" {
   type = "map"
 }

@@ -39,7 +39,7 @@ module "task" {
   memory = "${var.memory}"
 
   app_container_image = "${var.app_container_image}"
-  app_container_port = "${var.app_container_port}"
+  app_container_port  = "${var.app_container_port}"
 
   app_memory   = "${var.app_memory}"
   app_cpu      = "${var.app_cpu}"

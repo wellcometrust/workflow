@@ -8,8 +8,8 @@ module "cluster" {
   public_subnets  = "${module.network.public_subnets}"
   private_subnets = "${module.network.private_subnets}"
 
-  region = "${var.region}"
-  key_name   = "${var.key_name}"
+  region   = "${var.region}"
+  key_name = "${var.key_name}"
 
   controlled_access_cidr_ingress = ["${var.controlled_access_cidr_ingress}"]
 
@@ -24,8 +24,6 @@ module "cluster" {
 
   instance_type = "${var.instance_type}"
 }
-
-
 
 module "shell_server" {
   source = "private_service"
@@ -54,7 +52,7 @@ module "shell_server" {
   env_vars = "${var.shell_server_env_vars}"
 
   private_subnets = "${module.network.private_subnets}"
-  
+
   cpu    = "${var.shell_server_cpu}"
   memory = "${var.shell_server_memory}"
 }
@@ -66,14 +64,14 @@ module "load_balancer" {
 
   vpc_id         = "${module.network.vpc_id}"
   public_subnets = "${module.network.public_subnets}"
-  
+
   certificate_domain = "${var.workflow_domain_name}"
-  
+
   default_target_group_arn = "${module.goobi.target_group_arn}"
-  
+
   service_lb_security_group_ids = [
     "${module.goobi.service_lb_security_group_id}",
-    "${module.itm.service_lb_security_group_id}"
+    "${module.itm.service_lb_security_group_id}",
   ]
 }
 
@@ -106,16 +104,16 @@ module "goobi" {
   region     = "${var.region}"
 
   private_subnets = "${module.network.private_subnets}"
-  
+
   alb_listener_arn = "${module.load_balancer.https_listener_arn}"
 
   path_pattern = "${var.goobi_path_pattern}"
   host_name    = "${var.goobi_host_name}"
 
-  sidecar_cpu = "${var.goobi_sidecar_cpu}"
+  sidecar_cpu    = "${var.goobi_sidecar_cpu}"
   sidecar_memory = "${var.goobi_sidecar_memory}"
 
-  app_cpu = "${var.goobi_app_cpu}"
+  app_cpu    = "${var.goobi_app_cpu}"
   app_memory = "${var.goobi_app_memory}"
 
   healthcheck_path = "${var.goobi_healthcheck_path}"
@@ -149,16 +147,16 @@ module "itm" {
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
 
-  private_subnets = "${module.network.private_subnets}"
+  private_subnets  = "${module.network.private_subnets}"
   alb_listener_arn = "${module.load_balancer.https_listener_arn}"
-  
+
   path_pattern = "${var.itm_path_pattern}"
   host_name    = "${var.itm_host_name}"
 
-  sidecar_cpu = "${var.itm_sidecar_cpu}"
+  sidecar_cpu    = "${var.itm_sidecar_cpu}"
   sidecar_memory = "${var.itm_sidecar_memory}"
 
-  app_cpu = "${var.itm_app_cpu}"
+  app_cpu    = "${var.itm_app_cpu}"
   app_memory = "${var.itm_app_memory}"
 
   healthcheck_path = "${var.itm_healthcheck_path}"

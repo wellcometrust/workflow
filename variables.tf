@@ -23,9 +23,11 @@ variable "admin_cidr_ingress" {
 variable "asg_min" {
   default = "1"
 }
+
 variable "asg_desired" {
   default = "1"
 }
+
 variable "asg_max" {
   default = "2"
 }
@@ -39,6 +41,7 @@ variable "instance_type" {
 variable "profile" {
   default = "wellcomedigitalworkflow"
 }
+
 variable "region" {
   default = "eu-west-1"
 }
