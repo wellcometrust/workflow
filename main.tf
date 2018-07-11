@@ -16,6 +16,10 @@ module "goobi" {
     DB_PASSWORD   = "${module.goobi_rds_cluster.password}"
     CONFIGSOURCE  = "s3"
     AWS_S3_BUCKET = "${aws_s3_bucket.workflow-configuration.bucket}"
+    SERVERNAME    = "${var.domain_name}"
+    HTTPS_DOMAIN  = "${var.domain_name}"
+    APP_PATH      = "goobi"
+    APP_CONTAINER = "app"
   }
 
   goobi_sidecar_container_image = "${var.goobi_sidecar_container_image}"
@@ -54,6 +58,10 @@ module "goobi" {
     DB_PASSWORD   = "${module.goobi_rds_cluster.password}"
     CONFIGSOURCE  = "s3"
     AWS_S3_BUCKET = "${aws_s3_bucket.workflow-configuration.bucket}"
+    SERVERNAME    = "${var.domain_name}"
+    HTTPS_DOMAIN  = "${var.domain_name}"
+    APP_PATH      = "itm"
+    APP_CONTAINER = "app"
   }
 
   itm_sidecar_container_image = "${var.itm_sidecar_container_image}"
