@@ -32,12 +32,12 @@ module "goobi" {
   goobi_ebs_container_path = "/ebs"
 
   goobi_app_cpu    = "512"
-  goobi_app_memory = "1024"
+  goobi_app_memory = "2048"
 
   goobi_sidecar_cpu    = "512"
-  goobi_sidecar_memory = "1024"
+  goobi_sidecar_memory = "256"
 
-  goobi_healthcheck_path = "/healthcheck"
+  goobi_healthcheck_path = "/goobi/uii/index.php"
 
   # ITM
   itm_host_name    = "${var.domain_name}"
@@ -73,9 +73,9 @@ module "goobi" {
   itm_app_memory = "1024"
 
   itm_sidecar_cpu    = "512"
-  itm_sidecar_memory = "1024"
+  itm_sidecar_memory = "256"
 
-  itm_healthcheck_path = "/healthcheck"
+  itm_healthcheck_path = "/itm/index.php"
 
   # Shell Server
   shell_server_container_image = "${var.shell_server_container_image}"
