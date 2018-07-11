@@ -116,6 +116,9 @@ module "goobi" {
   app_cpu    = "${var.goobi_app_cpu}"
   app_memory = "${var.goobi_app_memory}"
 
+  cpu    = "${var.goobi_sidecar_cpu + var.goobi_app_cpu}"
+  memory = "${var.goobi_sidecar_memory + var.goobi_app_memory}"
+
   healthcheck_path = "${var.goobi_healthcheck_path}"
 }
 
@@ -158,6 +161,9 @@ module "itm" {
 
   app_cpu    = "${var.itm_app_cpu}"
   app_memory = "${var.itm_app_memory}"
+
+  cpu    = "${var.itm_sidecar_cpu + var.itm_app_cpu}"
+  memory = "${var.itm_sidecar_memory + var.itm_app_memory}"
 
   healthcheck_path = "${var.itm_healthcheck_path}"
 }
