@@ -10,7 +10,7 @@ module "cluster_hosts" {
   custom_security_groups      = ["${var.efs_security_group_ids}"]
 
   subnets  = "${var.private_subnets}"
-  key_name = "wellcomedigitalplatform"
+  key_name = "wellcomedigitalworkflow"
 
   efs_fs_id = "${var.efs_id}"
   region    = "${var.region}"
