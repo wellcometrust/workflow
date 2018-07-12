@@ -29,6 +29,7 @@ resource "aws_iam_role_policy" "ecs_itm_s3_data_rw" {
   role   = "${module.goobi.itm_task_role}"
   policy = "${data.aws_iam_policy_document.s3_rw_workflow-data.json}"
 }
+
 resource "aws_iam_role_policy" "ecs_shell_server_s3_config_read" {
   role   = "${module.goobi.shell_server_task_role}"
   policy = "${data.aws_iam_policy_document.s3_read_workflow-configuration.json}"

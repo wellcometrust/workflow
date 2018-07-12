@@ -25,9 +25,9 @@ module "goobi" {
   goobi_sidecar_container_port  = "80"
 
   goobi_sidecar_env_vars = {
-    SERVERNAME    = "${var.domain_name}"
-    HTTPS_DOMAIN  = "${var.domain_name}"
-    APP_PATH      = "goobi"
+    SERVERNAME   = "${var.domain_name}"
+    HTTPS_DOMAIN = "${var.domain_name}"
+    APP_PATH     = "goobi"
   }
 
   goobi_efs_container_path = "/efs"
@@ -65,9 +65,9 @@ module "goobi" {
   itm_sidecar_container_port  = "80"
 
   itm_sidecar_env_vars = {
-    SERVERNAME    = "${var.domain_name}"
-    HTTPS_DOMAIN  = "${var.domain_name}"
-    APP_PATH      = "itm"
+    SERVERNAME   = "${var.domain_name}"
+    HTTPS_DOMAIN = "${var.domain_name}"
+    APP_PATH     = "itm"
   }
 
   itm_efs_container_path = "/efs"
