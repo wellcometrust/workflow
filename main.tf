@@ -83,7 +83,7 @@ module "goobi" {
   itm_sidecar_cpu    = "512"
   itm_sidecar_memory = "256"
 
-  itm_healthcheck_path = "/itm/index.php"
+  itm_healthcheck_path = "/itm/index.xhtml"
 
   # Shell Server
   shell_server_container_image = "${var.shell_server_container_image}"
