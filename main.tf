@@ -6,7 +6,7 @@ module "goobi" {
   goobi_path_pattern = "/goobi"
 
   goobi_app_container_image = "${var.goobi_app_container_image}"
-  goobi_app_container_port  = "8080"
+  goobi_app_container_port  = "8009"
 
   goobi_app_env_vars = {
     DB_SERVER     = "${module.goobi_rds_cluster.host}"
@@ -38,17 +38,17 @@ module "goobi" {
   goobi_app_cpu    = "512"
   goobi_app_memory = "2048"
 
-  goobi_sidecar_cpu    = "512"
+  goobi_sidecar_cpu    = "128"
   goobi_sidecar_memory = "256"
 
-  goobi_healthcheck_path = "/goobi/index.php"
+  goobi_healthcheck_path = "/goobi/index.xhtml"
 
   # ITM
   itm_host_name    = "${var.domain_name}"
   itm_path_pattern = "/itm"
 
   itm_app_container_image = "${var.itm_app_container_image}"
-  itm_app_container_port  = "8080"
+  itm_app_container_port  = "8009"
 
   itm_app_env_vars = {
     DB_SERVER     = "${module.goobi_rds_cluster.host}"
