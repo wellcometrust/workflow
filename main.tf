@@ -41,7 +41,7 @@ module "goobi" {
   goobi_sidecar_cpu    = "512"
   goobi_sidecar_memory = "256"
 
-  goobi_healthcheck_path = "/goobi/uii/index.php"
+  goobi_healthcheck_path = "/goobi/index.php"
 
   # ITM
   itm_host_name    = "${var.domain_name}"
