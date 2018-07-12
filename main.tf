@@ -76,7 +76,7 @@ module "goobi" {
   itm_app_cpu    = "512"
   itm_app_memory = "1024"
 
-  itm_sidecar_cpu    = "512"
+  itm_sidecar_cpu    = "128"
   itm_sidecar_memory = "256"
 
   itm_healthcheck_path = "/itm/index.xhtml"
@@ -95,7 +95,7 @@ module "goobi" {
   shell_server_efs_container_path = "/efs"
   shell_server_ebs_container_path = "/ebs"
 
-  shell_server_cpu    = "512"
+  shell_server_cpu    = "256"
   shell_server_memory = "1024"
 
   controlled_access_cidr_ingress = ["${var.admin_cidr_ingress}"]
