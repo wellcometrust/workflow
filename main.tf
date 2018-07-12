@@ -19,7 +19,6 @@ module "goobi" {
     SERVERNAME    = "${var.domain_name}"
     HTTPS_DOMAIN  = "${var.domain_name}"
     APP_PATH      = "goobi"
-    APP_CONTAINER = "app"
   }
 
   goobi_sidecar_container_image = "${var.goobi_sidecar_container_image}"
@@ -29,7 +28,6 @@ module "goobi" {
     SERVERNAME    = "${var.domain_name}"
     HTTPS_DOMAIN  = "${var.domain_name}"
     APP_PATH      = "goobi"
-    APP_CONTAINER = "app"
   }
 
   goobi_efs_container_path = "/efs"
@@ -61,7 +59,6 @@ module "goobi" {
     SERVERNAME    = "${var.domain_name}"
     HTTPS_DOMAIN  = "${var.domain_name}"
     APP_PATH      = "itm"
-    APP_CONTAINER = "app"
   }
 
   itm_sidecar_container_image = "${var.itm_sidecar_container_image}"
@@ -71,7 +68,6 @@ module "goobi" {
     SERVERNAME    = "${var.domain_name}"
     HTTPS_DOMAIN  = "${var.domain_name}"
     APP_PATH      = "itm"
-    APP_CONTAINER = "app"
   }
 
   itm_efs_container_path = "/efs"
