@@ -11,6 +11,6 @@ module "goobi_rds_cluster" {
   # other instances in the private subnet (in order to reach via bastion host)
   admin_cidr_ingress = "0.0.0.0/0"
 
-  db_access_security_group = "${module.goobi.interservice_security_group_id}"
+  db_access_security_group = ["${module.goobi.interservice_security_group_id}"]
   vpc_security_group_ids   = "${module.goobi.interservice_security_group_id}"
 }
