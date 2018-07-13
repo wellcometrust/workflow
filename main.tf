@@ -3,7 +3,7 @@ module "goobi" {
 
   # Goobi
   goobi_host_name    = "${var.domain_name}"
-  goobi_path_pattern = "/goobi"
+  goobi_path_pattern = "/goobi/*"
 
   goobi_app_container_image = "${var.goobi_app_container_image}"
   goobi_app_container_port  = "8009"
@@ -34,7 +34,7 @@ module "goobi" {
   goobi_ebs_container_path = "/ebs"
 
   goobi_app_cpu    = "512"
-  goobi_app_memory = "2048"
+  goobi_app_memory = "4096"
 
   goobi_sidecar_cpu    = "128"
   goobi_sidecar_memory = "256"
@@ -43,7 +43,7 @@ module "goobi" {
 
   # ITM
   itm_host_name    = "${var.domain_name}"
-  itm_path_pattern = "/itm"
+  itm_path_pattern = "/itm/*"
 
   itm_app_container_image = "${var.itm_app_container_image}"
   itm_app_container_port  = "8009"
@@ -73,8 +73,8 @@ module "goobi" {
   itm_efs_container_path = "/efs"
   itm_ebs_container_path = "/ebs"
 
-  itm_app_cpu    = "512"
-  itm_app_memory = "1024"
+  itm_app_cpu    = "1024"
+  itm_app_memory = "2048"
 
   itm_sidecar_cpu    = "128"
   itm_sidecar_memory = "256"

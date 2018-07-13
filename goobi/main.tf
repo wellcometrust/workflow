@@ -73,6 +73,8 @@ module "load_balancer" {
     "${module.goobi.service_lb_security_group_id}",
     "${module.itm.service_lb_security_group_id}",
   ]
+
+  lb_controlled_ingress_cidrs = "${var.controlled_access_cidr_ingress}"
 }
 
 module "goobi" {

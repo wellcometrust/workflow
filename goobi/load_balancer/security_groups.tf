@@ -8,7 +8,7 @@ resource "aws_security_group" "external_lb_security_group" {
     from_port = 80
     to_port   = 80
 
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${var.lb_controlled_ingress_cidrs}"]
   }
 
   ingress {
