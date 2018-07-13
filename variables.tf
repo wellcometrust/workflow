@@ -33,7 +33,7 @@ variable "asg_max" {
 }
 
 variable "instance_type" {
-  default = "t2.large"
+  default = "c5.xlarge"
 }
 
 # Misc

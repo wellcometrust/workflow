@@ -8,7 +8,7 @@ module "service" {
 
   task_definition_arn = "${module.task.task_definition_arn}"
 
-  security_group_ids = ["${var.interservice_security_group_id}", "${var.service_egress_security_group_id}"]
+  security_group_ids = ["${var.interservice_security_group_id}", "${var.service_egress_security_group_id}", "${aws_security_group.service_lb_security_group.id}"]
 
   container_name = "${module.task.sidecar_task_name}"
   container_port = "${var.sidecar_container_port}"
