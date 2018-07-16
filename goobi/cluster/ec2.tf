@@ -1,5 +1,5 @@
 module "cluster_hosts" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/ec2/prebuilt/ebs+efs?ref=v11.1.0"
+  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/ec2/prebuilt/ebs+efs?ref=v11.3.0"
 
   cluster_name = "${var.cluster_name}"
   vpc_id       = "${var.vpc_id}"
@@ -23,7 +23,7 @@ module "cluster_hosts" {
 }
 
 module "bastion_host" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ec2/prebuilt/bastion?ref=v11.1.0"
+  source = "git::https://github.com/wellcometrust/terraform.git//ec2/prebuilt/bastion?ref=v11.3.0"
 
   vpc_id = "${var.vpc_id}"
 

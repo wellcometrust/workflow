@@ -1,5 +1,5 @@
 module "service" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/service/prebuilt/load_balanced?ref=v11.1.0"
+  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/service/prebuilt/load_balanced?ref=v11.3.0"
 
   service_name       = "${var.name}"
   task_desired_count = "${var.task_desired_count}"
@@ -24,7 +24,7 @@ module "service" {
 }
 
 module "task" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/task/prebuilt/container_with_sidecar+ebs+efs?ref=v11.1.0"
+  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/task/prebuilt/container_with_sidecar+ebs+efs?ref=v11.3.0"
 
   aws_region = "${var.region}"
   task_name  = "${var.name}"

@@ -1,5 +1,5 @@
 module "efs" {
-  source = "git::https://github.com/wellcometrust/terraform.git//efs?ref=workaround_count_computed"
+  source = "git::https://github.com/wellcometrust/terraform.git//efs?ref=v11.3.0"
 
   name = "${var.name}"
 
