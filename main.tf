@@ -65,7 +65,7 @@ module "goobi" {
     SERVERNAME    = "${var.domain_name}"
     HTTPS_DOMAIN  = "${var.domain_name}"
     APP_PATH      = "itm"
-    ITM_CONTAINER = "localhost"
+    APP_CONTAINER = "localhost"
   }
 
   itm_app_env_vars_length = "11"
@@ -74,7 +74,7 @@ module "goobi" {
   itm_sidecar_container_port  = "80"
 
   itm_sidecar_env_vars = {
-    ITM_CONTAINER = "localhost"
+    APP_CONTAINER = "localhost"
     SERVERNAME   = "${var.domain_name}"
     HTTPS_DOMAIN = "${var.domain_name}"
     APP_PATH     = "itm"
