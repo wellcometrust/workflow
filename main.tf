@@ -19,20 +19,22 @@ module "goobi" {
     SERVERNAME    = "${var.domain_name}"
     HTTPS_DOMAIN  = "${var.domain_name}"
     APP_PATH      = "goobi"
+    APP_CONTAINER = "localhost"
   }
 
-  goobi_app_env_vars_length = "10"
+  goobi_app_env_vars_length = "11"
 
   goobi_sidecar_container_image = "${var.goobi_sidecar_container_image}"
   goobi_sidecar_container_port  = "80"
 
   goobi_sidecar_env_vars = {
-    SERVERNAME   = "${var.domain_name}"
-    HTTPS_DOMAIN = "${var.domain_name}"
-    APP_PATH     = "goobi"
+    SERVERNAME    = "${var.domain_name}"
+    HTTPS_DOMAIN  = "${var.domain_name}"
+    APP_PATH      = "goobi"
+    APP_CONTAINER = "localhost"
   }
 
-  goobi_sidecar_env_vars_length = "3"
+  goobi_sidecar_env_vars_length = "4"
 
   goobi_efs_container_path = "/efs"
   goobi_ebs_container_path = "/ebs"
@@ -63,9 +65,10 @@ module "goobi" {
     SERVERNAME    = "${var.domain_name}"
     HTTPS_DOMAIN  = "${var.domain_name}"
     APP_PATH      = "itm"
+    ITM_CONTAINER = "localhost"
   }
 
-  itm_app_env_vars_length = "10"
+  itm_app_env_vars_length = "11"
 
   itm_sidecar_container_image = "${var.itm_sidecar_container_image}"
   itm_sidecar_container_port  = "80"
@@ -95,14 +98,13 @@ module "goobi" {
   shell_server_container_port  = "80"
 
   shell_server_env_vars = {
-    APP_CONTAINER   = "localhost"
     CONFIGSOURCE    = "s3"
     AWS_S3_BUCKET   = "${aws_s3_bucket.workflow-configuration.bucket}"
     WORKING_STORAGE = "/ebs"
     S3_DATA_BUCKET  = "${aws_s3_bucket.workflow-data.bucket}"
   }
 
-  shell_server_env_vars_length = "5"
+  shell_server_env_vars_length = "4"
 
   shell_server_efs_container_path = "/efs"
   shell_server_ebs_container_path = "/ebs"
