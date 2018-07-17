@@ -21,6 +21,8 @@ module "goobi" {
     APP_PATH      = "goobi"
   }
 
+  goobi_app_env_vars_length = "10"
+
   goobi_sidecar_container_image = "${var.goobi_sidecar_container_image}"
   goobi_sidecar_container_port  = "80"
 
@@ -29,6 +31,8 @@ module "goobi" {
     HTTPS_DOMAIN = "${var.domain_name}"
     APP_PATH     = "goobi"
   }
+
+  goobi_sidecar_env_vars_length = "3"
 
   goobi_efs_container_path = "/efs"
   goobi_ebs_container_path = "/ebs"
@@ -61,6 +65,8 @@ module "goobi" {
     APP_PATH      = "itm"
   }
 
+  itm_app_env_vars_length = "10"
+
   itm_sidecar_container_image = "${var.itm_sidecar_container_image}"
   itm_sidecar_container_port  = "80"
 
@@ -69,6 +75,8 @@ module "goobi" {
     HTTPS_DOMAIN = "${var.domain_name}"
     APP_PATH     = "itm"
   }
+
+  itm_sidecar_env_vars_length = "3"
 
   itm_efs_container_path = "/efs"
   itm_ebs_container_path = "/ebs"
@@ -91,6 +99,8 @@ module "goobi" {
     WORKING_STORAGE = "/ebs"
     S3_DATA_BUCKET  = "${aws_s3_bucket.workflow-data.bucket}"
   }
+
+  shell_server_env_vars_length = "4"
 
   shell_server_efs_container_path = "/efs"
   shell_server_ebs_container_path = "/ebs"

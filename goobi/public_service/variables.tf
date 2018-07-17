@@ -46,6 +46,8 @@ variable "app_env_vars" {
   type = "map"
 }
 
+variable "app_env_vars_length" {}
+
 # Sidecar
 
 variable "sidecar_container_image" {}
@@ -56,6 +58,8 @@ variable "sidecar_memory" {}
 variable "sidecar_env_vars" {
   type = "map"
 }
+
+variable "sidecar_env_vars_length" {}
 
 # Load balancer
 

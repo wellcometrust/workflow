@@ -49,7 +49,8 @@ module "shell_server" {
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
 
-  env_vars = "${var.shell_server_env_vars}"
+  env_vars        = "${var.shell_server_env_vars}"
+  env_vars_length = "${var.shell_server_env_vars_length}"
 
   private_subnets = "${module.network.private_subnets}"
 
@@ -88,10 +89,12 @@ module "goobi" {
   app_container_image = "${var.goobi_app_container_image}"
   app_container_port  = "${var.goobi_app_container_port}"
   app_env_vars        = "${var.goobi_app_env_vars}"
+  app_env_vars_length = "${var.goobi_app_env_vars_length}"
 
   sidecar_container_image = "${var.goobi_sidecar_container_image}"
   sidecar_container_port  = "${var.goobi_sidecar_container_port}"
   sidecar_env_vars        = "${var.goobi_sidecar_env_vars}"
+  sidecar_env_vars_length = "${var.goobi_sidecar_env_vars_length}"
 
   ebs_container_path = "${var.goobi_ebs_container_path}"
   efs_container_path = "${var.goobi_efs_container_path}"
@@ -135,10 +138,12 @@ module "itm" {
   app_container_image = "${var.itm_app_container_image}"
   app_container_port  = "${var.itm_app_container_port}"
   app_env_vars        = "${var.itm_app_env_vars}"
+  app_env_vars_length = "${var.itm_app_env_vars_length}"
 
   sidecar_container_image = "${var.itm_sidecar_container_image}"
   sidecar_container_port  = "${var.itm_sidecar_container_port}"
   sidecar_env_vars        = "${var.itm_sidecar_env_vars}"
+  sidecar_env_vars_length = "${var.itm_sidecar_env_vars_length}"
 
   ebs_container_path = "${var.itm_ebs_container_path}"
   efs_container_path = "${var.itm_efs_container_path}"

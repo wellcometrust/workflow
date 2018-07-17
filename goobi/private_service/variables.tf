@@ -32,3 +32,5 @@ variable "memory" {}
 variable "env_vars" {
   type = "map"
 }
+
+variable "env_vars_length" {}

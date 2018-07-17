@@ -38,5 +38,6 @@ module "task" {
   cpu    = "${var.cpu}"
   memory = "${var.memory}"
 
-  env_vars = "${var.env_vars}"
+  env_vars        = "${var.env_vars}"
+  env_vars_length = "${var.env_vars_length}"
 }
