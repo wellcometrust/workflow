@@ -71,12 +71,13 @@ module "goobi" {
   itm_sidecar_container_port  = "80"
 
   itm_sidecar_env_vars = {
+    ITM_CONTAINER = "localhost"
     SERVERNAME   = "${var.domain_name}"
     HTTPS_DOMAIN = "${var.domain_name}"
     APP_PATH     = "itm"
   }
 
-  itm_sidecar_env_vars_length = "3"
+  itm_sidecar_env_vars_length = "4"
 
   itm_efs_container_path = "/efs"
   itm_ebs_container_path = "/ebs"
@@ -94,13 +95,14 @@ module "goobi" {
   shell_server_container_port  = "80"
 
   shell_server_env_vars = {
+    APP_CONTAINER   = "localhost"
     CONFIGSOURCE    = "s3"
     AWS_S3_BUCKET   = "${aws_s3_bucket.workflow-configuration.bucket}"
     WORKING_STORAGE = "/ebs"
     S3_DATA_BUCKET  = "${aws_s3_bucket.workflow-data.bucket}"
   }
 
-  shell_server_env_vars_length = "4"
+  shell_server_env_vars_length = "5"
 
   shell_server_efs_container_path = "/efs"
   shell_server_ebs_container_path = "/ebs"
