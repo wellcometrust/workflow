@@ -1,3 +1,10 @@
+provider "aws" {
+  profile = "${var.profile}"
+  region  = "${var.region}"
+
+  version = "1.22.0"
+}
+
 terraform {
   required_version = ">= 0.9"
 
@@ -11,11 +18,6 @@ terraform {
   }
 }
 
-provider "aws" {
-  profile = "${var.profile}"
-  region  = "${var.region}"
-}
-
 resource "aws_dynamodb_table" "terraform-locktable" {
   name           = "terraform-locktable"
   read_capacity  = 1
@@ -26,15 +28,6 @@ resource "aws_dynamodb_table" "terraform-locktable" {
     name = "LockID"
     type = "S"
   }
-
-  lifecycle {
-    prevent_destroy = true
-  }
-}
-
-resource "aws_s3_bucket" "workflow-infra" {
-  bucket = "wellcomecollection-workflow-infra"
-  acl    = "private"
 
   lifecycle {
     prevent_destroy = true
