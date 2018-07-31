@@ -125,3 +125,35 @@ variable "itm_sidecar_memory" {}
 variable "itm_app_cpu" {}
 variable "itm_app_memory" {}
 variable "itm_healthcheck_path" {}
+
+# Harvester
+
+variable "harvester_app_container_image" {}
+variable "harvester_app_container_port" {}
+
+variable "harvester_app_env_vars" {
+  type = "map"
+}
+
+variable "harvester_app_env_vars_length" {}
+
+variable "harvester_sidecar_container_image" {}
+variable "harvester_sidecar_container_port" {}
+
+variable "harvester_sidecar_env_vars" {
+  type = "map"
+}
+
+variable "harvester_sidecar_env_vars_length" {}
+
+variable "harvester_ebs_container_path" {}
+variable "harvester_efs_container_path" {}
+
+variable "harvester_path_pattern" {}
+variable "harvester_host_name" {}
+
+variable "harvester_sidecar_cpu" {}
+variable "harvester_sidecar_memory" {}
+variable "harvester_app_cpu" {}
+variable "harvester_app_memory" {}
+variable "harvester_healthcheck_path" {}
