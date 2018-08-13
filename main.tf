@@ -66,9 +66,11 @@ module "goobi" {
     HTTPS_DOMAIN  = "${var.domain_name}"
     APP_PATH      = "itm"
     APP_CONTAINER = "localhost"
+    WORKING_STORAGE = "/ebs"
+    S3_DATA_BUCKET  = "${aws_s3_bucket.workflow-data.bucket}"
   }
 
-  itm_app_env_vars_length = "11"
+  itm_app_env_vars_length = "13"
 
   itm_sidecar_container_image = "${var.itm_sidecar_container_image}"
   itm_sidecar_container_port  = "80"
