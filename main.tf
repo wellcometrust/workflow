@@ -88,7 +88,7 @@ module "goobi" {
   itm_ebs_container_path = "/ebs"
 
   itm_app_cpu    = "1024"
-  itm_app_memory = "2048"
+  itm_app_memory = "4096"
 
   itm_sidecar_cpu    = "128"
   itm_sidecar_memory = "256"
