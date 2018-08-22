@@ -39,6 +39,10 @@ variable "instance_type" {
   default = "c5.4xlarge"
 }
 
+variable "ebs_size" {
+	default = "50"
+}
+
 # Misc
 
 variable "profile" {

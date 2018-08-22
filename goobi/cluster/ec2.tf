@@ -20,6 +20,8 @@ module "cluster_hosts" {
   asg_max     = "${var.asg_max}"
 
   instance_type = "${var.instance_type}"
+
+  ebs_size = "${var.ebs_size}"
 }
 
 module "bastion_host" {

@@ -55,17 +55,17 @@ module "goobi" {
   itm_app_container_port  = "8009"
 
   itm_app_env_vars = {
-    DB_SERVER     = "${module.goobi_rds_cluster.host}"
-    DB_PORT       = "${module.goobi_rds_cluster.port}"
-    DB_NAME       = "itm"
-    DB_USER       = "${module.goobi_rds_cluster.username}"
-    DB_PASSWORD   = "${module.goobi_rds_cluster.password}"
-    CONFIGSOURCE  = "s3"
-    AWS_S3_BUCKET = "${aws_s3_bucket.workflow-configuration.bucket}"
-    SERVERNAME    = "${var.domain_name}"
-    HTTPS_DOMAIN  = "${var.domain_name}"
-    APP_PATH      = "itm"
-    APP_CONTAINER = "localhost"
+    DB_SERVER       = "${module.goobi_rds_cluster.host}"
+    DB_PORT         = "${module.goobi_rds_cluster.port}"
+    DB_NAME         = "itm"
+    DB_USER         = "${module.goobi_rds_cluster.username}"
+    DB_PASSWORD     = "${module.goobi_rds_cluster.password}"
+    CONFIGSOURCE    = "s3"
+    AWS_S3_BUCKET   = "${aws_s3_bucket.workflow-configuration.bucket}"
+    SERVERNAME      = "${var.domain_name}"
+    HTTPS_DOMAIN    = "${var.domain_name}"
+    APP_PATH        = "itm"
+    APP_CONTAINER   = "localhost"
     WORKING_STORAGE = "/ebs"
     S3_DATA_BUCKET  = "${aws_s3_bucket.workflow-data.bucket}"
   }
@@ -121,6 +121,8 @@ module "goobi" {
   asg_max     = "${var.asg_max}"
 
   instance_type = "${var.instance_type}"
+
+  ebs_size = "${var.ebs_size}"
 
   # harvester
   harvester_host_name    = "${var.domain_name}"
