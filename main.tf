@@ -112,7 +112,7 @@ module "goobi" {
   shell_server_ebs_container_path = "/ebs"
 
   shell_server_cpu    = "256"
-  shell_server_memory = "1024"
+  shell_server_memory = "7168"
 
   controlled_access_cidr_ingress = ["${var.admin_cidr_ingress}"]
 
