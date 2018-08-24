@@ -40,7 +40,7 @@ variable "instance_type" {
 }
 
 variable "ebs_size" {
-	default = "50"
+  default = "50"
 }
 
 # Misc

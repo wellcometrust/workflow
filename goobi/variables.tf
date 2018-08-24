@@ -48,7 +48,6 @@ variable "instance_type" {}
 
 variable "ebs_size" {}
 
-
 # Shell Server
 
 variable "shell_server_ebs_container_path" {}
