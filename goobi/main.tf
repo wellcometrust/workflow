@@ -23,6 +23,8 @@ module "cluster" {
   asg_max     = "${var.asg_max}"
 
   instance_type = "${var.instance_type}"
+
+  ebs_size = "${var.ebs_size}"
 }
 
 module "shell_server" {
@@ -73,6 +75,7 @@ module "load_balancer" {
   service_lb_security_group_ids = [
     "${module.goobi.service_lb_security_group_id}",
     "${module.itm.service_lb_security_group_id}",
+    "${module.harvester.service_lb_security_group_id}",
   ]
 
   lb_controlled_ingress_cidrs = "${var.controlled_access_cidr_ingress}"
@@ -173,4 +176,53 @@ module "itm" {
   memory = "${var.itm_sidecar_memory + var.itm_app_memory}"
 
   healthcheck_path = "${var.itm_healthcheck_path}"
+}
+
+module "harvester" {
+  source = "public_service"
+
+  name = "harvester"
+
+  vpc_id       = "${module.network.vpc_id}"
+  namespace_id = "${aws_service_discovery_private_dns_namespace.namespace.id}"
+
+  app_container_image = "${var.harvester_app_container_image}"
+  app_container_port  = "${var.harvester_app_container_port}"
+  app_env_vars        = "${var.harvester_app_env_vars}"
+  app_env_vars_length = "${var.harvester_app_env_vars_length}"
+
+  sidecar_container_image = "${var.harvester_sidecar_container_image}"
+  sidecar_container_port  = "${var.harvester_sidecar_container_port}"
+  sidecar_env_vars        = "${var.harvester_sidecar_env_vars}"
+  sidecar_env_vars_length = "${var.harvester_sidecar_env_vars_length}"
+
+  ebs_container_path = "${var.harvester_ebs_container_path}"
+  efs_container_path = "${var.harvester_efs_container_path}"
+
+  ebs_host_path = "${module.cluster.ebs_host_path}"
+  efs_host_path = "${module.cluster.efs_host_path}"
+
+  service_egress_security_group_id = "${aws_security_group.service_egress_security_group.id}"
+  interservice_security_group_id   = "${aws_security_group.interservice_security_group.id}"
+
+  cluster_id = "${aws_ecs_cluster.cluster.id}"
+  region     = "${var.region}"
+
+  private_subnets = "${module.network.private_subnets}"
+
+  alb_listener_arn = "${module.load_balancer.https_listener_arn}"
+
+  path_pattern = "${var.harvester_path_pattern}"
+  host_name    = "${var.harvester_host_name}"
+
+  sidecar_cpu    = "${var.harvester_sidecar_cpu}"
+  sidecar_memory = "${var.harvester_sidecar_memory}"
+
+  app_cpu    = "${var.harvester_app_cpu}"
+  app_memory = "${var.harvester_app_memory}"
+
+  cpu    = "${var.harvester_sidecar_cpu + var.harvester_app_cpu}"
+  memory = "${var.harvester_sidecar_memory + var.harvester_app_memory}"
+
+  healthcheck_path = "${var.harvester_healthcheck_path}"
 }

@@ -55,20 +55,22 @@ module "goobi" {
   itm_app_container_port  = "8009"
 
   itm_app_env_vars = {
-    DB_SERVER     = "${module.goobi_rds_cluster.host}"
-    DB_PORT       = "${module.goobi_rds_cluster.port}"
-    DB_NAME       = "${module.goobi_rds_cluster.database_name}"
-    DB_USER       = "${module.goobi_rds_cluster.username}"
-    DB_PASSWORD   = "${module.goobi_rds_cluster.password}"
-    CONFIGSOURCE  = "s3"
-    AWS_S3_BUCKET = "${aws_s3_bucket.workflow-configuration.bucket}"
-    SERVERNAME    = "${var.domain_name}"
-    HTTPS_DOMAIN  = "${var.domain_name}"
-    APP_PATH      = "itm"
-    APP_CONTAINER = "localhost"
+    DB_SERVER       = "${module.goobi_rds_cluster.host}"
+    DB_PORT         = "${module.goobi_rds_cluster.port}"
+    DB_NAME         = "itm"
+    DB_USER         = "${module.goobi_rds_cluster.username}"
+    DB_PASSWORD     = "${module.goobi_rds_cluster.password}"
+    CONFIGSOURCE    = "s3"
+    AWS_S3_BUCKET   = "${aws_s3_bucket.workflow-configuration.bucket}"
+    SERVERNAME      = "${var.domain_name}"
+    HTTPS_DOMAIN    = "${var.domain_name}"
+    APP_PATH        = "itm"
+    APP_CONTAINER   = "localhost"
+    WORKING_STORAGE = "/ebs"
+    S3_DATA_BUCKET  = "${aws_s3_bucket.workflow-data.bucket}"
   }
 
-  itm_app_env_vars_length = "11"
+  itm_app_env_vars_length = "13"
 
   itm_sidecar_container_image = "${var.itm_sidecar_container_image}"
   itm_sidecar_container_port  = "80"
@@ -86,12 +88,12 @@ module "goobi" {
   itm_ebs_container_path = "/ebs"
 
   itm_app_cpu    = "1024"
-  itm_app_memory = "2048"
+  itm_app_memory = "4096"
 
   itm_sidecar_cpu    = "128"
   itm_sidecar_memory = "256"
 
-  itm_healthcheck_path = "/itm/index.xhtml"
+  itm_healthcheck_path = "/itm/service"
 
   # Shell Server
   shell_server_container_image = "${var.shell_server_container_image}"
@@ -110,7 +112,7 @@ module "goobi" {
   shell_server_ebs_container_path = "/ebs"
 
   shell_server_cpu    = "256"
-  shell_server_memory = "1024"
+  shell_server_memory = "7168"
 
   controlled_access_cidr_ingress = ["${var.admin_cidr_ingress}"]
 
@@ -119,4 +121,52 @@ module "goobi" {
   asg_max     = "${var.asg_max}"
 
   instance_type = "${var.instance_type}"
+
+  ebs_size = "${var.ebs_size}"
+
+  # harvester
+  harvester_host_name    = "${var.domain_name}"
+  harvester_path_pattern = "/harvester/*"
+
+  harvester_app_container_image = "${var.harvester_app_container_image}"
+  harvester_app_container_port  = "8009"
+
+  harvester_app_env_vars = {
+    DB_SERVER     = "${module.goobi_rds_cluster.host}"
+    DB_PORT       = "${module.goobi_rds_cluster.port}"
+    DB_NAME       = "harvester"
+    DB_USER       = "${module.goobi_rds_cluster.username}"
+    DB_PASSWORD   = "${module.goobi_rds_cluster.password}"
+    CONFIGSOURCE  = "s3"
+    AWS_S3_BUCKET = "${aws_s3_bucket.workflow-configuration.bucket}"
+    SERVERNAME    = "${var.domain_name}"
+    HTTPS_DOMAIN  = "${var.domain_name}"
+    APP_PATH      = "harvester"
+    APP_CONTAINER = "localhost"
+  }
+
+  harvester_app_env_vars_length = "11"
+
+  harvester_sidecar_container_image = "${var.harvester_sidecar_container_image}"
+  harvester_sidecar_container_port  = "80"
+
+  harvester_sidecar_env_vars = {
+    SERVERNAME    = "${var.domain_name}"
+    HTTPS_DOMAIN  = "${var.domain_name}"
+    APP_PATH      = "harvester"
+    APP_CONTAINER = "localhost"
+  }
+
+  harvester_sidecar_env_vars_length = "4"
+
+  harvester_efs_container_path = "/efs"
+  harvester_ebs_container_path = "/ebs"
+
+  harvester_app_cpu    = "512"
+  harvester_app_memory = "4096"
+
+  harvester_sidecar_cpu    = "128"
+  harvester_sidecar_memory = "256"
+
+  harvester_healthcheck_path = "/harvester/index.xhtml"
 }

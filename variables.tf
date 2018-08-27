@@ -6,6 +6,9 @@ variable "goobi_sidecar_container_image" {}
 variable "itm_app_container_image" {}
 variable "itm_sidecar_container_image" {}
 
+variable "harvester_app_container_image" {}
+variable "harvester_sidecar_container_image" {}
+
 variable "shell_server_container_image" {}
 
 # RDS
@@ -34,6 +37,10 @@ variable "asg_max" {
 
 variable "instance_type" {
   default = "c5.4xlarge"
+}
+
+variable "ebs_size" {
+  default = "50"
 }
 
 # Misc
