@@ -39,8 +39,8 @@ module "goobi" {
   goobi_efs_container_path = "/efs"
   goobi_ebs_container_path = "/ebs"
 
-  goobi_app_cpu    = "512"
-  goobi_app_memory = "4096"
+  goobi_app_cpu    = "1024"
+  goobi_app_memory = "7168"
 
   goobi_sidecar_cpu    = "128"
   goobi_sidecar_memory = "256"
