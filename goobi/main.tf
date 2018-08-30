@@ -58,6 +58,9 @@ module "shell_server" {
 
   cpu    = "${var.shell_server_cpu}"
   memory = "${var.shell_server_memory}"
+
+  deployment_minimum_healthy_percent = "${var.shell_server_deployment_minimum_healthy_percent}"
+  deployment_maximum_percent         = "${var.shell_server_deployment_maximum_percent}"
 }
 
 module "load_balancer" {
@@ -128,6 +131,9 @@ module "goobi" {
   memory = "${var.goobi_sidecar_memory + var.goobi_app_memory}"
 
   healthcheck_path = "${var.goobi_healthcheck_path}"
+
+  deployment_minimum_healthy_percent = "${var.goobi_deployment_minimum_healthy_percent}"
+  deployment_maximum_percent         = "${var.goobi_deployment_maximum_percent}"
 }
 
 module "itm" {
@@ -176,6 +182,9 @@ module "itm" {
   memory = "${var.itm_sidecar_memory + var.itm_app_memory}"
 
   healthcheck_path = "${var.itm_healthcheck_path}"
+
+  deployment_minimum_healthy_percent = "${var.itm_deployment_minimum_healthy_percent}"
+  deployment_maximum_percent         = "${var.itm_deployment_maximum_percent}"
 }
 
 module "harvester" {
@@ -225,4 +234,7 @@ module "harvester" {
   memory = "${var.harvester_sidecar_memory + var.harvester_app_memory}"
 
   healthcheck_path = "${var.harvester_healthcheck_path}"
+
+  deployment_minimum_healthy_percent = "${var.harvester_deployment_minimum_healthy_percent}"
+  deployment_maximum_percent         = "${var.harvester_deployment_maximum_percent}"
 }

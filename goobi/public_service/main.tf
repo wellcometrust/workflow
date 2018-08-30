@@ -21,6 +21,9 @@ module "service" {
   namespace_id = "${var.namespace_id}"
 
   launch_type = "EC2"
+
+  deployment_minimum_healthy_percent = "${var.deployment_minimum_healthy_percent}"
+  deployment_maximum_percent         = "${var.deployment_maximum_percent}"
 }
 
 module "task" {

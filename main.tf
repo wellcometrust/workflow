@@ -47,6 +47,9 @@ module "goobi" {
 
   goobi_healthcheck_path = "/goobi/index.xhtml"
 
+  goobi_deployment_minimum_healthy_percent = "0"
+  goobi_deployment_maximum_percent         = "100"
+
   # ITM
   itm_host_name    = "${var.domain_name}"
   itm_path_pattern = "/itm/*"
@@ -95,6 +98,9 @@ module "goobi" {
 
   itm_healthcheck_path = "/itm/service"
 
+  itm_deployment_minimum_healthy_percent = "0"
+  itm_deployment_maximum_percent         = "100"
+
   # Shell Server
   shell_server_container_image = "${var.shell_server_container_image}"
   shell_server_container_port  = "80"
@@ -113,6 +119,9 @@ module "goobi" {
 
   shell_server_cpu    = "1024"
   shell_server_memory = "7168"
+
+  shell_server_deployment_minimum_healthy_percent = "0"
+  shell_server_deployment_maximum_percent         = "100"
 
   controlled_access_cidr_ingress = ["${var.admin_cidr_ingress}"]
 
@@ -169,4 +178,7 @@ module "goobi" {
   harvester_sidecar_memory = "256"
 
   harvester_healthcheck_path = "/harvester/index.xhtml"
+
+  harvester_deployment_minimum_healthy_percent = "0"
+  harvester_deployment_maximum_percent         = "100"
 }

@@ -63,6 +63,8 @@ variable "shell_server_env_vars_length" {}
 
 variable "shell_server_cpu" {}
 variable "shell_server_memory" {}
+variable "shell_server_deployment_minimum_healthy_percent" {}
+variable "shell_server_deployment_maximum_percent" {}
 
 # Goobi
 
@@ -96,6 +98,9 @@ variable "goobi_app_cpu" {}
 variable "goobi_app_memory" {}
 variable "goobi_healthcheck_path" {}
 
+variable "goobi_deployment_minimum_healthy_percent" {}
+variable "goobi_deployment_maximum_percent" {}
+
 # ITM
 
 variable "itm_app_container_image" {}
@@ -128,6 +133,9 @@ variable "itm_app_cpu" {}
 variable "itm_app_memory" {}
 variable "itm_healthcheck_path" {}
 
+variable "itm_deployment_minimum_healthy_percent" {}
+variable "itm_deployment_maximum_percent" {}
+
 # Harvester
 
 variable "harvester_app_container_image" {}
@@ -159,3 +167,6 @@ variable "harvester_sidecar_memory" {}
 variable "harvester_app_cpu" {}
 variable "harvester_app_memory" {}
 variable "harvester_healthcheck_path" {}
+
+variable "harvester_deployment_minimum_healthy_percent" {}
+variable "harvester_deployment_maximum_percent" {}

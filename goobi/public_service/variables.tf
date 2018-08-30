@@ -4,6 +4,14 @@ variable "task_desired_count" {
   default = "1"
 }
 
+variable "deployment_minimum_healthy_percent" {
+  default = "100"
+}
+
+variable "deployment_maximum_percent" {
+  default = "200"
+}
+
 variable "interservice_security_group_id" {}
 variable "service_egress_security_group_id" {}
 
