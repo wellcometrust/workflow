@@ -20,6 +20,11 @@ resource "aws_iam_role_policy" "ecs_goobi_s3_data_rw" {
   policy = "${data.aws_iam_policy_document.s3_rw_workflow-data.json}"
 }
 
+resource "aws_iam_role_policy" "ecs_goobi_s3_export_bagit_rw" {
+  role   = "${module.goobi.goobi_task_role}"
+  policy = "${data.aws_iam_policy_document.s3_rw_workflow-export-bagit.json}"
+}
+
 resource "aws_iam_role_policy" "ecs_itm_s3_config_read" {
   role   = "${module.goobi.itm_task_role}"
   policy = "${data.aws_iam_policy_document.s3_read_workflow-configuration.json}"

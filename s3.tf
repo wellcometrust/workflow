@@ -28,3 +28,12 @@ resource "aws_s3_bucket" "workflow-infra" {
     prevent_destroy = true
   }
 }
+
+resource "aws_s3_bucket" "workflow-export-bagit" {
+  bucket = "wellcomecollection-workflow-export-bagit"
+  acl    = "private"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
