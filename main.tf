@@ -143,20 +143,21 @@ module "goobi" {
   harvester_app_container_port  = "8009"
 
   harvester_app_env_vars = {
-    DB_SERVER     = "${module.goobi_rds_cluster.host}"
-    DB_PORT       = "${module.goobi_rds_cluster.port}"
-    DB_NAME       = "harvester"
-    DB_USER       = "${module.goobi_rds_cluster.username}"
-    DB_PASSWORD   = "${module.goobi_rds_cluster.password}"
-    CONFIGSOURCE  = "s3"
-    AWS_S3_BUCKET = "${aws_s3_bucket.workflow-configuration.bucket}"
-    SERVERNAME    = "${var.domain_name}"
-    HTTPS_DOMAIN  = "${var.domain_name}"
-    APP_PATH      = "harvester"
-    APP_CONTAINER = "localhost"
+    DB_SERVER                    = "${module.goobi_rds_cluster.host}"
+    DB_PORT                      = "${module.goobi_rds_cluster.port}"
+    DB_NAME                      = "harvester"
+    DB_USER                      = "${module.goobi_rds_cluster.username}"
+    DB_PASSWORD                  = "${module.goobi_rds_cluster.password}"
+    CONFIGSOURCE                 = "s3"
+    AWS_S3_BUCKET                = "${aws_s3_bucket.workflow-configuration.bucket}"
+    SERVERNAME                   = "${var.domain_name}"
+    HTTPS_DOMAIN                 = "${var.domain_name}"
+    APP_PATH                     = "harvester"
+    APP_CONTAINER                = "localhost"
+    S3_BUCKET_HARVESTING_RESULTS = "${aws_s3_bucket.workflow-harvesting-results.bucket}"
   }
 
-  harvester_app_env_vars_length = "11"
+  harvester_app_env_vars_length = "12"
 
   harvester_sidecar_container_image = "${var.harvester_sidecar_container_image}"
   harvester_sidecar_container_port  = "80"
