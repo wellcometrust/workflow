@@ -40,6 +40,11 @@ resource "aws_iam_role_policy" "ecs_harvester_s3_config_read" {
   policy = "${data.aws_iam_policy_document.s3_read_workflow-configuration.json}"
 }
 
+resource "aws_iam_role_policy" "ecs_harvester_s3_rw_workflow-harvesting-results" {
+  role   = "${module.goobi.harvester_task_role}"
+  policy = "${data.aws_iam_policy_document.s3_rw_workflow-harvesting-results.json}"
+}
+
 resource "aws_iam_role_policy" "ecs_shell_server_s3_config_read" {
   role   = "${module.goobi.shell_server_task_role}"
   policy = "${data.aws_iam_policy_document.s3_read_workflow-configuration.json}"

@@ -37,3 +37,12 @@ resource "aws_s3_bucket" "workflow-export-bagit" {
     prevent_destroy = true
   }
 }
+
+resource "aws_s3_bucket" "workflow-harvesting-results" {
+  bucket = "wellcomecollection-workflow-harvesting-results"
+  acl    = "private"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
