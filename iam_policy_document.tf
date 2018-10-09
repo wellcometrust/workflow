@@ -122,3 +122,18 @@ data "aws_iam_policy_document" "s3_rw_workflow-export-bagit" {
     ]
   }
 }
+
+data "aws_iam_policy_document" "s3_rw_workflow-harvesting-results" {
+  statement {
+    actions = [
+      "s3:ListBucket",
+      "s3:GetObject",
+      "s3:PutObject",
+    ]
+
+    resources = [
+      "${aws_s3_bucket.workflow-harvesting-results.arn}",
+      "${aws_s3_bucket.workflow-harvesting-results.arn}/*",
+    ]
+  }
+}
