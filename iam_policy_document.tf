@@ -141,9 +141,10 @@ data "aws_iam_policy_document" "s3_rw_workflow-harvesting-results" {
 data "aws_iam_policy_document" "allow_archive_access" {
   statement {
     actions   = ["s3:GetObject*"]
-    resources = ["${aws_s3_bucket.workflow-export-bagit.arn}","${aws_s3_bucket.workflow-export-bagit.arn}/*"]
+    resources = ["${aws_s3_bucket.workflow-export-bagit.arn}", "${aws_s3_bucket.workflow-export-bagit.arn}/*"]
+
     principals {
-      type = "AWS"
+      type        = "AWS"
       identifiers = ["arn:aws:iam::${var.platform_team_account_id}:role/archivist_task_role"]
     }
   }
