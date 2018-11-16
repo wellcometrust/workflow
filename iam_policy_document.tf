@@ -149,3 +149,18 @@ data "aws_iam_policy_document" "allow_archive_access" {
     }
   }
 }
+
+data "aws_iam_policy_document" "s3_workflow-import-editorialphotography" {
+  statement {
+    actions = [
+      "s3:ListBucket",
+      "s3:GetObject",
+      "s3:PutObject",
+    ]
+
+    resources = [
+      "${aws_s3_bucket.workflow-import-editorialphotography.arn}",
+      "${aws_s3_bucket.workflow-import-editorialphotography.arn}/*",
+    ]
+  }
+}

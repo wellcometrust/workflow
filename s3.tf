@@ -51,3 +51,12 @@ resource "aws_s3_bucket" "workflow-harvesting-results" {
     prevent_destroy = true
   }
 }
+
+resource "aws_s3_bucket" "workflow-import-editorialphotography" {
+  bucket = "wellcomecollection-workflow-import-editorialphotography"
+  acl    = "private"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
