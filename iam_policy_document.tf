@@ -150,7 +150,7 @@ data "aws_iam_policy_document" "allow_archive_access" {
   }
 }
 
-data "aws_iam_policy_document" "s3_workflow-import-editorialphotography" {
+data "aws_iam_policy_document" "s3_workflow-upload" {
   statement {
     actions = [
       "s3:ListBucket",
@@ -160,8 +160,8 @@ data "aws_iam_policy_document" "s3_workflow-import-editorialphotography" {
     ]
 
     resources = [
-      "${aws_s3_bucket.workflow-import-editorialphotography.arn}",
-      "${aws_s3_bucket.workflow-import-editorialphotography.arn}/*",
+      "${aws_s3_bucket.workflow-upload.arn}",
+      "${aws_s3_bucket.workflow-upload.arn}/*",
     ]
   }
 }

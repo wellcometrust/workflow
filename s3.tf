@@ -52,8 +52,8 @@ resource "aws_s3_bucket" "workflow-harvesting-results" {
   }
 }
 
-resource "aws_s3_bucket" "workflow-import-editorialphotography" {
-  bucket = "wellcomecollection-workflow-import-editorialphotography"
+resource "aws_s3_bucket" "workflow-upload" {
+  bucket = "wellcomecollection-workflow-upload"
   acl    = "private"
 
   lifecycle {
