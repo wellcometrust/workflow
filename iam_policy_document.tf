@@ -145,7 +145,7 @@ data "aws_iam_policy_document" "allow_archive_access" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.platform_team_account_id}:role/archivist_task_role"]
+      identifiers = ["${var.platform_team_account_id}"]
     }
   }
 }
