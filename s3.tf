@@ -38,9 +38,9 @@ resource "aws_s3_bucket" "workflow-export-bagit" {
   }
 }
 
-resource "aws_s3_bucket_policy" "workflow-export-bagit-archive-policy" {
+resource "aws_s3_bucket_policy" "workflow-export-bagit-external-access-policy" {
   bucket = "${aws_s3_bucket.workflow-export-bagit.id}"
-  policy = "${data.aws_iam_policy_document.allow_archive_access.json}"
+  policy = "${data.aws_iam_policy_document.allow_external_export-bagit_access.json}"
 }
 
 resource "aws_s3_bucket" "workflow-harvesting-results" {

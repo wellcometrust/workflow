@@ -58,3 +58,5 @@ variable "platform_team_account_id" {}
 variable "domain_name" {
   default = "workflow.wellcomecollection.org"
 }
+
+variable "intranda_ep_user" {}

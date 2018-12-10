@@ -138,14 +138,26 @@ data "aws_iam_policy_document" "s3_rw_workflow-harvesting-results" {
   }
 }
 
-data "aws_iam_policy_document" "allow_archive_access" {
+data "aws_iam_policy_document" "allow_external_export-bagit_access" {
   statement {
     actions   = ["s3:GetObject*"]
     resources = ["${aws_s3_bucket.workflow-export-bagit.arn}", "${aws_s3_bucket.workflow-export-bagit.arn}/*"]
-
     principals {
       type        = "AWS"
       identifiers = ["${var.platform_team_account_id}"]
+    }
+  }
+  statement {
+    actions = [
+      "s3:ListBucket",
+      "s3:GetObject",
+      "s3:PutObject",
+      "s3:DeleteObject",
+    ]
+    resources = ["${aws_s3_bucket.workflow-export-bagit.arn}", "${aws_s3_bucket.workflow-export-bagit.arn}/*"]
+    principals {
+      type        = "AWS"
+      identifiers = ["${var.intranda_ep_user}"]
     }
   }
 }
