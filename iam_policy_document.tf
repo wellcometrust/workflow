@@ -181,3 +181,16 @@ data "aws_iam_policy_document" "s3_workflow-upload" {
     ]
   }
 }
+
+data "aws_iam_policy_document" "s3_editorial_photography_upload_external" {
+  statement {
+    actions = [
+      "s3:ListBucket",
+      "s3:GetObject",
+      "s3:PutObject",
+      "s3:DeleteObject",
+    ]
+
+    resources = ["${var.ep_upload_external_bucket}", "${var.ep_upload_external_bucket}/${var.ep_upload_external_prefix}/*"]
+  }
+}
