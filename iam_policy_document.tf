@@ -191,6 +191,6 @@ data "aws_iam_policy_document" "s3_editorial_photography_upload_external" {
       "s3:DeleteObject",
     ]
 
-    resources = ["arn:aws:s3:::${var.ep_upload_external_bucket}", "arn:aws:s3:::${var.ep_upload_external_bucket}/${var.ep_upload_external_prefix}/*"]
+    resources = ["arn:aws:s3:::${var.ep_upload_external_bucket}", "arn:aws:s3:::${var.ep_upload_external_bucket}/*"]
   }
 }

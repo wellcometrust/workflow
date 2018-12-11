@@ -62,9 +62,5 @@ variable "domain_name" {
 variable "intranda_ep_user" {}
 
 variable "ep_upload_external_bucket" {
-  default = "wellcomecollection-mets-ingest"
-}
-
-variable "ep_upload_external_prefix" {
-  default = "editorial-photography"
+  default = "wellcomecollection-editorial-photography"
 }
