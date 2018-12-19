@@ -12,7 +12,7 @@ module "cluster" {
 
   controlled_access_cidr_ingress = ["${var.controlled_access_cidr_ingress}"]
 
-  efs_security_group_ids = ["${aws_security_group.efs_security_group.id}"]
+  efs_security_group_ids = ["${var.efs_security_group_id}"]
   efs_id                 = "${module.efs.efs_id}"
 
   cluster_name = "${aws_ecs_cluster.cluster.name}"
@@ -44,8 +44,8 @@ module "shell_server" {
 
   container_port = "${var.shell_server_container_port}"
 
-  service_egress_security_group_id = "${aws_security_group.service_egress_security_group.id}"
-  interservice_security_group_id   = "${aws_security_group.interservice_security_group.id}"
+  service_egress_security_group_id = "${var.service_egress_security_group_id}"
+  interservice_security_group_id   = "${var.interservice_security_group_id}"
 
   container_image = "${var.shell_server_container_image}"
 
@@ -109,8 +109,8 @@ module "goobi" {
   ebs_host_path = "${module.cluster.ebs_host_path}"
   efs_host_path = "${module.cluster.efs_host_path}"
 
-  service_egress_security_group_id = "${aws_security_group.service_egress_security_group.id}"
-  interservice_security_group_id   = "${aws_security_group.interservice_security_group.id}"
+  service_egress_security_group_id = "${var.service_egress_security_group_id}"
+  interservice_security_group_id   = "${var.interservice_security_group_id}"
 
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
@@ -161,8 +161,8 @@ module "itm" {
   ebs_host_path = "${module.cluster.ebs_host_path}"
   efs_host_path = "${module.cluster.efs_host_path}"
 
-  service_egress_security_group_id = "${aws_security_group.service_egress_security_group.id}"
-  interservice_security_group_id   = "${aws_security_group.interservice_security_group.id}"
+  service_egress_security_group_id = "${var.service_egress_security_group_id}"
+  interservice_security_group_id   = "${var.interservice_security_group_id}"
 
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
@@ -213,8 +213,8 @@ module "harvester" {
   ebs_host_path = "${module.cluster.ebs_host_path}"
   efs_host_path = "${module.cluster.efs_host_path}"
 
-  service_egress_security_group_id = "${aws_security_group.service_egress_security_group.id}"
-  interservice_security_group_id   = "${aws_security_group.interservice_security_group.id}"
+  service_egress_security_group_id = "${var.service_egress_security_group_id}"
+  interservice_security_group_id   = "${var.interservice_security_group_id}"
 
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"

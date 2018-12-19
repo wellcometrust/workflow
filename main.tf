@@ -6,6 +6,10 @@ module "goobi" {
   private_subnets     = "${module.network.private_subnets}"
   num_private_subnets = "${length(module.network.private_subnets)}"
 
+  service_egress_security_group_id = "${aws_security_group.service_egress.id}"
+  interservice_security_group_id   = "${aws_security_group.interservice.id}"
+  efs_security_group_id            = "${aws_security_group.efs.id}"
+
   # Goobi
   goobi_host_name    = "${var.domain_name}"
   goobi_path_pattern = "/goobi/*"

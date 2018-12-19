@@ -20,6 +20,10 @@ variable "private_subnets" {
 
 variable "num_private_subnets" {}
 
+variable "service_egress_security_group_id" {}
+variable "interservice_security_group_id" {}
+variable "efs_security_group_id" {}
+
 # Account
 
 variable "profile" {

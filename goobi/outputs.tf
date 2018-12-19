@@ -13,7 +13,3 @@ output "harvester_task_role" {
 output "shell_server_task_role" {
   value = "${module.shell_server.task_role}"
 }
-
-output "interservice_security_group_id" {
-  value = "${aws_security_group.interservice_security_group.id}"
-}
