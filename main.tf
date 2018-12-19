@@ -195,6 +195,8 @@ module "goobi" {
   harvester_deployment_maximum_percent         = "100"
 
   load_balancer_https_listener_arn = "${module.load_balancer.https_listener_arn}"
+
+  service_lb_security_group_id = "${aws_security_group.service_lb.id}"
 }
 
 module "load_balancer" {

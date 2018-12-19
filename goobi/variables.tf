@@ -26,6 +26,8 @@ variable "efs_security_group_id" {}
 
 variable "load_balancer_https_listener_arn" {}
 
+variable "service_lb_security_group_id" {}
+
 # Account
 
 variable "profile" {

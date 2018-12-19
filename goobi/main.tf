@@ -90,6 +90,7 @@ module "goobi" {
 
   service_egress_security_group_id = "${var.service_egress_security_group_id}"
   interservice_security_group_id   = "${var.interservice_security_group_id}"
+  service_lb_security_group_id     = "${var.service_lb_security_group_id}"
 
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
@@ -142,6 +143,7 @@ module "itm" {
 
   service_egress_security_group_id = "${var.service_egress_security_group_id}"
   interservice_security_group_id   = "${var.interservice_security_group_id}"
+  service_lb_security_group_id     = "${var.service_lb_security_group_id}"
 
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
@@ -194,6 +196,7 @@ module "harvester" {
 
   service_egress_security_group_id = "${var.service_egress_security_group_id}"
   interservice_security_group_id   = "${var.interservice_security_group_id}"
+  service_lb_security_group_id     = "${var.service_lb_security_group_id}"
 
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
