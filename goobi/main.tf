@@ -62,27 +62,6 @@ module "shell_server" {
   deployment_maximum_percent         = "${var.shell_server_deployment_maximum_percent}"
 }
 
-module "load_balancer" {
-  source = "load_balancer"
-
-  name = "${var.name}"
-
-  vpc_id         = "${var.vpc_id}"
-  public_subnets = "${var.public_subnets}"
-
-  certificate_domain = "${var.workflow_domain_name}"
-
-  default_target_group_arn = "${module.goobi.target_group_arn}"
-
-  service_lb_security_group_ids = [
-    "${module.goobi.service_lb_security_group_id}",
-    "${module.itm.service_lb_security_group_id}",
-    "${module.harvester.service_lb_security_group_id}",
-  ]
-
-  lb_controlled_ingress_cidrs = "${var.controlled_access_cidr_ingress}"
-}
-
 module "goobi" {
   source = "public_service"
 
@@ -115,7 +94,7 @@ module "goobi" {
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
 
-  alb_listener_arn = "${module.load_balancer.https_listener_arn}"
+  alb_listener_arn = "${var.load_balancer_https_listener_arn}"
 
   path_pattern = "${var.goobi_path_pattern}"
   host_name    = "${var.goobi_host_name}"
@@ -167,7 +146,7 @@ module "itm" {
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
 
-  alb_listener_arn = "${module.load_balancer.https_listener_arn}"
+  alb_listener_arn = "${var.load_balancer_https_listener_arn}"
 
   path_pattern = "${var.itm_path_pattern}"
   host_name    = "${var.itm_host_name}"
@@ -219,7 +198,7 @@ module "harvester" {
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
 
-  alb_listener_arn = "${module.load_balancer.https_listener_arn}"
+  alb_listener_arn = "${var.load_balancer_https_listener_arn}"
 
   path_pattern = "${var.harvester_path_pattern}"
   host_name    = "${var.harvester_host_name}"

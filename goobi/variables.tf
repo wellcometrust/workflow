@@ -24,6 +24,8 @@ variable "service_egress_security_group_id" {}
 variable "interservice_security_group_id" {}
 variable "efs_security_group_id" {}
 
+variable "load_balancer_https_listener_arn" {}
+
 # Account
 
 variable "profile" {
@@ -36,10 +38,6 @@ variable "key_name" {
 
 variable "platform_team_account_id" {
   default = "760097843905"
-}
-
-variable "workflow_domain_name" {
-  default = "workflow.wellcomecollection.org"
 }
 
 variable "name" {

@@ -193,4 +193,23 @@ module "goobi" {
 
   harvester_deployment_minimum_healthy_percent = "0"
   harvester_deployment_maximum_percent         = "100"
+
+  load_balancer_https_listener_arn = "${module.load_balancer.https_listener_arn}"
+}
+
+module "load_balancer" {
+  source = "load_balancer"
+
+  name = "workflow"
+
+  vpc_id         = "${module.network.vpc_id}"
+  public_subnets = "${module.network.public_subnets}"
+
+  certificate_domain = "workflow.wellcomecollection.org"
+
+  service_lb_security_group_ids = [
+    "${aws_security_group.service_lb.id}",
+  ]
+
+  lb_controlled_ingress_cidrs = ["${var.admin_cidr_ingress}"]
 }
