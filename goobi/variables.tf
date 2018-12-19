@@ -4,17 +4,21 @@ variable "region" {
   default = "eu-west-1"
 }
 
-variable "az_count" {
-  default = "3"
-}
-
 variable "controlled_access_cidr_ingress" {
   type = "list"
 }
 
-variable "vpc_cidr_block" {
-  default = "10.50.0.0/16"
+variable "vpc_id" {}
+
+variable "public_subnets" {
+  type = "list"
 }
+
+variable "private_subnets" {
+  type = "list"
+}
+
+variable "num_private_subnets" {}
 
 # Account
 

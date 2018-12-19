@@ -14,18 +14,6 @@ output "shell_server_task_role" {
   value = "${module.shell_server.task_role}"
 }
 
-output "vpc_id" {
-  value = "${module.network.vpc_id}"
-}
-
-output "public_subnets" {
-  value = "${module.network.public_subnets}"
-}
-
-output "private_subnets" {
-  value = "${module.network.private_subnets}"
-}
-
 output "interservice_security_group_id" {
   value = "${aws_security_group.interservice_security_group.id}"
 }

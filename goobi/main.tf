@@ -3,10 +3,9 @@ module "cluster" {
 
   name = "${var.name}"
 
-  vpc_id = "${module.network.vpc_id}"
-
-  public_subnets  = "${module.network.public_subnets}"
-  private_subnets = "${module.network.private_subnets}"
+  vpc_id          = "${var.vpc_id}"
+  public_subnets  = "${var.public_subnets}"
+  private_subnets = "${var.private_subnets}"
 
   region   = "${var.region}"
   key_name = "${var.key_name}"
@@ -32,7 +31,9 @@ module "shell_server" {
 
   name = "shell_server"
 
-  vpc_id       = "${module.network.vpc_id}"
+  vpc_id          = "${var.vpc_id}"
+  private_subnets = "${var.private_subnets}"
+
   namespace_id = "${aws_service_discovery_private_dns_namespace.namespace.id}"
 
   ebs_container_path = "${var.shell_server_ebs_container_path}"
@@ -54,8 +55,6 @@ module "shell_server" {
   env_vars        = "${var.shell_server_env_vars}"
   env_vars_length = "${var.shell_server_env_vars_length}"
 
-  private_subnets = "${module.network.private_subnets}"
-
   cpu    = "${var.shell_server_cpu}"
   memory = "${var.shell_server_memory}"
 
@@ -68,8 +67,8 @@ module "load_balancer" {
 
   name = "${var.name}"
 
-  vpc_id         = "${module.network.vpc_id}"
-  public_subnets = "${module.network.public_subnets}"
+  vpc_id         = "${var.vpc_id}"
+  public_subnets = "${var.public_subnets}"
 
   certificate_domain = "${var.workflow_domain_name}"
 
@@ -89,7 +88,9 @@ module "goobi" {
 
   name = "goobi"
 
-  vpc_id       = "${module.network.vpc_id}"
+  vpc_id          = "${var.vpc_id}"
+  private_subnets = "${var.private_subnets}"
+
   namespace_id = "${aws_service_discovery_private_dns_namespace.namespace.id}"
 
   app_container_image = "${var.goobi_app_container_image}"
@@ -113,8 +114,6 @@ module "goobi" {
 
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
-
-  private_subnets = "${module.network.private_subnets}"
 
   alb_listener_arn = "${module.load_balancer.https_listener_arn}"
 
@@ -141,7 +140,9 @@ module "itm" {
 
   name = "itm"
 
-  vpc_id       = "${module.network.vpc_id}"
+  vpc_id          = "${var.vpc_id}"
+  private_subnets = "${var.private_subnets}"
+
   namespace_id = "${aws_service_discovery_private_dns_namespace.namespace.id}"
 
   app_container_image = "${var.itm_app_container_image}"
@@ -166,7 +167,6 @@ module "itm" {
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
 
-  private_subnets  = "${module.network.private_subnets}"
   alb_listener_arn = "${module.load_balancer.https_listener_arn}"
 
   path_pattern = "${var.itm_path_pattern}"
@@ -192,7 +192,9 @@ module "harvester" {
 
   name = "harvester"
 
-  vpc_id       = "${module.network.vpc_id}"
+  vpc_id          = "${var.vpc_id}"
+  private_subnets = "${var.private_subnets}"
+
   namespace_id = "${aws_service_discovery_private_dns_namespace.namespace.id}"
 
   app_container_image = "${var.harvester_app_container_image}"
@@ -216,8 +218,6 @@ module "harvester" {
 
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
-
-  private_subnets = "${module.network.private_subnets}"
 
   alb_listener_arn = "${module.load_balancer.https_listener_arn}"
 

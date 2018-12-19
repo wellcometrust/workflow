@@ -1,6 +1,11 @@
 module "goobi" {
   source = "goobi"
 
+  vpc_id              = "${module.network.vpc_id}"
+  public_subnets      = "${module.network.public_subnets}"
+  private_subnets     = "${module.network.private_subnets}"
+  num_private_subnets = "${length(module.network.private_subnets)}"
+
   # Goobi
   goobi_host_name    = "${var.domain_name}"
   goobi_path_pattern = "/goobi/*"
