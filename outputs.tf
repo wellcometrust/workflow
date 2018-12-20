@@ -29,3 +29,7 @@ output "efs_security_group_id" {
 output "service_lb_security_group_id" {
   value = "${aws_security_group.service_lb.id}"
 }
+
+output "load_balancer_https_listener_arn" {
+  value = "${module.load_balancer.https_listener_arn}"
+}
