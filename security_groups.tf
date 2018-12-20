@@ -61,6 +61,13 @@ resource "aws_security_group" "service_lb" {
   description = "Allow traffic between services and load balancer"
   vpc_id      = "${module.network.vpc_id}"
 
+  ingress {
+    protocol  = "tcp"
+    from_port = 0
+    to_port   = 65535
+    self      = true
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
