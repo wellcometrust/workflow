@@ -14,6 +14,7 @@ variable "deployment_maximum_percent" {
 
 variable "interservice_security_group_id" {}
 variable "service_egress_security_group_id" {}
+variable "service_lb_security_group_id" {}
 
 variable "cluster_id" {}
 variable "vpc_id" {}

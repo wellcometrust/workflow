@@ -3,17 +3,16 @@ module "cluster" {
 
   name = "${var.name}"
 
-  vpc_id = "${module.network.vpc_id}"
-
-  public_subnets  = "${module.network.public_subnets}"
-  private_subnets = "${module.network.private_subnets}"
+  vpc_id          = "${var.vpc_id}"
+  public_subnets  = "${var.public_subnets}"
+  private_subnets = "${var.private_subnets}"
 
   region   = "${var.region}"
   key_name = "${var.key_name}"
 
   controlled_access_cidr_ingress = ["${var.controlled_access_cidr_ingress}"]
 
-  efs_security_group_ids = ["${aws_security_group.efs_security_group.id}"]
+  efs_security_group_ids = ["${var.efs_security_group_id}"]
   efs_id                 = "${module.efs.efs_id}"
 
   cluster_name = "${aws_ecs_cluster.cluster.name}"
@@ -32,7 +31,9 @@ module "shell_server" {
 
   name = "shell_server"
 
-  vpc_id       = "${module.network.vpc_id}"
+  vpc_id          = "${var.vpc_id}"
+  private_subnets = "${var.private_subnets}"
+
   namespace_id = "${aws_service_discovery_private_dns_namespace.namespace.id}"
 
   ebs_container_path = "${var.shell_server_ebs_container_path}"
@@ -43,8 +44,8 @@ module "shell_server" {
 
   container_port = "${var.shell_server_container_port}"
 
-  service_egress_security_group_id = "${aws_security_group.service_egress_security_group.id}"
-  interservice_security_group_id   = "${aws_security_group.interservice_security_group.id}"
+  service_egress_security_group_id = "${var.service_egress_security_group_id}"
+  interservice_security_group_id   = "${var.interservice_security_group_id}"
 
   container_image = "${var.shell_server_container_image}"
 
@@ -54,8 +55,6 @@ module "shell_server" {
   env_vars        = "${var.shell_server_env_vars}"
   env_vars_length = "${var.shell_server_env_vars_length}"
 
-  private_subnets = "${module.network.private_subnets}"
-
   cpu    = "${var.shell_server_cpu}"
   memory = "${var.shell_server_memory}"
 
@@ -63,33 +62,14 @@ module "shell_server" {
   deployment_maximum_percent         = "${var.shell_server_deployment_maximum_percent}"
 }
 
-module "load_balancer" {
-  source = "load_balancer"
-
-  name = "${var.name}"
-
-  vpc_id         = "${module.network.vpc_id}"
-  public_subnets = "${module.network.public_subnets}"
-
-  certificate_domain = "${var.workflow_domain_name}"
-
-  default_target_group_arn = "${module.goobi.target_group_arn}"
-
-  service_lb_security_group_ids = [
-    "${module.goobi.service_lb_security_group_id}",
-    "${module.itm.service_lb_security_group_id}",
-    "${module.harvester.service_lb_security_group_id}",
-  ]
-
-  lb_controlled_ingress_cidrs = "${var.controlled_access_cidr_ingress}"
-}
-
 module "goobi" {
   source = "public_service"
 
   name = "goobi"
 
-  vpc_id       = "${module.network.vpc_id}"
+  vpc_id          = "${var.vpc_id}"
+  private_subnets = "${var.private_subnets}"
+
   namespace_id = "${aws_service_discovery_private_dns_namespace.namespace.id}"
 
   app_container_image = "${var.goobi_app_container_image}"
@@ -108,15 +88,14 @@ module "goobi" {
   ebs_host_path = "${module.cluster.ebs_host_path}"
   efs_host_path = "${module.cluster.efs_host_path}"
 
-  service_egress_security_group_id = "${aws_security_group.service_egress_security_group.id}"
-  interservice_security_group_id   = "${aws_security_group.interservice_security_group.id}"
+  service_egress_security_group_id = "${var.service_egress_security_group_id}"
+  interservice_security_group_id   = "${var.interservice_security_group_id}"
+  service_lb_security_group_id     = "${var.service_lb_security_group_id}"
 
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
 
-  private_subnets = "${module.network.private_subnets}"
-
-  alb_listener_arn = "${module.load_balancer.https_listener_arn}"
+  alb_listener_arn = "${var.load_balancer_https_listener_arn}"
 
   path_pattern = "${var.goobi_path_pattern}"
   host_name    = "${var.goobi_host_name}"
@@ -141,7 +120,9 @@ module "itm" {
 
   name = "itm"
 
-  vpc_id       = "${module.network.vpc_id}"
+  vpc_id          = "${var.vpc_id}"
+  private_subnets = "${var.private_subnets}"
+
   namespace_id = "${aws_service_discovery_private_dns_namespace.namespace.id}"
 
   app_container_image = "${var.itm_app_container_image}"
@@ -160,14 +141,14 @@ module "itm" {
   ebs_host_path = "${module.cluster.ebs_host_path}"
   efs_host_path = "${module.cluster.efs_host_path}"
 
-  service_egress_security_group_id = "${aws_security_group.service_egress_security_group.id}"
-  interservice_security_group_id   = "${aws_security_group.interservice_security_group.id}"
+  service_egress_security_group_id = "${var.service_egress_security_group_id}"
+  interservice_security_group_id   = "${var.interservice_security_group_id}"
+  service_lb_security_group_id     = "${var.service_lb_security_group_id}"
 
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
 
-  private_subnets  = "${module.network.private_subnets}"
-  alb_listener_arn = "${module.load_balancer.https_listener_arn}"
+  alb_listener_arn = "${var.load_balancer_https_listener_arn}"
 
   path_pattern = "${var.itm_path_pattern}"
   host_name    = "${var.itm_host_name}"
@@ -192,7 +173,9 @@ module "harvester" {
 
   name = "harvester"
 
-  vpc_id       = "${module.network.vpc_id}"
+  vpc_id          = "${var.vpc_id}"
+  private_subnets = "${var.private_subnets}"
+
   namespace_id = "${aws_service_discovery_private_dns_namespace.namespace.id}"
 
   app_container_image = "${var.harvester_app_container_image}"
@@ -211,15 +194,14 @@ module "harvester" {
   ebs_host_path = "${module.cluster.ebs_host_path}"
   efs_host_path = "${module.cluster.efs_host_path}"
 
-  service_egress_security_group_id = "${aws_security_group.service_egress_security_group.id}"
-  interservice_security_group_id   = "${aws_security_group.interservice_security_group.id}"
+  service_egress_security_group_id = "${var.service_egress_security_group_id}"
+  interservice_security_group_id   = "${var.interservice_security_group_id}"
+  service_lb_security_group_id     = "${var.service_lb_security_group_id}"
 
   cluster_id = "${aws_ecs_cluster.cluster.id}"
   region     = "${var.region}"
 
-  private_subnets = "${module.network.private_subnets}"
-
-  alb_listener_arn = "${module.load_balancer.https_listener_arn}"
+  alb_listener_arn = "${var.load_balancer_https_listener_arn}"
 
   path_pattern = "${var.harvester_path_pattern}"
   host_name    = "${var.harvester_host_name}"

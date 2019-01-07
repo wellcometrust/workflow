@@ -4,17 +4,29 @@ variable "region" {
   default = "eu-west-1"
 }
 
-variable "az_count" {
-  default = "3"
-}
-
 variable "controlled_access_cidr_ingress" {
   type = "list"
 }
 
-variable "vpc_cidr_block" {
-  default = "10.50.0.0/16"
+variable "vpc_id" {}
+
+variable "public_subnets" {
+  type = "list"
 }
+
+variable "private_subnets" {
+  type = "list"
+}
+
+variable "num_private_subnets" {}
+
+variable "service_egress_security_group_id" {}
+variable "interservice_security_group_id" {}
+variable "efs_security_group_id" {}
+
+variable "load_balancer_https_listener_arn" {}
+
+variable "service_lb_security_group_id" {}
 
 # Account
 
@@ -28,10 +40,6 @@ variable "key_name" {
 
 variable "platform_team_account_id" {
   default = "760097843905"
-}
-
-variable "workflow_domain_name" {
-  default = "workflow.wellcomecollection.org"
 }
 
 variable "name" {

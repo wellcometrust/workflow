@@ -3,10 +3,10 @@ module "efs" {
 
   name = "${var.name}"
 
-  vpc_id  = "${module.network.vpc_id}"
-  subnets = "${module.network.private_subnets}"
+  vpc_id  = "${var.vpc_id}"
+  subnets = "${var.private_subnets}"
 
-  num_subnets = "${length(module.network.private_subnets)}"
+  num_subnets = "${var.num_private_subnets}"
 
-  efs_access_security_group_ids = ["${aws_security_group.efs_security_group.id}"]
+  efs_access_security_group_ids = ["${var.efs_security_group_id}"]
 }

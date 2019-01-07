@@ -1,6 +1,15 @@
 module "goobi" {
   source = "goobi"
 
+  vpc_id              = "${module.network.vpc_id}"
+  public_subnets      = "${module.network.public_subnets}"
+  private_subnets     = "${module.network.private_subnets}"
+  num_private_subnets = "${length(module.network.private_subnets)}"
+
+  service_egress_security_group_id = "${aws_security_group.service_egress.id}"
+  interservice_security_group_id   = "${aws_security_group.interservice.id}"
+  efs_security_group_id            = "${aws_security_group.efs.id}"
+
   # Goobi
   goobi_host_name    = "${var.domain_name}"
   goobi_path_pattern = "/goobi/*"
@@ -184,4 +193,25 @@ module "goobi" {
 
   harvester_deployment_minimum_healthy_percent = "0"
   harvester_deployment_maximum_percent         = "100"
+
+  load_balancer_https_listener_arn = "${module.load_balancer.https_listener_arn}"
+
+  service_lb_security_group_id = "${aws_security_group.service_lb.id}"
+}
+
+module "load_balancer" {
+  source = "load_balancer"
+
+  name = "workflow"
+
+  vpc_id         = "${module.network.vpc_id}"
+  public_subnets = "${module.network.public_subnets}"
+
+  certificate_domain = "workflow.wellcomecollection.org"
+
+  service_lb_security_group_ids = [
+    "${aws_security_group.service_lb.id}",
+  ]
+
+  lb_controlled_ingress_cidrs = ["${var.admin_cidr_ingress}"]
 }

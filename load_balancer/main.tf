@@ -14,8 +14,13 @@ resource "aws_alb_listener" "https" {
   certificate_arn   = "${data.aws_acm_certificate.certificate.arn}"
 
   default_action {
-    target_group_arn = "${var.default_target_group_arn}"
-    type             = "forward"
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "application/json"
+      message_body = "Not Found"
+      status_code  = "404"
+    }
   }
 }
 

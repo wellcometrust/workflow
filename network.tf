@@ -1,6 +1,6 @@
 module "network" {
   source     = "git::https://github.com/wellcometrust/terraform.git//network?ref=workaround_count_computed"
-  name       = "${var.name}"
-  cidr_block = "${var.vpc_cidr_block}"
-  az_count   = "${var.az_count}"
+  name       = "workflow"
+  cidr_block = "10.50.0.0/16"
+  az_count   = 3
 }
