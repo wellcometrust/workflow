@@ -194,3 +194,43 @@ data "aws_iam_policy_document" "s3_editorial_photography_upload_external" {
     resources = ["arn:aws:s3:::${var.ep_upload_external_bucket}", "arn:aws:s3:::${var.ep_upload_external_bucket}/*"]
   }
 }
+
+data "aws_iam_policy_document" "assume_lambda_role" {
+  statement {
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "lambda_vpc_permissions" {
+  statement {
+    actions = [
+      "ec2:CreateNetworkInterface",
+      "ec2:DescribeNetworkInterfaces",
+      "ec2:DeleteNetworkInterface",
+    ]
+
+    resources = [
+      "*",
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "cloudwatch_logs" {
+  statement {
+    actions = [
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+    ]
+
+    resources = [
+      "${aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi.arn}",
+    ]
+  }
+}
