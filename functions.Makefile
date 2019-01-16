@@ -42,7 +42,7 @@ endif
 #
 define terraform_plan
 	make uptodate-git
-	AWS_PROFILE="workflow" $(ROOT)/docker_run.py --aws -- \
+	AWS_PROFILE="workflow-dev" $(ROOT)/docker_run.py --aws -- \
 		--volume $(1):/data \
 		--env OP=plan \
 		--env GET_TFVARS=true \
@@ -60,7 +60,7 @@ endef
 #
 define terraform_apply
 	make uptodate-git
-	AWS_PROFILE="workflow" $(ROOT)/docker_run.py --aws -- \
+	AWS_PROFILE="workflow-dev" $(ROOT)/docker_run.py --aws -- \
 		--volume $(1):/data \
 		--env OP=apply \
 		--env BUCKET_NAME=wellcomecollection-workflow-infra \

@@ -13,7 +13,7 @@ terraform {
     key            = "terraform/workflow.tfstate"
     dynamodb_table = "terraform-locktable"
 
-    profile = "workflow"
+    profile = "workflow-dev"
     region  = "eu-west-1"
   }
 }

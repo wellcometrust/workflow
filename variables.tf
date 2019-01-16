@@ -46,14 +46,12 @@ variable "ebs_size" {
 # Misc
 
 variable "profile" {
-  default = "workflow"
+  default = "workflow-dev"
 }
 
 variable "region" {
   default = "eu-west-1"
 }
-
-variable "platform_team_account_id" {}
 
 variable "domain_name" {
   default = "workflow.wellcomecollection.org"

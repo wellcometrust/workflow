@@ -76,6 +76,16 @@ data "aws_iam_policy_document" "s3_rw_workflow-harvesting-results" {
   }
 }
 
+locals {
+  bagit_access_principles = [
+    # Platform
+    "arn:aws:iam::760097843905:root",
+
+    # Storage
+    "arn:aws:iam::975596993436:root",
+  ]
+}
+
 data "aws_iam_policy_document" "allow_external_export-bagit_access" {
   statement {
     actions   = ["s3:GetObject*"]
@@ -83,7 +93,7 @@ data "aws_iam_policy_document" "allow_external_export-bagit_access" {
 
     principals {
       type        = "AWS"
-      identifiers = ["${var.platform_team_account_id}"]
+      identifiers = ["${local.bagit_access_principles}"]
     }
   }
 
