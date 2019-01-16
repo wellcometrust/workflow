@@ -1,3 +1,10 @@
+provider "aws" {
+  profile = "${var.profile}"
+  region  = "${var.region}"
+
+  version = "1.52.0"
+}
+
 terraform {
   required_version = ">= 0.9"
 
@@ -6,7 +13,7 @@ terraform {
     key            = "terraform/workflow.tfstate"
     dynamodb_table = "terraform-locktable"
 
-    profile = "wellcomedigitalworkflow"
+    profile = "workflow"
     region  = "eu-west-1"
   }
 }

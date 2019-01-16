@@ -197,6 +197,8 @@ module "goobi" {
   load_balancer_https_listener_arn = "${module.load_balancer.https_listener_arn}"
 
   service_lb_security_group_id = "${aws_security_group.service_lb.id}"
+
+  profile = "${var.profile}"
 }
 
 module "load_balancer" {

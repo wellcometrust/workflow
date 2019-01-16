@@ -30,9 +30,7 @@ variable "service_lb_security_group_id" {}
 
 # Account
 
-variable "profile" {
-  default = "wellcomedigitalworkflow"
-}
+variable "profile" {}
 
 variable "key_name" {
   default = "wellcomedigitalworkflow"

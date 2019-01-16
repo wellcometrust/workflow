@@ -46,7 +46,7 @@ variable "ebs_size" {
 # Misc
 
 variable "profile" {
-  default = "wellcomedigitalworkflow"
+  default = "workflow"
 }
 
 variable "region" {
