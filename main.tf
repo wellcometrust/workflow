@@ -74,6 +74,7 @@ module "goobi" {
     DB_NAME         = "itm"
     DB_USER         = "${module.goobi_rds_cluster.username}"
     DB_PASSWORD     = "${module.goobi_rds_cluster.password}"
+    DB_HA           = "aurora:"
     CONFIGSOURCE    = "s3"
     AWS_S3_BUCKET   = "${aws_s3_bucket.workflow-configuration.bucket}"
     SERVERNAME      = "${var.domain_name}"
@@ -84,7 +85,7 @@ module "goobi" {
     S3_DATA_BUCKET  = "${aws_s3_bucket.workflow-data.bucket}"
   }
 
-  itm_app_env_vars_length = "13"
+  itm_app_env_vars_length = "14"
 
   itm_sidecar_container_image = "${var.itm_sidecar_container_image}"
   itm_sidecar_container_port  = "80"
