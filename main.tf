@@ -158,6 +158,7 @@ module "goobi" {
     DB_NAME                      = "harvester"
     DB_USER                      = "${module.goobi_rds_cluster.username}"
     DB_PASSWORD                  = "${module.goobi_rds_cluster.password}"
+    DB_HA                        = "aurora:"
     CONFIGSOURCE                 = "s3"
     AWS_S3_BUCKET                = "${aws_s3_bucket.workflow-configuration.bucket}"
     SERVERNAME                   = "${var.domain_name}"
@@ -167,7 +168,7 @@ module "goobi" {
     S3_BUCKET_HARVESTING_RESULTS = "${aws_s3_bucket.workflow-harvesting-results.bucket}"
   }
 
-  harvester_app_env_vars_length = "12"
+  harvester_app_env_vars_length = "13"
 
   harvester_sidecar_container_image = "${var.harvester_sidecar_container_image}"
   harvester_sidecar_container_port  = "80"
