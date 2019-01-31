@@ -182,3 +182,14 @@ data "aws_iam_policy_document" "cloudwatch_logs" {
     ]
   }
 }
+
+data "aws_iam_policy_document" "allow_storage_archive_access" {
+  statement {
+    actions = [
+      "s3:GetObject*",
+      "s3:ListBucket",
+    ]
+
+    resources = ["arn:aws:s3:::${var.storage_archive_bucket}", "arn:aws:s3:::${var.storage_archive_bucket}/*"]
+  }
+}

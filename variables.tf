@@ -62,3 +62,7 @@ variable "intranda_ep_user" {}
 variable "ep_upload_external_bucket" {
   default = "wellcomecollection-editorial-photography"
 }
+
+variable "storage_archive_bucket" {
+  default = "wellcomecollection-storage-archive"
+}

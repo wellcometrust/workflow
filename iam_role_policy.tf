@@ -23,6 +23,11 @@ resource "aws_iam_role_policy" "ecs_goobi_s3_editorial_photography_upload_extern
   policy = "${data.aws_iam_policy_document.s3_editorial_photography_upload_external.json}"
 }
 
+resource "aws_iam_role_policy" "ecs_goobi_s3_allow_storage_archive_access" {
+  role   = "${module.goobi.goobi_task_role}"
+  policy = "${data.aws_iam_policy_document.allow_storage_archive_access.json}"
+}
+
 resource "aws_iam_role_policy" "ecs_itm_s3_config_read" {
   role   = "${module.goobi.itm_task_role}"
   policy = "${data.aws_iam_policy_document.s3_read_workflow-configuration.json}"
