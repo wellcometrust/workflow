@@ -15,6 +15,7 @@ resource "aws_lambda_function" "lambda_s3_trigger_goobi" {
   handler = "s3_trigger_goobi.lambda_handler"
   runtime = "python3.6"
   timeout = "10"
+  publish = true
 
   memory_size = "128"
 
