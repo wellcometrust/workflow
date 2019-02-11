@@ -79,6 +79,12 @@ resource "aws_iam_role_policy" "lambda_vpc_permissions" {
   policy = "${data.aws_iam_policy_document.lambda_vpc_permissions.json}"
 }
 
+resource "aws_iam_role_policy" "lambda_s3_upload_rw" {
+  name   = "lambda_s3_upload"
+  role   = "${aws_iam_role.lambda_iam_role.name}"
+  policy = "${data.aws_iam_policy_document.s3_workflow-upload.json}"
+}
+
 resource "aws_iam_role_policy" "cloudwatch_logs" {
   name   = "s3_trigger_goobi_lambda_logs"
   role   = "${aws_iam_role.lambda_iam_role.name}"
