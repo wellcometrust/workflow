@@ -47,7 +47,7 @@ resource "aws_lambda_permission" "allow_event_s3_trigger_goobi" {
   source_arn    = "${aws_s3_bucket.workflow-upload.arn}"
 }
 
-resource "aws_cloudwatch_log_group" "cloudwatch_log_group_s3_trigger_goobi" {
+resource "aws_cloudwatch_log_group" "cloudwatch_log_group_s3_trigger_goobi_ep" {
   name = "/aws/lambda/s3_trigger_goobi_ep"
 
   retention_in_days = "14"
