@@ -33,6 +33,22 @@ variable "lambda_hotfolder" {
   default = "hotfolder"
 }
 
+variable "lambda_api_endpoint_digitised" {
+  type = "string"
+}
+
+variable "lambda_token_digitised" {
+  type = "string"
+}
+
+variable "lambda_templateid_digitised" {
+  type = "string"
+}
+
+variable "lambda_updatetemplateid_digitised" {
+  type = "string"
+}
+
 # RDS
 
 variable "rds_username" {}
