@@ -11,6 +11,28 @@ variable "harvester_sidecar_container_image" {}
 
 variable "shell_server_container_image" {}
 
+# Lambda
+variable "lambda_api_endpoint_ep" {
+  type = "string"
+}
+
+variable "lambda_token_ep" {
+  type = "string"
+}
+
+variable "lambda_templateid_ep" {
+  type = "string"
+}
+
+variable "lambda_updatetemplateid_ep" {
+  type = "string"
+}
+
+variable "lambda_hotfolder" {
+  type    = "string"
+  default = "hotfolder"
+}
+
 # RDS
 
 variable "rds_username" {}

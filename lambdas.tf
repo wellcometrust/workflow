@@ -19,6 +19,16 @@ resource "aws_lambda_function" "lambda_s3_trigger_goobi_ep" {
 
   memory_size = "128"
 
+  environment {
+    variables = {
+      API_ENDPOINT     = "${var.lambda_api_endpoint_ep}"
+      TOKEN            = "${var.lambda_token_ep}"
+      TEMPLATEID       = "${var.lambda_templateid_ep}"
+      UPDATETEMPLATEID = "${var.lambda_updatetemplateid_ep}"
+      HOTFOLDER        = "hotfolder"
+    }
+  }
+
   vpc_config {
     security_group_ids = [
       "${aws_security_group.interservice.id}",
