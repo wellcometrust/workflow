@@ -1,9 +1,7 @@
 provider "aws" {
-// Wellcome devs will need to swap this for the profile statement to authenticate
+  // Wellcome devs will need to swap this for the profile statement to authenticate
 
-//  assume_role {
-//    role_arn = "arn:aws:iam::299497370133:role/workflow-admin"
-//  }
+  //  assume_role {  //    role_arn = "arn:aws:iam::299497370133:role/workflow-admin"  //  }
 
   profile = "${var.profile}"
   region  = "${var.region}"

@@ -25,5 +25,3 @@ output "harvester_task_role" {
 output "shell_server_task_role" {
   value = "${module.shell_server.task_role}"
 }
-
-
