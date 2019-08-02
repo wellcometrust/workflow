@@ -33,3 +33,7 @@ output "service_lb_security_group_id" {
 output "load_balancer_https_listener_arn" {
   value = "${module.load_balancer.https_listener_arn}"
 }
+
+//output "service-workflow" {
+//  value = "${aws_vpc_endpoint_service.goobi.service_name}"
+//}

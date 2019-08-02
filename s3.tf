@@ -61,6 +61,34 @@ resource "aws_s3_bucket" "workflow-upload" {
   }
 }
 
+resource "aws_s3_bucket_policy" "workflow-upload" {
+  bucket = "${aws_s3_bucket.workflow-upload.id}"
+  policy = "${data.aws_iam_policy_document.workflow-upload.json}"
+}
+
+data "aws_iam_policy_document" "workflow-upload" {
+  "statement" {
+    actions = [
+      "s3:List*",
+      "s3:Get*",
+      "s3:Delete*",
+      "s3:Put*",
+    ]
+
+    resources = [
+      "${aws_s3_bucket.workflow-upload.arn}/*",
+    ]
+
+    principals {
+      identifiers = [
+        "arn:aws:iam::404315009621:role/digitisation-developer",
+      ]
+
+      type = "AWS"
+    }
+  }
+}
+
 resource "aws_s3_bucket_notification" "bucket_notification_workflow-upload" {
   bucket = "${aws_s3_bucket.workflow-upload.id}"
 
