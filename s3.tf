@@ -76,6 +76,7 @@ data "aws_iam_policy_document" "workflow-upload" {
     ]
 
     resources = [
+      "${aws_s3_bucket.workflow-upload.arn}",
       "${aws_s3_bucket.workflow-upload.arn}/*",
     ]
 
