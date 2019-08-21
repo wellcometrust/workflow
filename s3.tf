@@ -52,6 +52,11 @@ resource "aws_s3_bucket" "workflow-export-bagit-stage" {
   }
 }
 
+resource "aws_s3_bucket_policy" "workflow-export-bagit-stage-external-access-policy" {
+  bucket = "${aws_s3_bucket.workflow-export-bagit-stage.id}"
+  policy = "${data.aws_iam_policy_document.allow_external_export-bagit-stage_access.json}"
+}
+
 resource "aws_s3_bucket" "workflow-harvesting-results" {
   bucket = "wellcomecollection-workflow-harvesting-results"
   acl    = "private"
