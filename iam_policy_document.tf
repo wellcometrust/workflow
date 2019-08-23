@@ -132,6 +132,16 @@ data "aws_iam_policy_document" "allow_external_export-bagit_access" {
 
 data "aws_iam_policy_document" "allow_external_export-bagit-stage_access" {
   statement {
+    actions   = ["s3:GetObject*"]
+    resources = ["${aws_s3_bucket.workflow-export-bagit-stage.arn}", "${aws_s3_bucket.workflow-export-bagit-stage.arn}/*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${local.bagit_access_principles}"]
+    }
+  }
+
+  statement {
     actions = [
       "s3:ListBucket",
       "s3:GetObject",
