@@ -1,10 +1,12 @@
 provider "aws" {
   // Wellcome devs will need to swap this for the profile statement to authenticate
 
-  //  assume_role {  //    role_arn = "arn:aws:iam::299497370133:role/workflow-admin"  //  }
+  assume_role {
+    role_arn = "arn:aws:iam::299497370133:role/workflow-admin"
+  }
 
-  profile = "${var.profile}"
-  region  = "${var.region}"
+  //  profile = "${var.profile}"
+  region = "${var.region}"
 
   version = "1.52.0"
 }
@@ -18,10 +20,10 @@ terraform {
     dynamodb_table = "terraform-locktable"
 
     // Wellcome devs will need to swap this for the profile statement to authenticate
-    // role_arn = "arn:aws:iam::299497370133:role/workflow-developer"
+    role_arn = "arn:aws:iam::299497370133:role/workflow-developer"
 
-    profile = "workflow-dev"
-    region  = "eu-west-1"
+    // profile = "workflow-dev"
+    region = "eu-west-1"
   }
 }
 

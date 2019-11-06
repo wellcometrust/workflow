@@ -34,7 +34,14 @@ output "load_balancer_https_listener_arn" {
   value = "${module.load_balancer.https_listener_arn}"
 }
 
-//output "service-workflow" {
-//  value = "${aws_vpc_endpoint_service.goobi.service_name}"
+# workflow upload user (editorial photography)
+
+
+//output "upload_access_key_id" {
+//  value = "${aws_iam_access_key.workflow-upload-only.id}"
+//}
+//
+//output "upload_secret_key_id" {
+//  value = "${aws_iam_access_key.workflow-upload-only.secret}"
 //}
 
