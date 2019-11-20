@@ -81,7 +81,7 @@ resource "aws_s3_bucket_policy" "workflow-upload" {
 }
 
 data "aws_iam_policy_document" "workflow-upload" {
-  "statement" {
+  statement {
     actions = [
       "s3:List*",
       "s3:Get*",

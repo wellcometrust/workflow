@@ -1,5 +1,5 @@
 module "goobi" {
-  source = "goobi"
+  source = "./goobi"
 
   vpc_id              = "${module.network.vpc_id}"
   public_subnets      = "${module.network.public_subnets}"
@@ -204,7 +204,7 @@ module "goobi" {
 }
 
 module "load_balancer" {
-  source = "load_balancer"
+  source = "./load_balancer"
 
   name = "workflow"
 
