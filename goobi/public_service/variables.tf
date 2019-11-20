@@ -1,22 +1,22 @@
 variable "name" {}
 
-variable "task_desired_count" {
-  default = "1"
+variable "desired_task_count" {
+  default = 1
 }
 
 variable "deployment_minimum_healthy_percent" {
-  default = "100"
+  default = 100
 }
 
 variable "deployment_maximum_percent" {
-  default = "200"
+  default = 200
 }
 
 variable "interservice_security_group_id" {}
 variable "service_egress_security_group_id" {}
 variable "service_lb_security_group_id" {}
 
-variable "cluster_id" {}
+variable "cluster_arn" {}
 variable "vpc_id" {}
 
 variable "private_subnets" {
@@ -52,10 +52,8 @@ variable "app_memory" {}
 variable "app_cpu" {}
 
 variable "app_env_vars" {
-  type = "map"
+  type = map(string)
 }
-
-variable "app_env_vars_length" {}
 
 # Sidecar
 
@@ -65,10 +63,8 @@ variable "sidecar_cpu" {}
 variable "sidecar_memory" {}
 
 variable "sidecar_env_vars" {
-  type = "map"
+  type = map(string)
 }
-
-variable "sidecar_env_vars_length" {}
 
 # Load balancer
 

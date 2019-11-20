@@ -33,8 +33,6 @@ module "goobi" {
     WORKING_STORAGE = "/ebs"
   }
 
-  goobi_app_env_vars_length = "13"
-
   goobi_sidecar_container_image = "${var.goobi_sidecar_container_image}"
   goobi_sidecar_container_port  = "80"
 
@@ -44,8 +42,6 @@ module "goobi" {
     APP_PATH      = "goobi"
     APP_CONTAINER = "localhost"
   }
-
-  goobi_sidecar_env_vars_length = "4"
 
   goobi_efs_container_path = "/efs"
   goobi_ebs_container_path = "/ebs"
@@ -85,8 +81,6 @@ module "goobi" {
     S3_DATA_BUCKET  = "${aws_s3_bucket.workflow-data.bucket}"
   }
 
-  itm_app_env_vars_length = "14"
-
   itm_sidecar_container_image = "${var.itm_sidecar_container_image}"
   itm_sidecar_container_port  = "80"
 
@@ -96,8 +90,6 @@ module "goobi" {
     HTTPS_DOMAIN  = "${var.domain_name}"
     APP_PATH      = "itm"
   }
-
-  itm_sidecar_env_vars_length = "4"
 
   itm_efs_container_path = "/efs"
   itm_ebs_container_path = "/ebs"
@@ -168,8 +160,6 @@ module "goobi" {
     S3_BUCKET_HARVESTING_RESULTS = "${aws_s3_bucket.workflow-harvesting-results.bucket}"
   }
 
-  harvester_app_env_vars_length = "13"
-
   harvester_sidecar_container_image = "${var.harvester_sidecar_container_image}"
   harvester_sidecar_container_port  = "80"
 
@@ -179,8 +169,6 @@ module "goobi" {
     APP_PATH      = "harvester"
     APP_CONTAINER = "localhost"
   }
-
-  harvester_sidecar_env_vars_length = "4"
 
   harvester_efs_container_path = "/efs"
   harvester_ebs_container_path = "/ebs"

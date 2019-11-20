@@ -81,16 +81,12 @@ variable "goobi_app_env_vars" {
   type = "map"
 }
 
-variable "goobi_app_env_vars_length" {}
-
 variable "goobi_sidecar_container_image" {}
 variable "goobi_sidecar_container_port" {}
 
 variable "goobi_sidecar_env_vars" {
   type = "map"
 }
-
-variable "goobi_sidecar_env_vars_length" {}
 
 variable "goobi_ebs_container_path" {}
 variable "goobi_efs_container_path" {}
@@ -116,16 +112,12 @@ variable "itm_app_env_vars" {
   type = "map"
 }
 
-variable "itm_app_env_vars_length" {}
-
 variable "itm_sidecar_container_image" {}
 variable "itm_sidecar_container_port" {}
 
 variable "itm_sidecar_env_vars" {
   type = "map"
 }
-
-variable "itm_sidecar_env_vars_length" {}
 
 variable "itm_ebs_container_path" {}
 variable "itm_efs_container_path" {}
@@ -151,16 +143,12 @@ variable "harvester_app_env_vars" {
   type = "map"
 }
 
-variable "harvester_app_env_vars_length" {}
-
 variable "harvester_sidecar_container_image" {}
 variable "harvester_sidecar_container_port" {}
 
 variable "harvester_sidecar_env_vars" {
   type = "map"
 }
-
-variable "harvester_sidecar_env_vars_length" {}
 
 variable "harvester_ebs_container_path" {}
 variable "harvester_efs_container_path" {}
