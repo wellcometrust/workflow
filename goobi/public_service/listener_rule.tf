@@ -15,4 +15,8 @@ resource "aws_alb_listener_rule" "https" {
     field  = "path-pattern"
     values = ["${var.path_pattern}"]
   }
+
+  lifecycle {
+    ignore_changes = "all"
+  }
 }

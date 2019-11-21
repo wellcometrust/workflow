@@ -217,5 +217,5 @@ module "load_balancer" {
     "${aws_security_group.service_lb.id}",
   ]
 
-  lb_controlled_ingress_cidrs = ["${var.admin_cidr_ingress}"]
+  lb_controlled_ingress_cidrs = ["0.0.0.0/0"]
 }
