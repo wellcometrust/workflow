@@ -24,7 +24,7 @@ module "service" {
 }
 
 module "task" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/task/prebuilt/single_container+ebs+efs?ref=v11.3.1"
+  source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/modules/task/prebuilt/single_container+ebs+efs?ref=v11.8.1"
 
   aws_region = "${var.region}"
   task_name  = "${var.name}"
