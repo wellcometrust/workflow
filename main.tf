@@ -129,8 +129,17 @@ module "goobi" {
   shell_server_efs_container_path = "/efs"
   shell_server_ebs_container_path = "/ebs"
 
-  shell_server_cpu    = "1024"
-  shell_server_memory = "7168"
+  shell_server_1_cpu    = "1024"
+  shell_server_1_memory = "7168"
+
+  shell_server_2_cpu    = "1024"
+  shell_server_2_memory = "3027"
+
+  shell_server_3_cpu    = "1024"
+  shell_server_3_memory = "3027"
+  
+  shell_server_4_cpu    = "1024"
+  shell_server_4_memory = "3027"
 
   shell_server_deployment_minimum_healthy_percent = "0"
   shell_server_deployment_maximum_percent         = "100"
