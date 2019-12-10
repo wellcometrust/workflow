@@ -124,7 +124,7 @@ module "goobi" {
     S3_DATA_BUCKET  = "${aws_s3_bucket.workflow-data.bucket}"
   }
 
-  shell_server_env_vars_length = "4"
+  shell_server_env_vars_length = "5"
 
   shell_server_efs_container_path = "/efs"
   shell_server_ebs_container_path = "/ebs"
