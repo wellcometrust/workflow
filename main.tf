@@ -137,7 +137,7 @@ module "goobi" {
 
   shell_server_3_cpu    = "1024"
   shell_server_3_memory = "3027"
-  
+
   shell_server_4_cpu    = "1024"
   shell_server_4_memory = "3027"
 
