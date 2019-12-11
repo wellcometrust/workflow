@@ -51,7 +51,7 @@ module "goobi" {
   goobi_ebs_container_path = "/ebs"
 
   goobi_app_cpu    = "6144"
-  goobi_app_memory = "16384"
+  goobi_app_memory = "8192"
 
   goobi_sidecar_cpu    = "128"
   goobi_sidecar_memory = "256"
@@ -195,7 +195,7 @@ module "goobi" {
   harvester_ebs_container_path = "/ebs"
 
   harvester_app_cpu    = "512"
-  harvester_app_memory = "3072"
+  harvester_app_memory = "2048"
 
   harvester_sidecar_cpu    = "128"
   harvester_sidecar_memory = "256"
