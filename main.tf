@@ -219,3 +219,7 @@ module "load_balancer" {
 
   lb_controlled_ingress_cidrs = ["0.0.0.0/0"]
 }
+
+module "production_iam" {
+  source = "production"
+}
