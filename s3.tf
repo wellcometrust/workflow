@@ -36,6 +36,14 @@ resource "aws_s3_bucket" "workflow-export-bagit" {
   lifecycle {
     prevent_destroy = true
   }
+  lifecycle_rule {
+    id      = "expire_all_objects"
+    enabled = true
+
+    expiration {
+      days = 10
+    }
+  }
 }
 
 resource "aws_s3_bucket_policy" "workflow-export-bagit-external-access-policy" {
@@ -49,6 +57,15 @@ resource "aws_s3_bucket" "workflow-export-bagit-stage" {
 
   lifecycle {
     prevent_destroy = true
+  }
+
+  lifecycle_rule {
+    id      = "expire_all_objects"
+    enabled = true
+
+    expiration {
+      days = 10
+    }
   }
 }
 
