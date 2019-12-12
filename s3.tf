@@ -6,6 +6,14 @@ resource "aws_s3_bucket" "workflow-configuration" {
     enabled = true
   }
 
+  lifecycle_rule {
+    enabled = true
+
+    noncurrent_version_expiration {
+      days = 90
+    }
+  }
+
   lifecycle {
     prevent_destroy = true
   }
