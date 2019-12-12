@@ -81,6 +81,15 @@ resource "aws_s3_bucket" "workflow-harvesting-results" {
   lifecycle {
     prevent_destroy = true
   }
+  versioning {
+    enabled = true
+  }
+  lifecycle_rule {
+    enabled = true
+    noncurrent_version_expiration {
+      days = 90
+    }
+  }
 }
 
 resource "aws_s3_bucket" "workflow-upload" {
