@@ -39,6 +39,18 @@ resource "aws_s3_bucket" "workflow-infra" {
   lifecycle {
     prevent_destroy = true
   }
+
+  versioning {
+    enabled = true
+  }
+
+  lifecycle_rule {
+    enabled = true
+
+    noncurrent_version_expiration {
+      days = 60
+    }
+  }
 }
 
 resource "aws_s3_bucket" "workflow-export-bagit" {
