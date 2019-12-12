@@ -36,6 +36,7 @@ resource "aws_s3_bucket" "workflow-export-bagit" {
   lifecycle {
     prevent_destroy = true
   }
+
   lifecycle_rule {
     id      = "expire_all_objects"
     enabled = true
@@ -81,11 +82,14 @@ resource "aws_s3_bucket" "workflow-harvesting-results" {
   lifecycle {
     prevent_destroy = true
   }
+
   versioning {
     enabled = true
   }
+
   lifecycle_rule {
     enabled = true
+
     noncurrent_version_expiration {
       days = 90
     }
