@@ -22,6 +22,18 @@ output "harvester_task_role" {
   value = "${module.harvester.task_role}"
 }
 
-output "shell_server_task_role" {
-  value = "${module.shell_server.task_role}"
+output "shell_server_1_task_role" {
+  value = "${module.shell_server_1.task_role}"
+}
+
+output "shell_server_2_task_role" {
+  value = "${module.shell_server_2.task_role}"
+}
+
+output "shell_server_3_task_role" {
+  value = "${module.shell_server_3.task_role}"
+}
+
+output "shell_server_4_task_role" {
+  value = "${module.shell_server_4.task_role}"
 }

@@ -125,13 +125,22 @@ module "goobi" {
     S3_DATA_BUCKET  = "${aws_s3_bucket.workflow-data.bucket}"
   }
 
-  shell_server_env_vars_length = "4"
+  shell_server_env_vars_length = "5"
 
   shell_server_efs_container_path = "/efs"
   shell_server_ebs_container_path = "/ebs"
 
-  shell_server_cpu    = "1024"
-  shell_server_memory = "7168"
+  shell_server_1_cpu    = "1024"
+  shell_server_1_memory = "7168"
+
+  shell_server_2_cpu    = "1024"
+  shell_server_2_memory = "3027"
+
+  shell_server_3_cpu    = "1024"
+  shell_server_3_memory = "3027"
+
+  shell_server_4_cpu    = "1024"
+  shell_server_4_memory = "3027"
 
   shell_server_deployment_minimum_healthy_percent = "0"
   shell_server_deployment_maximum_percent         = "100"
@@ -187,7 +196,7 @@ module "goobi" {
   harvester_ebs_container_path = "/ebs"
 
   harvester_app_cpu    = "512"
-  harvester_app_memory = "4096"
+  harvester_app_memory = "2048"
 
   harvester_sidecar_cpu    = "128"
   harvester_sidecar_memory = "256"

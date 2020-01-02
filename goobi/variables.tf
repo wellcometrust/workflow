@@ -67,8 +67,14 @@ variable "shell_server_env_vars" {
 
 variable "shell_server_env_vars_length" {}
 
-variable "shell_server_cpu" {}
-variable "shell_server_memory" {}
+variable "shell_server_1_cpu" {}
+variable "shell_server_1_memory" {}
+variable "shell_server_2_cpu" {}
+variable "shell_server_2_memory" {}
+variable "shell_server_3_cpu" {}
+variable "shell_server_3_memory" {}
+variable "shell_server_4_cpu" {}
+variable "shell_server_4_memory" {}
 variable "shell_server_deployment_minimum_healthy_percent" {}
 variable "shell_server_deployment_maximum_percent" {}
 
