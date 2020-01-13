@@ -85,6 +85,11 @@ resource "aws_iam_role_policy" "ecs_shell_server_1_s3_editorial_photography_uplo
 }
 
 # shell_server_2
+resource "aws_iam_role_policy" "ecs_shell_server_2_s3_wellcomecollection_storage_read" {
+  role   = "${module.goobi.shell_server_2_task_role}"
+  policy = "${data.aws_iam_policy_document.s3_read_wellcomecollection-storage.json}"
+}
+
 resource "aws_iam_role_policy" "ecs_shell_server_2_s3_config_read" {
   role   = "${module.goobi.shell_server_2_task_role}"
   policy = "${data.aws_iam_policy_document.s3_read_workflow-configuration.json}"

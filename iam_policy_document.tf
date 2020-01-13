@@ -15,6 +15,20 @@ data "aws_iam_policy_document" "alb_logs" {
   }
 }
 
+data "aws_iam_policy_document" "s3_read_wellcomecollection-storage" {
+  statement {
+    actions = [
+      "s3:GetObject",
+	  "s3:ListBucket",
+    ]
+
+    resources = [
+      "arn:aws:s3:::wellcomecollection-storage/*",
+      "arn:aws:s3:::wellcomecollection-storage",
+    ]
+  }
+}
+
 data "aws_iam_policy_document" "s3_read_workflow-configuration" {
   statement {
     actions = [
