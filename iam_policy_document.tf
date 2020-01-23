@@ -183,7 +183,23 @@ data "aws_iam_policy_document" "s3_editorial_photography_upload_external" {
       "s3:DeleteObject",
     ]
 
-    resources = ["arn:aws:s3:::${var.ep_upload_external_bucket}", "arn:aws:s3:::${var.ep_upload_external_bucket}/*"]
+    resources = [
+      "arn:aws:s3:::${var.ep_upload_external_bucket}",
+      "arn:aws:s3:::${var.ep_upload_external_bucket}/*"
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "s3_editorial_photography_allow_restore" {
+  statement {
+    actions = [
+      "s3:RestoreObject",
+    ]
+
+    resources = [
+      "arn:aws:s3:::${var.ep_upload_external_bucket}",
+      "arn:aws:s3:::${var.ep_upload_external_bucket}/*"
+    ]
   }
 }
 
