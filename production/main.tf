@@ -15,7 +15,7 @@ resource "aws_iam_access_key" "in_house_photography" {
 }
 
 resource "aws_iam_user_policy" "in_house_photography" {
-  user = "${aws_iam_user.in_house_photography.name}"
+  user   = "${aws_iam_user.in_house_photography.name}"
   policy = "${data.aws_iam_policy_document.in_house_photography.json}"
 }
 
@@ -29,14 +29,26 @@ data "aws_iam_policy_document" "in_house_photography" {
       "${data.aws_s3_bucket.workflow_upload.arn}/in_house_photography/*",
     ]
   }
-}
 
-output "in_house_photography_id" {
-  value = "${aws_iam_access_key.in_house_photography.id}"
-}
+  statement {
+    actions = [
+      "s3:List*",
+    ]
 
-output "in_house_photography_secret" {
-  value = "${aws_iam_access_key.in_house_photography.secret}"
+    resources = [
+      "${data.aws_s3_bucket.workflow_upload.arn}",
+    ]
+  }
+
+  statement {
+    actions = [
+      "s3:*",
+    ]
+
+    resources = [
+      "${data.aws_s3_bucket.workflow_upload.arn}/editorial/*",
+    ]
+  }
 }
 
 // in_house_archives
@@ -50,7 +62,7 @@ resource "aws_iam_access_key" "in_house_archives" {
 }
 
 resource "aws_iam_user_policy" "in_house_archives" {
-  user = "${aws_iam_user.in_house_archives.name}"
+  user   = "${aws_iam_user.in_house_archives.name}"
   policy = "${data.aws_iam_policy_document.in_house_archives.json}"
 }
 
@@ -64,14 +76,26 @@ data "aws_iam_policy_document" "in_house_archives" {
       "${data.aws_s3_bucket.workflow_upload.arn}/in_house_archives/*",
     ]
   }
-}
 
-output "in_house_archives_id" {
-  value = "${aws_iam_access_key.in_house_archives.id}"
-}
+  statement {
+    actions = [
+      "s3:List*",
+    ]
 
-output "in_house_archives_secret" {
-  value = "${aws_iam_access_key.in_house_archives.secret}"
+    resources = [
+      "${data.aws_s3_bucket.workflow_upload.arn}",
+    ]
+  }
+
+  statement {
+    actions = [
+      "s3:*",
+    ]
+
+    resources = [
+      "${data.aws_s3_bucket.workflow_upload.arn}/editorial/*",
+    ]
+  }
 }
 
 // digitisation_services
@@ -85,7 +109,7 @@ resource "aws_iam_access_key" "digitisation_services" {
 }
 
 resource "aws_iam_user_policy" "digitisation_services" {
-  user = "${aws_iam_user.digitisation_services.name}"
+  user   = "${aws_iam_user.digitisation_services.name}"
   policy = "${data.aws_iam_policy_document.digitisation_services.json}"
 }
 
@@ -99,12 +123,24 @@ data "aws_iam_policy_document" "digitisation_services" {
       "${data.aws_s3_bucket.workflow_upload.arn}/digitisation_services/*",
     ]
   }
-}
 
-output "digitisation_services_id" {
-  value = "${aws_iam_access_key.digitisation_services.id}"
-}
+  statement {
+    actions = [
+      "s3:List*",
+    ]
 
-output "digitisation_services_secret" {
-  value = "${aws_iam_access_key.digitisation_services.secret}"
+    resources = [
+      "${data.aws_s3_bucket.workflow_upload.arn}",
+    ]
+  }
+
+  statement {
+    actions = [
+      "s3:*",
+    ]
+
+    resources = [
+      "${data.aws_s3_bucket.workflow_upload.arn}/editorial/*",
+    ]
+  }
 }

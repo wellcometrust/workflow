@@ -59,4 +59,3 @@ output "production_dis_id" {
 output "production_dis_secret" {
   value = "${module.production_iam.digitisation_services_secret}"
 }
-

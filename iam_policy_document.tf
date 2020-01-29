@@ -185,7 +185,7 @@ data "aws_iam_policy_document" "s3_editorial_photography_upload_external" {
 
     resources = [
       "arn:aws:s3:::${var.ep_upload_external_bucket}",
-      "arn:aws:s3:::${var.ep_upload_external_bucket}/*"
+      "arn:aws:s3:::${var.ep_upload_external_bucket}/*",
     ]
   }
 }
@@ -198,7 +198,7 @@ data "aws_iam_policy_document" "s3_editorial_photography_allow_restore" {
 
     resources = [
       "arn:aws:s3:::${var.ep_upload_external_bucket}",
-      "arn:aws:s3:::${var.ep_upload_external_bucket}/*"
+      "arn:aws:s3:::${var.ep_upload_external_bucket}/*",
     ]
   }
 }
