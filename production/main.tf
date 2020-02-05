@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "in_house_photography" {
     ]
 
     resources = [
-      "${data.aws_s3_bucket.workflow_upload.arn}/in_house_photography/*",
+      "${data.aws_s3_bucket.workflow_upload.arn}/digitised/in_house_photography/*",
     ]
   }
 
@@ -73,7 +73,7 @@ data "aws_iam_policy_document" "in_house_archives" {
     ]
 
     resources = [
-      "${data.aws_s3_bucket.workflow_upload.arn}/in_house_archives/*",
+      "${data.aws_s3_bucket.workflow_upload.arn}/digitised/in_house_archives/*",
     ]
   }
 
@@ -120,7 +120,7 @@ data "aws_iam_policy_document" "digitisation_services" {
     ]
 
     resources = [
-      "${data.aws_s3_bucket.workflow_upload.arn}/digitisation_services/*",
+      "${data.aws_s3_bucket.workflow_upload.arn}/digitised/digitisation_services/*",
     ]
   }
 
