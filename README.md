@@ -1,6 +1,6 @@
-# Digital Workflow
+# Goobi infrastructure
 
-The infrastructure for the Wellcome Collection digital workflow services.
+The infrastructure for the Wellcome Collection instance of Goobi.
 
 ## Working in AWS via Azure AD sign-in
 
