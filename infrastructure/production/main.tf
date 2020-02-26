@@ -5,9 +5,9 @@ data "aws_s3_bucket" "workflow_upload" {
 }
 
 resource "aws_s3_bucket_policy" "workflow_upload" {
-  bucket = data.aws_s3_bucket.workflow_upload.id
+  bucket = "${data.aws_s3_bucket.workflow_upload.id}"
 
-  policy = data.aws_iam_policy_document.workflow_upload.json
+  policy = "${data.aws_iam_policy_document.workflow_upload.json}"
 }
 
 data "aws_iam_policy_document" "workflow_upload" {
@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "workflow_upload" {
 
     resources = [
       "${data.aws_s3_bucket.workflow_upload.arn}/*",
-      data.aws_s3_bucket.workflow_upload.arn,
+      "${data.aws_s3_bucket.workflow_upload.arn}",
     ]
   }
 }
