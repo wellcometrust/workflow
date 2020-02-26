@@ -1,5 +1,5 @@
 module "goobi_rds_cluster" {
-  source             = "git::https://github.com/wellcometrust/terraform.git//rds?ref=v6.4.1"
+  source             = "../modules/rds"
   cluster_identifier = "goobi"
   database_name      = "goobi"
   username           = "${var.rds_username}"
