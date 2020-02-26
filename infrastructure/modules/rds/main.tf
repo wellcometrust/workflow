@@ -20,4 +20,5 @@ resource "aws_rds_cluster" "default" {
   master_password         = "${var.password}"
   vpc_security_group_ids  = ["${aws_security_group.database_sg.id}"]
   backup_retention_period = "${var.backup_retention_period}"
+  deletion_protection     = "${var.deletion_protection}"
 }

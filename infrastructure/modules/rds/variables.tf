@@ -9,6 +9,8 @@ variable "backup_retention_period" {
   default = "14"
 }
 
+variable "deletion_protection" {}
+
 variable "database_name" {}
 
 variable "username" {}
