@@ -5,6 +5,10 @@ variable "instance_class" {
   default = "db.t2.small"
 }
 
+variable "backup_retention_period" {
+  default = "14"
+}
+
 variable "database_name" {}
 
 variable "username" {}
