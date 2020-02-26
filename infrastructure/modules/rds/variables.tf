@@ -1,5 +1,10 @@
 variable "cluster_identifier" {}
 
+variable "instance_class" {
+  type = "string"
+  default = "db.t2.small"
+}
+
 variable "database_name" {}
 
 variable "username" {}
