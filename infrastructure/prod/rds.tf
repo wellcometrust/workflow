@@ -8,6 +8,7 @@ module "goobi_rds_cluster" {
   vpc_subnet_ids          = ["${module.network.private_subnets}"]
   instance_class          = "db.r5.large"
   backup_retention_period = "14"
+  deletion_protection     = "true"
 
   # The database is in a private subnet, so this CIDR only gives access to
   # other instances in the private subnet (in order to reach via bastion host)
