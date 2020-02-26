@@ -1,7 +1,7 @@
 variable "cluster_identifier" {}
 
 variable "instance_class" {
-  type = "string"
+  type    = "string"
   default = "db.t2.small"
 }
 

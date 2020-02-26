@@ -13,11 +13,11 @@ resource "aws_db_subnet_group" "default" {
 }
 
 resource "aws_rds_cluster" "default" {
-  db_subnet_group_name   = "${aws_db_subnet_group.default.name}"
-  cluster_identifier     = "${var.cluster_identifier}"
-  database_name          = "${var.database_name}"
-  master_username        = "${var.username}"
-  master_password        = "${var.password}"
-  vpc_security_group_ids = ["${aws_security_group.database_sg.id}"]
+  db_subnet_group_name    = "${aws_db_subnet_group.default.name}"
+  cluster_identifier      = "${var.cluster_identifier}"
+  database_name           = "${var.database_name}"
+  master_username         = "${var.username}"
+  master_password         = "${var.password}"
+  vpc_security_group_ids  = ["${aws_security_group.database_sg.id}"]
   backup_retention_period = "${var.backup_retention_period}"
 }
