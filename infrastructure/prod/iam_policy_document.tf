@@ -112,22 +112,6 @@ data "aws_iam_policy_document" "allow_external_export-bagit_access" {
       identifiers = ["${local.bagit_access_principles}"]
     }
   }
-
-  statement {
-    actions = [
-      "s3:ListBucket",
-      "s3:GetObject",
-      "s3:PutObject",
-      "s3:DeleteObject",
-    ]
-
-    resources = ["${aws_s3_bucket.workflow-export-bagit.arn}", "${aws_s3_bucket.workflow-export-bagit.arn}/*"]
-
-    principals {
-      type        = "AWS"
-      identifiers = ["${var.intranda_ep_user}"]
-    }
-  }
 }
 
 data "aws_iam_policy_document" "allow_external_export-bagit-stage_access" {
@@ -138,22 +122,6 @@ data "aws_iam_policy_document" "allow_external_export-bagit-stage_access" {
     principals {
       type        = "AWS"
       identifiers = ["${local.bagit_access_principles}"]
-    }
-  }
-
-  statement {
-    actions = [
-      "s3:ListBucket",
-      "s3:GetObject",
-      "s3:PutObject",
-      "s3:DeleteObject",
-    ]
-
-    resources = ["${aws_s3_bucket.workflow-export-bagit-stage.arn}", "${aws_s3_bucket.workflow-export-bagit-stage.arn}/*"]
-
-    principals {
-      type        = "AWS"
-      identifiers = ["${var.intranda_ep_user}"]
     }
   }
 }

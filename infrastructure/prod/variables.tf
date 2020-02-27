@@ -95,8 +95,6 @@ variable "domain_name" {
   default = "workflow.wellcomecollection.org"
 }
 
-variable "intranda_ep_user" {}
-
 variable "ep_upload_external_bucket" {
   default = "wellcomecollection-editorial-photography"
 }
