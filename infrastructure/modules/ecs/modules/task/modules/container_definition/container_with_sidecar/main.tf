@@ -52,6 +52,7 @@ data "template_file" "definition" {
 module "sidecar_log_group" {
   source    = "../../log_group"
   task_name = "sidecar_${var.task_name}"
+  log_retention_in_days ="${var.sidecar_log_retention_in_days}"
 }
 
 module "sidecar_env_vars" {
@@ -65,6 +66,7 @@ module "sidecar_env_vars" {
 module "app_log_group" {
   source    = "../../log_group"
   task_name = "${var.task_name}"
+  log_retention_in_days ="${var.app_log_retention_in_days}"
 }
 
 module "app_env_vars" {
