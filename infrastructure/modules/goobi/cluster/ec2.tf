@@ -7,7 +7,7 @@ module "cluster_hosts" {
   asg_name = var.name
 
   ssh_ingress_security_groups = [module.bastion_host.ssh_controlled_ingress_sg]
-  custom_security_groups      = [var.efs_security_group_ids]
+  custom_security_groups      = var.efs_security_group_ids
 
   subnets  = var.private_subnets
   key_name = "wellcomedigitalworkflow"
