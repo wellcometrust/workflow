@@ -10,7 +10,7 @@ module "cluster" {
   region   = var.region
   key_name = var.key_name
 
-  controlled_access_cidr_ingress = [var.controlled_access_cidr_ingress]
+  controlled_access_cidr_ingress = var.controlled_access_cidr_ingress
 
   efs_security_group_ids = [var.efs_security_group_id]
   efs_id                 = module.efs.efs_id
