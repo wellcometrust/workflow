@@ -1,7 +1,7 @@
 resource "aws_security_group" "efs" {
   name        = "workflow_efs_security_group"
   description = "Allow traffic between services and efs"
-  vpc_id      = "${module.network.vpc_id}"
+  vpc_id      = module.network.vpc_id
 
   ingress {
     from_port = 0
@@ -17,7 +17,7 @@ resource "aws_security_group" "efs" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     Name = "workflow-efs"
   }
 }
@@ -25,7 +25,7 @@ resource "aws_security_group" "efs" {
 resource "aws_security_group" "service_egress" {
   name        = "workflow_service_egress_security_group"
   description = "Allow traffic between services"
-  vpc_id      = "${module.network.vpc_id}"
+  vpc_id      = module.network.vpc_id
 
   egress {
     from_port   = 0
@@ -34,7 +34,7 @@ resource "aws_security_group" "service_egress" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     Name = "workflow-egress"
   }
 }
@@ -42,7 +42,7 @@ resource "aws_security_group" "service_egress" {
 resource "aws_security_group" "interservice" {
   name        = "workflow_interservice_security_group"
   description = "Allow traffic between services"
-  vpc_id      = "${module.network.vpc_id}"
+  vpc_id      = module.network.vpc_id
 
   ingress {
     from_port = 0
@@ -51,7 +51,7 @@ resource "aws_security_group" "interservice" {
     self      = true
   }
 
-  tags {
+  tags = {
     Name = "workflow-interservice"
   }
 }
@@ -59,7 +59,7 @@ resource "aws_security_group" "interservice" {
 resource "aws_security_group" "service_lb" {
   name        = "workflow_service_lb_security_group"
   description = "Allow traffic between services and load balancer"
-  vpc_id      = "${module.network.vpc_id}"
+  vpc_id      = module.network.vpc_id
 
   ingress {
     protocol  = "tcp"
@@ -75,7 +75,8 @@ resource "aws_security_group" "service_lb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     Name = "workflow-service-lb"
   }
 }
+

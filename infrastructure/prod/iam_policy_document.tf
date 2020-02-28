@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "s3_read_workflow-configuration" {
     ]
 
     resources = [
-      "${aws_s3_bucket.workflow-configuration.arn}",
+      aws_s3_bucket.workflow-configuration.arn,
       "${aws_s3_bucket.workflow-configuration.arn}/*",
     ]
   }
@@ -39,7 +39,7 @@ data "aws_iam_policy_document" "s3_rw_workflow-data" {
     ]
 
     resources = [
-      "${aws_s3_bucket.workflow-data.arn}",
+      aws_s3_bucket.workflow-data.arn,
       "${aws_s3_bucket.workflow-data.arn}/*",
     ]
   }
@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "s3_rw_workflow-export-bagit" {
     ]
 
     resources = [
-      "${aws_s3_bucket.workflow-export-bagit.arn}",
+      aws_s3_bucket.workflow-export-bagit.arn,
       "${aws_s3_bucket.workflow-export-bagit.arn}/*",
     ]
   }
@@ -71,7 +71,7 @@ data "aws_iam_policy_document" "s3_rw_workflow-export-bagit-stage" {
     ]
 
     resources = [
-      "${aws_s3_bucket.workflow-export-bagit-stage.arn}",
+      aws_s3_bucket.workflow-export-bagit-stage.arn,
       "${aws_s3_bucket.workflow-export-bagit-stage.arn}/*",
     ]
   }
@@ -86,7 +86,7 @@ data "aws_iam_policy_document" "s3_rw_workflow-harvesting-results" {
     ]
 
     resources = [
-      "${aws_s3_bucket.workflow-harvesting-results.arn}",
+      aws_s3_bucket.workflow-harvesting-results.arn,
       "${aws_s3_bucket.workflow-harvesting-results.arn}/*",
     ]
   }
@@ -94,10 +94,7 @@ data "aws_iam_policy_document" "s3_rw_workflow-harvesting-results" {
 
 locals {
   bagit_access_principles = [
-    # Platform
     "arn:aws:iam::760097843905:root",
-
-    # Storage
     "arn:aws:iam::975596993436:root",
   ]
 }
@@ -105,11 +102,11 @@ locals {
 data "aws_iam_policy_document" "allow_external_export-bagit_access" {
   statement {
     actions   = ["s3:GetObject*"]
-    resources = ["${aws_s3_bucket.workflow-export-bagit.arn}", "${aws_s3_bucket.workflow-export-bagit.arn}/*"]
+    resources = [aws_s3_bucket.workflow-export-bagit.arn, "${aws_s3_bucket.workflow-export-bagit.arn}/*"]
 
     principals {
-      type        = "AWS"
-      identifiers = ["${local.bagit_access_principles}"]
+      type = "AWS"
+      identifiers = local.bagit_access_principles
     }
   }
 }
@@ -117,11 +114,11 @@ data "aws_iam_policy_document" "allow_external_export-bagit_access" {
 data "aws_iam_policy_document" "allow_external_export-bagit-stage_access" {
   statement {
     actions   = ["s3:GetObject*"]
-    resources = ["${aws_s3_bucket.workflow-export-bagit-stage.arn}", "${aws_s3_bucket.workflow-export-bagit-stage.arn}/*"]
+    resources = [aws_s3_bucket.workflow-export-bagit-stage.arn, "${aws_s3_bucket.workflow-export-bagit-stage.arn}/*"]
 
     principals {
-      type        = "AWS"
-      identifiers = ["${local.bagit_access_principles}"]
+      type = "AWS"
+      identifiers = local.bagit_access_principles
     }
   }
 }
@@ -136,7 +133,7 @@ data "aws_iam_policy_document" "s3_workflow-upload" {
     ]
 
     resources = [
-      "${aws_s3_bucket.workflow-upload.arn}",
+      aws_s3_bucket.workflow-upload.arn,
       "${aws_s3_bucket.workflow-upload.arn}/*",
     ]
   }
@@ -206,8 +203,8 @@ data "aws_iam_policy_document" "cloudwatch_logs" {
     ]
 
     resources = [
-      "${aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_ep.arn}",
-      "${aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_digitised.arn}",
+      aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_ep.arn,
+      aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_digitised.arn,
     ]
   }
 }
@@ -222,3 +219,4 @@ data "aws_iam_policy_document" "allow_storage_archive_access" {
     resources = ["arn:aws:s3:::${var.storage_archive_bucket}", "arn:aws:s3:::${var.storage_archive_bucket}/*"]
   }
 }
+
