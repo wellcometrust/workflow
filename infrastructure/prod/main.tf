@@ -146,7 +146,7 @@ module "goobi" {
   shell_server_deployment_minimum_healthy_percent = "0"
   shell_server_deployment_maximum_percent         = "100"
 
-  controlled_access_cidr_ingress = [var.admin_cidr_ingress]
+  controlled_access_cidr_ingress = var.admin_cidr_ingress
 
   asg_min     = var.asg_min
   asg_desired = var.asg_desired
