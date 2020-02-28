@@ -5,7 +5,7 @@ module "goobi_rds_cluster" {
   username                = var.rds_username
   password                = var.rds_password
   vpc_id                  = module.network.vpc_id
-  vpc_subnet_ids          = [module.network.private_subnets]
+  vpc_subnet_ids          = module.network.private_subnets
   instance_class          = "db.r5.large"
   backup_retention_period = "14"
   deletion_protection     = "true"
