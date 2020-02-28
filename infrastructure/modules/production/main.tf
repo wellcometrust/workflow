@@ -4,7 +4,7 @@ data "aws_s3_bucket" "workflow_upload" {
   bucket = "wellcomecollection-workflow-upload"
 }
 
-resource "aws_s3_bucket_policy" "workflow_upload" {
+/* resource "aws_s3_bucket_policy" "workflow_upload" {
   bucket = "${data.aws_s3_bucket.workflow_upload.id}"
 
   policy = "${data.aws_iam_policy_document.workflow_upload.json}"
@@ -30,7 +30,7 @@ data "aws_iam_policy_document" "workflow_upload" {
     ]
   }
 }
-
+ */
 
 
 // in_house_photography

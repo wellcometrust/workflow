@@ -7,16 +7,20 @@ resource "aws_alb_listener_rule" "https" {
   }
 
   condition {
-    field  = "host-header"
-    values = ["${var.host_name}"]
+    host_header {
+      values = ["${var.host_name}"]
+    }
   }
 
   condition {
-    field  = "path-pattern"
-    values = ["${var.path_pattern}"]
+    path_pattern {
+      values = ["${var.path_pattern}"]
+    }
   }
 
-  lifecycle {
-    ignore_changes = "all"
+  condition {
+    source_ip {
+      values = "${var.source_ips}"
+    }
   }
 }

@@ -6,8 +6,16 @@ variable "goobi_sidecar_container_image" {}
 variable "itm_app_container_image" {}
 variable "itm_sidecar_container_image" {}
 
+variable "itm_source_ips" {
+  type = "list"
+}
+
 variable "harvester_app_container_image" {}
 variable "harvester_sidecar_container_image" {}
+
+variable "harvester_source_ips" {
+  type = "list"
+}
 
 variable "shell_server_container_image" {}
 
@@ -94,8 +102,6 @@ variable "region" {
 variable "domain_name" {
   default = "workflow.wellcomecollection.org"
 }
-
-variable "intranda_ep_user" {}
 
 variable "ep_upload_external_bucket" {
   default = "wellcomecollection-editorial-photography"

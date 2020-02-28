@@ -29,6 +29,10 @@ variable "app_env_vars" {
   default     = {}
 }
 
+variable "app_log_retention_in_days" {
+  default = "14"
+}
+
 variable "sidecar_env_vars_length" {
   default = 0
 }
@@ -53,6 +57,10 @@ variable "sidecar_env_vars" {
   description = "Environment variables to pass to the container"
   type        = "map"
   default     = {}
+}
+
+variable "sidecar_log_retention_in_days" {
+  default = "7"
 }
 
 variable "app_env_vars_length" {

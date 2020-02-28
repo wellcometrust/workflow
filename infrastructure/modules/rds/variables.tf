@@ -1,5 +1,16 @@
 variable "cluster_identifier" {}
 
+variable "instance_class" {
+  type    = "string"
+  default = "db.t2.small"
+}
+
+variable "backup_retention_period" {
+  default = "14"
+}
+
+variable "deletion_protection" {}
+
 variable "database_name" {}
 
 variable "username" {}
