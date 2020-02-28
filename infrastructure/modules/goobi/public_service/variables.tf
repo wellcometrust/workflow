@@ -75,3 +75,8 @@ variable "sidecar_env_vars_length" {}
 variable "alb_listener_arn" {}
 variable "host_name" {}
 variable "path_pattern" {}
+
+variable "source_ips" {
+  type    = "list"
+  default = ["0.0.0.0/0"]
+}

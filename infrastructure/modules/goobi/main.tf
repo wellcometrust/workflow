@@ -260,6 +260,7 @@ module "itm" {
 
   path_pattern = "${var.itm_path_pattern}"
   host_name    = "${var.itm_host_name}"
+  source_ips   = "${var.itm_source_ips}"
 
   sidecar_cpu    = "${var.itm_sidecar_cpu}"
   sidecar_memory = "${var.itm_sidecar_memory}"
@@ -313,6 +314,7 @@ module "harvester" {
 
   path_pattern = "${var.harvester_path_pattern}"
   host_name    = "${var.harvester_host_name}"
+  source_ips   = "${var.harvester_source_ips}"
 
   sidecar_cpu    = "${var.harvester_sidecar_cpu}"
   sidecar_memory = "${var.harvester_sidecar_memory}"

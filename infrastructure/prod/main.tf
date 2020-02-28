@@ -65,6 +65,7 @@ module "goobi" {
   # ITM
   itm_host_name    = "${var.domain_name}"
   itm_path_pattern = "/itm/*"
+  itm_source_ips   = "${var.itm_source_ips}"
 
   itm_app_container_image = "${var.itm_app_container_image}"
   itm_app_container_port  = "8009"
@@ -158,6 +159,7 @@ module "goobi" {
   # harvester
   harvester_host_name    = "${var.domain_name}"
   harvester_path_pattern = "/harvester/*"
+  harvester_source_ips   = "${var.harvester_source_ips}"
 
   harvester_app_container_image = "${var.harvester_app_container_image}"
   harvester_app_container_port  = "8009"

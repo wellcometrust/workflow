@@ -18,6 +18,12 @@ resource "aws_alb_listener_rule" "https" {
     }
   }
 
+  condition {
+    source_ip {
+      values = "${var.source_ips}"
+    }
+  }
+
   lifecycle {
     ignore_changes = "all"
   }

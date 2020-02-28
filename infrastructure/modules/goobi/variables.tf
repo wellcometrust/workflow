@@ -138,6 +138,9 @@ variable "itm_efs_container_path" {}
 
 variable "itm_path_pattern" {}
 variable "itm_host_name" {}
+variable "itm_source_ips" {
+  type = "list"
+}
 
 variable "itm_sidecar_cpu" {}
 variable "itm_sidecar_memory" {}
@@ -173,7 +176,9 @@ variable "harvester_efs_container_path" {}
 
 variable "harvester_path_pattern" {}
 variable "harvester_host_name" {}
-
+variable "harvester_source_ips" {
+  type = "list"
+}
 variable "harvester_sidecar_cpu" {}
 variable "harvester_sidecar_memory" {}
 variable "harvester_app_cpu" {}
