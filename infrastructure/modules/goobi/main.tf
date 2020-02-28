@@ -1,5 +1,5 @@
 module "cluster" {
-  source = "cluster"
+  source = "./cluster"
 
   name = "${var.name}"
 
@@ -27,7 +27,7 @@ module "cluster" {
 }
 
 module "shell_server_1" {
-  source = "private_service"
+  source = "./private_service"
 
   name = "shell_server_1"
 
@@ -63,7 +63,7 @@ module "shell_server_1" {
 }
 
 module "shell_server_2" {
-  source = "private_service"
+  source = "./private_service"
 
   name = "shell_server_2"
 
@@ -99,7 +99,7 @@ module "shell_server_2" {
 }
 
 module "shell_server_3" {
-  source = "private_service"
+  source = "./private_service"
 
   name = "shell_server_3"
 
@@ -135,7 +135,7 @@ module "shell_server_3" {
 }
 
 module "shell_server_4" {
-  source = "private_service"
+  source = "./private_service"
 
   name = "shell_server_4"
 
@@ -171,7 +171,7 @@ module "shell_server_4" {
 }
 
 module "goobi" {
-  source = "public_service"
+  source = "./public_service"
 
   name = "goobi"
 
@@ -224,7 +224,7 @@ module "goobi" {
 }
 
 module "itm" {
-  source = "public_service"
+  source = "./public_service"
 
   name = "itm"
 
@@ -278,7 +278,7 @@ module "itm" {
 }
 
 module "harvester" {
-  source = "public_service"
+  source = "./public_service"
 
   name = "harvester"
 
