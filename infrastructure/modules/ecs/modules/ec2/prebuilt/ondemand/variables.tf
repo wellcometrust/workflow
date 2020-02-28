@@ -1,4 +1,5 @@
-variable "cluster_name" {}
+variable "cluster_name" {
+}
 
 variable "asg_name" {
   description = "Name of the ASG"
@@ -25,28 +26,32 @@ variable "instance_type" {
 }
 
 variable "subnets" {
-  type = "list"
+  type = list(string)
 }
 
-variable "vpc_id" {}
-variable "key_name" {}
+variable "vpc_id" {
+}
+
+variable "key_name" {
+}
 
 variable "image_id" {
   default = "ami-c91624b0"
 }
 
 variable "controlled_access_cidr_ingress" {
-  type        = "list"
+  type        = list(string)
   default     = []
   description = "CIDR for SSH access to EC2 instances"
 }
 
 variable "custom_security_groups" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
 variable "ssh_ingress_security_groups" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
+

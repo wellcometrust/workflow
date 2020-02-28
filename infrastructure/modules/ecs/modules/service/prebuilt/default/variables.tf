@@ -1,26 +1,32 @@
-variable "service_name" {}
-variable "ecs_cluster_id" {}
+variable "service_name" {
+}
+
+variable "ecs_cluster_id" {
+}
 
 variable "task_desired_count" {
   default = 1
 }
 
-variable "task_definition_arn" {}
-
-variable "subnets" {
-  type = "list"
+variable "task_definition_arn" {
 }
 
-variable "container_port" {}
+variable "subnets" {
+  type = list(string)
+}
 
-variable "vpc_id" {}
+variable "container_port" {
+}
+
+variable "vpc_id" {
+}
 
 variable "namespace_id" {
   default = "ecs"
 }
 
 variable "security_group_ids" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
@@ -32,10 +38,11 @@ variable "deployment_maximum_percent" {
   default = "200"
 }
 
-variable service_discovery_failure_threshold {
+variable "service_discovery_failure_threshold" {
   default = 1
 }
 
 variable "launch_type" {
   default = "FARGATE"
 }
+

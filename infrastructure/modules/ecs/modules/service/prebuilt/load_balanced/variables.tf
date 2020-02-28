@@ -1,19 +1,30 @@
-variable "service_name" {}
-variable "ecs_cluster_id" {}
-variable "task_desired_count" {}
-variable "task_definition_arn" {}
-
-variable "subnets" {
-  type = "list"
+variable "service_name" {
 }
 
-variable "container_name" {}
-variable "container_port" {}
+variable "ecs_cluster_id" {
+}
 
-variable "vpc_id" {}
+variable "task_desired_count" {
+}
+
+variable "task_definition_arn" {
+}
+
+variable "subnets" {
+  type = list(string)
+}
+
+variable "container_name" {
+}
+
+variable "container_port" {
+}
+
+variable "vpc_id" {
+}
 
 variable "security_group_ids" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
@@ -33,10 +44,11 @@ variable "launch_type" {
   default = "FARGATE"
 }
 
-variable service_discovery_failure_threshold {
+variable "service_discovery_failure_threshold" {
   default = 1
 }
 
 variable "namespace_id" {
   default = "ecs"
 }
+

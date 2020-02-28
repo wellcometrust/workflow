@@ -3,7 +3,7 @@ variable "name" {
 }
 
 variable "subnets" {
-  type        = "list"
+  type        = list(string)
   description = "subnets where to create the EFS mount"
 }
 
@@ -12,7 +12,7 @@ variable "vpc_id" {
 }
 
 variable "efs_access_security_group_ids" {
-  type        = "list"
+  type        = list(string)
   description = "IDs of the security groups of the EC2 instances that need to access the EFS"
 }
 
@@ -24,3 +24,4 @@ variable "performance_mode" {
 variable "num_subnets" {
   description = "Number of subnets"
 }
+

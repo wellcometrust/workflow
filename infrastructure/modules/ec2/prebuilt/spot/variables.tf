@@ -18,7 +18,7 @@ variable "asg_max" {
 }
 
 variable "subnet_list" {
-  type = "list"
+  type = list(string)
 }
 
 variable "instance_type" {
@@ -48,20 +48,22 @@ variable "image_id" {
   description = "ID of the AMI to use on the instances"
 }
 
-variable "spot_price" {}
+variable "spot_price" {
+}
 
 variable "controlled_access_cidr_ingress" {
-  type        = "list"
+  type        = list(string)
   default     = []
   description = "CIDR for SSH access to EC2 instances"
 }
 
 variable "ssh_ingress_security_groups" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
 variable "custom_security_groups" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
+

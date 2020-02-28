@@ -14,3 +14,4 @@ variable "map_public_ip" {
   description = "Assign public IP addresses to instances launched in this subnet"
   default     = false
 }
+

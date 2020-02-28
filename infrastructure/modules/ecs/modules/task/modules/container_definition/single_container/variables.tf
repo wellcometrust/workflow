@@ -1,12 +1,14 @@
-variable "aws_region" {}
+variable "aws_region" {
+}
 
 variable "env_vars" {
   description = "Environment variables to pass to the container"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
 
-variable "task_name" {}
+variable "task_name" {
+}
 
 variable "task_port" {
   default = "false"
@@ -17,16 +19,21 @@ variable "log_group_prefix" {
   default     = "ecs"
 }
 
-variable "container_image" {}
+variable "container_image" {
+}
 
-variable "cpu" {}
-variable "memory" {}
+variable "cpu" {
+}
+
+variable "memory" {
+}
 
 variable "mount_points" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
 variable "env_vars_length" {
   default = 0
 }
+
