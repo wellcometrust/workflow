@@ -25,7 +25,7 @@ variable "app_memory" {
 }
 
 variable "app_mount_points" {
-  type    = list(string)
+  type    = list(any)
   default = []
 }
 
