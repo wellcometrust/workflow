@@ -37,3 +37,7 @@ output "shell_server_3_task_role" {
 output "shell_server_4_task_role" {
   value = "${module.shell_server_4.task_role}"
 }
+
+output "efs_arn" {
+  value = "${module.efs.efs_arn}"
+}
