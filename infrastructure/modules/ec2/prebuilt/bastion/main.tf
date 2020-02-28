@@ -21,7 +21,7 @@ module "launch_config" {
   user_data             = var.user_data
 
   associate_public_ip_address = var.associate_public_ip_address
-  instance_security_groups    = [module.security_groups.instance_security_groups]
+  instance_security_groups    = module.security_groups.instance_security_groups
 }
 
 module "security_groups" {
