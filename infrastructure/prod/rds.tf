@@ -15,6 +15,6 @@ module "goobi_rds_cluster" {
   admin_cidr_ingress = "0.0.0.0/0"
 
   db_access_security_group = [aws_security_group.interservice.id]
-  vpc_security_group_ids   = aws_security_group.interservice.id
+  vpc_security_group_ids   = [aws_security_group.interservice.id]
 }
 
