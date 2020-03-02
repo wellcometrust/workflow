@@ -60,7 +60,7 @@ resource "aws_backup_selection" "workflow_default_backup_assignments" {
   name         = "workflow_default_backup_assignments"
   plan_id      = aws_backup_plan.workflow-default.id
   iam_role_arn = aws_iam_role.aws_backup_default_role.arn
-  resources    = module.goobi.efs_arn
+  resources    = [module.goobi.efs_arn]
 
   selection_tag {
     type  = "STRINGEQUALS"
