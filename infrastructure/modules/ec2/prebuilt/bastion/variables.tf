@@ -3,7 +3,7 @@ variable "name" {
 }
 
 variable "subnet_list" {
-  type = "list"
+  type = list(string)
 }
 
 variable "key_name" {
@@ -15,13 +15,13 @@ variable "vpc_id" {
 }
 
 variable "controlled_access_cidr_ingress" {
-  type        = "list"
+  type        = list(string)
   default     = []
   description = "CIDR for SSH access to EC2 instances"
 }
 
 variable "custom_security_groups" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
@@ -65,6 +65,7 @@ variable "associate_public_ip_address" {
 }
 
 variable "ssh_ingress_security_groups" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
+

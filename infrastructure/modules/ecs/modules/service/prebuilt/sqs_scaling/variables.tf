@@ -14,21 +14,30 @@ variable "scale_down_period_in_minutes" {
   default = 10
 }
 
-variable "vpc_id" {}
-variable "ecs_cluster_id" {}
-variable "ecs_cluster_name" {}
+variable "vpc_id" {
+}
 
-variable "service_name" {}
+variable "ecs_cluster_id" {
+}
+
+variable "ecs_cluster_name" {
+}
+
+variable "service_name" {
+}
 
 variable "container_port" {
   default = "80"
 }
 
-variable "source_queue_arn" {}
-variable "source_queue_name" {}
+variable "source_queue_arn" {
+}
+
+variable "source_queue_name" {
+}
 
 variable "subnets" {
-  type = "list"
+  type = list(string)
 }
 
 variable "launch_type" {
@@ -64,12 +73,12 @@ variable "container_image" {
 
 variable "env_vars" {
   description = "Environment variables to pass to the container"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
 
 variable "security_group_ids" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
@@ -80,3 +89,4 @@ variable "namespace_id" {
 variable "env_vars_length" {
   default = 0
 }
+

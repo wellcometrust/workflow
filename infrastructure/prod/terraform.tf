@@ -3,7 +3,7 @@ provider "aws" {
     role_arn = "arn:aws:iam::299497370133:role/workflow-admin"
   }
 
-  region = "${var.region}"
+  region = var.region
 
   version = "~> 2.0"
 }
@@ -37,3 +37,4 @@ resource "aws_dynamodb_table" "terraform-locktable" {
     prevent_destroy = true
   }
 }
+

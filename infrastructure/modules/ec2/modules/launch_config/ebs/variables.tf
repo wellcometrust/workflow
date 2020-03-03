@@ -24,11 +24,12 @@ variable "associate_public_ip_address" {
 }
 
 variable "instance_security_groups" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
-variable "ebs_size" {}
+variable "ebs_size" {
+}
 
 variable "ebs_device_name" {
   default = "/dev/xvdb"
@@ -37,3 +38,4 @@ variable "ebs_device_name" {
 variable "ebs_volume_type" {
   default = "standard"
 }
+

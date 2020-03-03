@@ -1,4 +1,5 @@
-variable "task_name" {}
+variable "task_name" {
+}
 
 variable "memory" {
   description = "How much memory to allocate to the app"
@@ -11,11 +12,16 @@ variable "cpu" {
 }
 
 variable "launch_types" {
-  type    = "list"
+  type    = list(string)
   default = ["FARGATE", "EC2"]
 }
 
-variable "task_definition_rendered" {}
+variable "task_definition_rendered" {
+}
 
-variable "ebs_host_path" {}
-variable "ebs_container_path" {}
+variable "ebs_host_path" {
+}
+
+variable "ebs_container_path" {
+}
+

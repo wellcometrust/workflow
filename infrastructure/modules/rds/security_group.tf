@@ -1,6 +1,6 @@
 resource "aws_security_group" "database_sg" {
   description = "controls direct access to application instances"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = var.vpc_id
   name        = "${var.database_name}_sg"
 
   ingress {
@@ -9,7 +9,7 @@ resource "aws_security_group" "database_sg" {
     to_port   = 3306
 
     cidr_blocks = [
-      "${var.admin_cidr_ingress}",
+      var.admin_cidr_ingress,
     ]
   }
 
@@ -18,7 +18,7 @@ resource "aws_security_group" "database_sg" {
     to_port   = 3306
     protocol  = "tcp"
 
-    security_groups = ["${var.db_access_security_group}"]
+    security_groups = var.db_access_security_group
   }
 
   egress {
@@ -28,3 +28,4 @@ resource "aws_security_group" "database_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+

@@ -24,6 +24,7 @@ variable "associate_public_ip_address" {
 }
 
 variable "instance_security_groups" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
+

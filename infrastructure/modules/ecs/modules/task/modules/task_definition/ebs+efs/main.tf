@@ -1,7 +1,7 @@
 module "iam_roles" {
   source = "../../iam_roles"
 
-  task_name = "${var.task_name}"
+  task_name = var.task_name
 }
 
 locals {
@@ -10,22 +10,22 @@ locals {
 
   mount_points = [
     {
-      sourceVolume  = "${local.ebs_volume_name}"
-      containerPath = "${var.ebs_container_path}"
+      sourceVolume  = local.ebs_volume_name
+      containerPath = var.ebs_container_path
     },
     {
-      sourceVolume  = "${local.efs_volume_name}"
-      containerPath = "${var.efs_container_path}"
+      sourceVolume  = local.efs_volume_name
+      containerPath = var.efs_container_path
     },
   ]
 }
 
 resource "aws_ecs_task_definition" "task" {
-  family                = "${var.task_name}"
-  container_definitions = "${var.task_definition_rendered}"
+  family                = var.task_name
+  container_definitions = var.task_definition_rendered
 
-  task_role_arn      = "${module.iam_roles.task_role_arn}"
-  execution_role_arn = "${module.iam_roles.task_execution_role_arn}"
+  task_role_arn      = module.iam_roles.task_role_arn
+  execution_role_arn = module.iam_roles.task_execution_role_arn
 
   network_mode = "awsvpc"
 
@@ -43,15 +43,16 @@ resource "aws_ecs_task_definition" "task" {
   }
 
   volume {
-    name      = "${local.ebs_volume_name}"
-    host_path = "${var.ebs_host_path}"
+    name      = local.ebs_volume_name
+    host_path = var.ebs_host_path
   }
 
   volume {
-    name      = "${local.efs_volume_name}"
-    host_path = "${var.efs_host_path}"
+    name      = local.efs_volume_name
+    host_path = var.efs_host_path
   }
 
-  cpu    = "${var.cpu}"
-  memory = "${var.memory}"
+  cpu    = var.cpu
+  memory = var.memory
 }
+

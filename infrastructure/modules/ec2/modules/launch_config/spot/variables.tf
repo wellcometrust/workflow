@@ -24,8 +24,10 @@ variable "associate_public_ip_address" {
 }
 
 variable "instance_security_groups" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
-variable "spot_price" {}
+variable "spot_price" {
+}
+

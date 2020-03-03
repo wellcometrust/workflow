@@ -1,7 +1,8 @@
-variable "cluster_identifier" {}
+variable "cluster_identifier" {
+}
 
 variable "instance_class" {
-  type    = "string"
+  type    = string
   default = "db.t2.small"
 }
 
@@ -9,26 +10,33 @@ variable "backup_retention_period" {
   default = "14"
 }
 
-variable "deletion_protection" {}
+variable "deletion_protection" {
+}
 
-variable "database_name" {}
+variable "database_name" {
+}
 
-variable "username" {}
+variable "username" {
+}
 
-variable "password" {}
+variable "password" {
+}
 
 variable "vpc_security_group_ids" {
-  type = "list"
+  type = list(string)
 }
 
 variable "vpc_subnet_ids" {
-  type = "list"
+  type = list(string)
 }
 
-variable "vpc_id" {}
+variable "vpc_id" {
+}
 
-variable "admin_cidr_ingress" {}
+variable "admin_cidr_ingress" {
+}
 
 variable "db_access_security_group" {
-  type = "list"
+  type = list(string)
 }
+

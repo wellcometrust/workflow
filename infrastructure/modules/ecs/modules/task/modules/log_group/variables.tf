@@ -8,4 +8,6 @@ variable "log_retention_in_days" {
   default     = 7
 }
 
-variable "task_name" {}
+variable "task_name" {
+}
+
