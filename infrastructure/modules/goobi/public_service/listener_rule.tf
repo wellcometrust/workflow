@@ -1,4 +1,5 @@
 resource "aws_alb_listener_rule" "https" {
+  for_each = var.source_ips
   listener_arn = var.alb_listener_arn
 
   action {
@@ -20,7 +21,7 @@ resource "aws_alb_listener_rule" "https" {
 
   condition {
     source_ip {
-      values = var.source_ips
+      values = [each.key]
     }
   }
 }

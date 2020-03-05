@@ -117,7 +117,7 @@ variable "path_pattern" {
 }
 
 variable "source_ips" {
-  type    = list(string)
+  type    = set(string)
   default = ["0.0.0.0/0"]
 }
 
