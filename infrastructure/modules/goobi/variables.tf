@@ -71,57 +71,6 @@ variable "instance_type" {
 variable "ebs_size" {
 }
 
-# Shell Server
-
-variable "shell_server_ebs_container_path" {
-}
-
-variable "shell_server_efs_container_path" {
-}
-
-variable "shell_server_container_port" {
-}
-
-variable "shell_server_container_image" {
-}
-
-variable "shell_server_env_vars" {
-  type = map(string)
-}
-
-variable "shell_server_env_vars_length" {
-}
-
-variable "shell_server_1_cpu" {
-}
-
-variable "shell_server_1_memory" {
-}
-
-variable "shell_server_2_cpu" {
-}
-
-variable "shell_server_2_memory" {
-}
-
-variable "shell_server_3_cpu" {
-}
-
-variable "shell_server_3_memory" {
-}
-
-variable "shell_server_4_cpu" {
-}
-
-variable "shell_server_4_memory" {
-}
-
-variable "shell_server_deployment_minimum_healthy_percent" {
-}
-
-variable "shell_server_deployment_maximum_percent" {
-}
-
 # Goobi
 
 variable "goobi_app_container_image" {

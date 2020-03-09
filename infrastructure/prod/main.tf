@@ -115,37 +115,6 @@ module "goobi" {
   itm_deployment_minimum_healthy_percent = "0"
   itm_deployment_maximum_percent         = "100"
 
-  # Shell Server
-  shell_server_container_image = var.shell_server_container_image
-  shell_server_container_port  = "80"
-
-  shell_server_env_vars = {
-    CONFIGSOURCE    = "s3"
-    AWS_S3_BUCKET   = aws_s3_bucket.workflow-configuration.bucket
-    WORKING_STORAGE = "/ebs"
-    S3_DATA_BUCKET  = aws_s3_bucket.workflow-data.bucket
-  }
-
-  shell_server_env_vars_length = "5"
-
-  shell_server_efs_container_path = "/efs"
-  shell_server_ebs_container_path = "/ebs"
-
-  shell_server_1_cpu    = "1024"
-  shell_server_1_memory = "7168"
-
-  shell_server_2_cpu    = "1024"
-  shell_server_2_memory = "3027"
-
-  shell_server_3_cpu    = "1024"
-  shell_server_3_memory = "3027"
-
-  shell_server_4_cpu    = "1024"
-  shell_server_4_memory = "3027"
-
-  shell_server_deployment_minimum_healthy_percent = "0"
-  shell_server_deployment_maximum_percent         = "100"
-
   controlled_access_cidr_ingress = var.admin_cidr_ingress
 
   asg_min     = var.asg_min
@@ -236,3 +205,178 @@ module "production_iam" {
   source = "../modules/production"
 }
 
+module "shell_server_1" {
+  source = "../modules/shell_server"
+
+  name = "shell_server_1"
+  
+  shell_server_cpu    = "1024"
+  shell_server_memory = "7168"
+
+  shell_server_env_vars = {
+    CONFIGSOURCE    = "s3"
+    AWS_S3_BUCKET   = aws_s3_bucket.workflow-configuration.bucket
+    WORKING_STORAGE = "/ebs"
+    S3_DATA_BUCKET  = aws_s3_bucket.workflow-data.bucket
+    SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_1_config.properties"
+  }
+
+  shell_server_env_vars_length = "5"
+
+  shell_server_namespace_id = module.goobi.goobi_namespace_id
+
+  ebs_host_path = module.goobi.goobi_ebs_host_path
+  efs_host_path = module.goobi.goobi_efs_host_path
+
+  cluster_id = module.goobi.goobi_cluster_id
+
+  vpc_id          = module.network.vpc_id
+  private_subnets = module.network.private_subnets
+
+  service_egress_security_group_id = aws_security_group.service_egress.id
+  interservice_security_group_id   = aws_security_group.interservice.id
+
+  region     = var.region
+
+  shell_server_container_image = var.shell_server_container_image
+  shell_server_container_port  = "80"
+
+
+  shell_server_efs_container_path = "/efs"
+  shell_server_ebs_container_path = "/ebs"
+
+  shell_server_deployment_minimum_healthy_percent = "0"
+  shell_server_deployment_maximum_percent         = "100"
+}
+
+module "shell_server_2" {
+  source = "../modules/shell_server"
+
+  name = "shell_server_2"
+
+  shell_server_cpu    = "1024"
+  shell_server_memory = "3027"
+
+  shell_server_env_vars = {
+    CONFIGSOURCE    = "s3"
+    AWS_S3_BUCKET   = aws_s3_bucket.workflow-configuration.bucket
+    WORKING_STORAGE = "/ebs"
+    S3_DATA_BUCKET  = aws_s3_bucket.workflow-data.bucket
+    SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_2_config.properties"
+  }
+
+  shell_server_env_vars_length = "5"
+
+  shell_server_namespace_id = module.goobi.goobi_namespace_id
+
+  ebs_host_path = module.goobi.goobi_ebs_host_path
+  efs_host_path = module.goobi.goobi_efs_host_path
+
+  cluster_id = module.goobi.goobi_cluster_id
+
+  vpc_id          = module.network.vpc_id
+  private_subnets = module.network.private_subnets
+
+  service_egress_security_group_id = aws_security_group.service_egress.id
+  interservice_security_group_id   = aws_security_group.interservice.id
+
+  region     = var.region
+
+  shell_server_container_image = var.shell_server_container_image
+  shell_server_container_port  = "80"
+
+
+  shell_server_efs_container_path = "/efs"
+  shell_server_ebs_container_path = "/ebs"
+
+  shell_server_deployment_minimum_healthy_percent = "0"
+  shell_server_deployment_maximum_percent         = "100"
+}
+
+module "shell_server_3" {
+  source = "../modules/shell_server"
+
+  name = "shell_server_3"
+
+  shell_server_cpu    = "1024"
+  shell_server_memory = "3027"
+
+  shell_server_env_vars = {
+    CONFIGSOURCE    = "s3"
+    AWS_S3_BUCKET   = aws_s3_bucket.workflow-configuration.bucket
+    WORKING_STORAGE = "/ebs"
+    S3_DATA_BUCKET  = aws_s3_bucket.workflow-data.bucket
+    SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_3_config.properties"
+  }
+  
+  shell_server_env_vars_length = "5"
+
+  shell_server_namespace_id = module.goobi.goobi_namespace_id
+
+  ebs_host_path = module.goobi.goobi_ebs_host_path
+  efs_host_path = module.goobi.goobi_efs_host_path
+
+  cluster_id = module.goobi.goobi_cluster_id
+
+  vpc_id          = module.network.vpc_id
+  private_subnets = module.network.private_subnets
+
+  service_egress_security_group_id = aws_security_group.service_egress.id
+  interservice_security_group_id   = aws_security_group.interservice.id
+
+  region     = var.region
+
+  shell_server_container_image = var.shell_server_container_image
+  shell_server_container_port  = "80"
+
+
+  shell_server_efs_container_path = "/efs"
+  shell_server_ebs_container_path = "/ebs"
+
+  shell_server_deployment_minimum_healthy_percent = "0"
+  shell_server_deployment_maximum_percent         = "100"
+}
+
+module "shell_server_4" {
+  source = "../modules/shell_server"
+
+  name = "shell_server_4"
+
+  shell_server_cpu    = "1024"
+  shell_server_memory = "3027"
+
+  shell_server_env_vars = {
+    CONFIGSOURCE    = "s3"
+    AWS_S3_BUCKET   = aws_s3_bucket.workflow-configuration.bucket
+    WORKING_STORAGE = "/ebs"
+    S3_DATA_BUCKET  = aws_s3_bucket.workflow-data.bucket
+    SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_4_config.properties"
+  }
+
+  shell_server_env_vars_length = "5"
+
+  shell_server_namespace_id = module.goobi.goobi_namespace_id
+
+  ebs_host_path = module.goobi.goobi_ebs_host_path
+  efs_host_path = module.goobi.goobi_efs_host_path
+
+  cluster_id = module.goobi.goobi_cluster_id
+
+  vpc_id          = module.network.vpc_id
+  private_subnets = module.network.private_subnets
+
+  service_egress_security_group_id = aws_security_group.service_egress.id
+  interservice_security_group_id   = aws_security_group.interservice.id
+
+  region     = var.region
+
+  shell_server_container_image = var.shell_server_container_image
+  shell_server_container_port  = "80"
+
+
+  shell_server_efs_container_path = "/efs"
+  shell_server_ebs_container_path = "/ebs"
+
+  shell_server_deployment_minimum_healthy_percent = "0"
+  shell_server_deployment_maximum_percent         = "100"
+}

@@ -22,23 +22,22 @@ output "harvester_task_role" {
   value = module.harvester.task_role
 }
 
-output "shell_server_1_task_role" {
-  value = module.shell_server_1.task_role
-}
-
-output "shell_server_2_task_role" {
-  value = module.shell_server_2.task_role
-}
-
-output "shell_server_3_task_role" {
-  value = module.shell_server_3.task_role
-}
-
-output "shell_server_4_task_role" {
-  value = module.shell_server_4.task_role
-}
-
 output "efs_arn" {
   value = module.efs.efs_arn
 }
 
+output "goobi_namespace_id" {
+  value = aws_service_discovery_private_dns_namespace.namespace.id
+}
+
+output "goobi_ebs_host_path" {
+  value = module.cluster.ebs_host_path
+}
+
+output "goobi_efs_host_path" {
+  value = module.cluster.efs_host_path
+}
+
+output "goobi_cluster_id" {
+  value = aws_ecs_cluster.cluster.id
+}
