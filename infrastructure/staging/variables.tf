@@ -115,7 +115,7 @@ variable "region" {
 }
 
 variable "domain_name" {
-  default = "workflow.wellcomecollection.org"
+  default = "workflow-stage.wellcomecollection.org"
 }
 
 variable "ep_upload_external_bucket" {
