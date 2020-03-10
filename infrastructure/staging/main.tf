@@ -205,6 +205,7 @@ module "production_iam" {
   source = "../modules/production"
 }
 
+# the staging environment needs only one shellserver - it handles all jobtypes
 module "shell_server_1" {
   source = "../modules/shell_server"
 

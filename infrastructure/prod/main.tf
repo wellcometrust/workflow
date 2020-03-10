@@ -205,6 +205,7 @@ module "production_iam" {
   source = "../modules/production"
 }
 
+# shell_server_1 handles altoconvert jobs and thus needs ~7GB of RAM
 module "shell_server_1" {
   source = "../modules/shell_server"
 
@@ -249,6 +250,7 @@ module "shell_server_1" {
   shell_server_deployment_maximum_percent         = "100"
 }
 
+# shell_server_2 handles bagit and iaparser jobs
 module "shell_server_2" {
   source = "../modules/shell_server"
 
@@ -293,6 +295,7 @@ module "shell_server_2" {
   shell_server_deployment_maximum_percent         = "100"
 }
 
+# shell_server_3 handles the jpeg conversion
 module "shell_server_3" {
   source = "../modules/shell_server"
 
@@ -337,6 +340,7 @@ module "shell_server_3" {
   shell_server_deployment_maximum_percent         = "100"
 }
 
+# shell_server_4 does the JP2 conversion with lurawave as well as JP2 validation with jpylyzer
 module "shell_server_4" {
   source = "../modules/shell_server"
 
