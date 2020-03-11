@@ -14,7 +14,7 @@ terraform {
   backend "s3" {
     bucket         = "wellcomecollection-workflow-infra"
     key            = "terraform/workflow-stage.tfstate"
-    dynamodb_table = "terraform-locktable"
+    dynamodb_table = "terraform-stage-locktable"
 
     role_arn = "arn:aws:iam::299497370133:role/workflow-developer"
 
@@ -22,8 +22,8 @@ terraform {
   }
 }
 
-resource "aws_dynamodb_table" "terraform-locktable" {
-  name           = "terraform-locktable"
+resource "aws_dynamodb_table" "terraform-stage-locktable" {
+  name           = "terraform-stage-locktable"
   read_capacity  = 1
   write_capacity = 1
   hash_key       = "LockID"
