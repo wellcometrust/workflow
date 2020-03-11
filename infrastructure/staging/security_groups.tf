@@ -18,7 +18,7 @@ resource "aws_security_group" "efs" {
   }
 
   tags = {
-    Name = "workflow-efs"
+    Name = "workflow-stage-efs"
   }
 }
 
@@ -35,7 +35,7 @@ resource "aws_security_group" "service_egress" {
   }
 
   tags = {
-    Name = "workflow-egress"
+    Name = "workflow-stage-egress"
   }
 }
 
@@ -52,7 +52,7 @@ resource "aws_security_group" "interservice" {
   }
 
   tags = {
-    Name = "workflow-interservice"
+    Name = "workflow-stage-interservice"
   }
 }
 
@@ -76,7 +76,7 @@ resource "aws_security_group" "service_lb" {
   }
 
   tags = {
-    Name = "workflow-service-lb"
+    Name = "workflow-stage-service-lb"
   }
 }
 
