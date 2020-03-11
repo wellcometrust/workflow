@@ -1,6 +1,6 @@
 module "goobi_rds_cluster" {
   source                  = "../modules/rds"
-  cluster_identifier      = "goobi"
+  cluster_identifier      = "goobi-stage"
   database_name           = "goobi"
   username                = var.rds_username
   password                = var.rds_password
