@@ -1,5 +1,5 @@
 data "aws_s3_bucket_object" "lambda_s3_trigger_goobi_package" {
-  bucket = aws_s3_bucket.workflow-infra.bucket
+  bucket = data.aws_s3_bucket.workflow-infra.bucket
   key    = "lambdas/s3_trigger_goobi.zip"
 }
 

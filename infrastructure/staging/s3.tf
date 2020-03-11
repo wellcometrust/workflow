@@ -40,25 +40,8 @@ resource "aws_s3_bucket" "workflow-stage-data" {
   }
 }
 
-resource "aws_s3_bucket" "workflow-infra" {
+data "aws_s3_bucket" "workflow-infra" {
   bucket = "wellcomecollection-workflow-infra"
-  acl    = "private"
-
-  lifecycle {
-    prevent_destroy = true
-  }
-
-  versioning {
-    enabled = true
-  }
-
-  lifecycle_rule {
-    enabled = true
-
-    noncurrent_version_expiration {
-      days = 60
-    }
-  }
 }
 
 resource "aws_s3_bucket" "workflow-export-bagit-stage" {
