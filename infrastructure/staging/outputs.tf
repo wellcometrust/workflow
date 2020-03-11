@@ -36,27 +36,27 @@ output "load_balancer_https_listener_arn" {
 
 # workflow upload users
 
-output "production_iha_id" {
-  value = module.production_iam.in_house_archives_id
-}
+# output "production_iha_id" {
+#   value = module.production_iam.in_house_archives_id
+# }
 
-output "production_iha_secret" {
-  value = module.production_iam.in_house_archives_secret
-}
+# output "production_iha_secret" {
+#   value = module.production_iam.in_house_archives_secret
+# }
 
-output "production_ihp_id" {
-  value = module.production_iam.in_house_photography_id
-}
+# output "production_ihp_id" {
+#   value = module.production_iam.in_house_photography_id
+# }
 
-output "production_ihp_secret" {
-  value = module.production_iam.in_house_photography_secret
-}
+# output "production_ihp_secret" {
+#   value = module.production_iam.in_house_photography_secret
+# }
 
-output "production_dis_id" {
-  value = module.production_iam.digitisation_services_id
-}
+# output "production_dis_id" {
+#   value = module.production_iam.digitisation_services_id
+# }
 
-output "production_dis_secret" {
-  value = module.production_iam.digitisation_services_secret
-}
+# output "production_dis_secret" {
+#   value = module.production_iam.digitisation_services_secret
+# }
 
