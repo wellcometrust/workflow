@@ -187,7 +187,7 @@ module "goobi" {
 module "load_balancer" {
   source = "../modules/load_balancer"
 
-  name = "workflow"
+  name = "workflow-stage"
 
   vpc_id         = module.network.vpc_id
   public_subnets = module.network.public_subnets
