@@ -156,7 +156,7 @@ data "aws_iam_policy_document" "s3_editorial_photography_allow_restore" {
   }
 }
 
-data "aws_iam_policy_document" "assume_lambda_role" {
+data "aws_iam_policy_document" "assume_lambda_stage_role" {
   statement {
     actions = [
       "sts:AssumeRole",
@@ -191,8 +191,8 @@ data "aws_iam_policy_document" "cloudwatch_logs" {
     ]
 
     resources = [
-      aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_ep.arn,
-      aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_digitised.arn,
+      aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_stage_ep.arn,
+      aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_stage_digitised.arn,
     ]
   }
 }

@@ -3,16 +3,16 @@ data "aws_s3_bucket_object" "lambda_s3_trigger_goobi_package" {
   key    = "lambdas/s3_trigger_goobi.zip"
 }
 
-resource "aws_lambda_function" "lambda_s3_trigger_goobi_ep" {
+resource "aws_lambda_function" "lambda_s3_trigger_goobi_stage_ep" {
   description   = "lambda to call Goobi API for import after successful S3 upload"
-  function_name = "s3_trigger_goobi_ep"
+  function_name = "s3_trigger_goobi_stage_ep"
 
   s3_bucket         = data.aws_s3_bucket_object.lambda_s3_trigger_goobi_package.bucket
   s3_key            = data.aws_s3_bucket_object.lambda_s3_trigger_goobi_package.key
   s3_object_version = data.aws_s3_bucket_object.lambda_s3_trigger_goobi_package.version_id
 
-  role    = aws_iam_role.lambda_iam_role.arn
-  handler = "s3_trigger_goobi.lambda_handler"
+  role    = aws_iam_role.lambda_stage_iam_role.arn
+  handler = "s3_trigger_goobi_stage.lambda_handler"
   runtime = "python3.6"
   timeout = "60"
   publish = true
@@ -39,30 +39,30 @@ resource "aws_lambda_function" "lambda_s3_trigger_goobi_ep" {
   }
 }
 
-resource "aws_lambda_permission" "allow_event_s3_trigger_goobi_ep" {
+resource "aws_lambda_permission" "allow_event_s3_trigger_goobi_stage_ep" {
   statement_id  = "AllowExecutionFromS3Bucket"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.lambda_s3_trigger_goobi_ep.arn
+  function_name = aws_lambda_function.lambda_s3_trigger_goobi_stage_ep.arn
   principal     = "s3.amazonaws.com"
   source_arn    = aws_s3_bucket.workflow-stage-upload.arn
 }
 
-resource "aws_cloudwatch_log_group" "cloudwatch_log_group_s3_trigger_goobi_ep" {
-  name = "/aws/lambda/s3_trigger_goobi_ep"
+resource "aws_cloudwatch_log_group" "cloudwatch_log_group_s3_trigger_goobi_stage_ep" {
+  name = "/aws/lambda/s3_trigger_goobi_stage_ep"
 
   retention_in_days = "14"
 }
 
-resource "aws_lambda_function" "lambda_s3_trigger_goobi_digitised" {
+resource "aws_lambda_function" "lambda_s3_trigger_goobi_stage_digitised" {
   description   = "lambda to call Goobi API for import after successful S3 upload"
-  function_name = "s3_trigger_goobi_digitised"
+  function_name = "s3_trigger_goobi_stage_digitised"
 
   s3_bucket         = data.aws_s3_bucket_object.lambda_s3_trigger_goobi_package.bucket
   s3_key            = data.aws_s3_bucket_object.lambda_s3_trigger_goobi_package.key
   s3_object_version = data.aws_s3_bucket_object.lambda_s3_trigger_goobi_package.version_id
 
-  role    = aws_iam_role.lambda_iam_role.arn
-  handler = "s3_trigger_goobi.lambda_handler"
+  role    = aws_iam_role.lambda_stage_iam_role.arn
+  handler = "s3_trigger_goobi_stage.lambda_handler"
   runtime = "python3.6"
   timeout = "60"
   publish = true
@@ -89,16 +89,16 @@ resource "aws_lambda_function" "lambda_s3_trigger_goobi_digitised" {
   }
 }
 
-resource "aws_lambda_permission" "allow_event_s3_trigger_goobi_digitised" {
+resource "aws_lambda_permission" "allow_event_s3_trigger_goobi_stage_digitised" {
   statement_id  = "AllowExecutionFromS3Bucket"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.lambda_s3_trigger_goobi_digitised.arn
+  function_name = aws_lambda_function.lambda_s3_trigger_goobi_stage_digitised.arn
   principal     = "s3.amazonaws.com"
   source_arn    = aws_s3_bucket.workflow-stage-upload.arn
 }
 
-resource "aws_cloudwatch_log_group" "cloudwatch_log_group_s3_trigger_goobi_digitised" {
-  name = "/aws/lambda/s3_trigger_goobi_digitised"
+resource "aws_cloudwatch_log_group" "cloudwatch_log_group_s3_trigger_goobi_stage_digitised" {
+  name = "/aws/lambda/s3_trigger_goobi_stage_digitised"
 
   retention_in_days = "14"
 }
