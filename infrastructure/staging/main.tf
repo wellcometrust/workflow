@@ -1,5 +1,6 @@
 module "goobi" {
   source = "../modules/goobi"
+  name   = "workflow-stage"
 
   vpc_id              = module.network.vpc_id
   public_subnets      = module.network.public_subnets
