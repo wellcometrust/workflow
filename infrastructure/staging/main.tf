@@ -192,7 +192,7 @@ module "load_balancer" {
   vpc_id         = module.network.vpc_id
   public_subnets = module.network.public_subnets
 
-  certificate_domain = "workflow-stage.wellcomecollection.org"
+  certificate_domain = "workflow.wellcomecollection.org"
 
   service_lb_security_group_ids = [
     aws_security_group.service_lb.id,
