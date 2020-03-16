@@ -210,7 +210,7 @@ module "load_balancer" {
 module "shell_server_1" {
   source = "../modules/shell_server"
 
-  name = "shell_server_1"
+  name = "workflow-stage-shell_server_1"
   
   shell_server_cpu    = "1024"
   shell_server_memory = "2000"
