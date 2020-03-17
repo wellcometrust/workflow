@@ -54,6 +54,10 @@ variable "name" {
   default = "workflow"
 }
 
+variable "prefix" {
+  type    = string
+  default = ""
+}
 # Cluster
 
 variable "asg_min" {

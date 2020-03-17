@@ -29,7 +29,7 @@ module "cluster" {
 module "goobi" {
   source = "./public_service"
 
-  name = join("-", [var.name, "goobi"])
+  name = var.prefix != "" ? "${var.prefix}-goobi" : "goobi"
 
   vpc_id          = var.vpc_id
   private_subnets = var.private_subnets
@@ -82,7 +82,7 @@ module "goobi" {
 module "itm" {
   source = "./public_service"
 
-  name = join("-", [var.name, "itm"])
+  name = var.prefix != "" ? "${var.prefix}-itm" : "itm"
 
   vpc_id          = var.vpc_id
   private_subnets = var.private_subnets
@@ -136,7 +136,7 @@ module "itm" {
 module "harvester" {
   source = "./public_service"
 
-  name = join("-", [var.name, "harvester"])
+  name = var.prefix != "" ? "${var.prefix}-harvester" : "harvester"
 
   vpc_id          = var.vpc_id
   private_subnets = var.private_subnets
