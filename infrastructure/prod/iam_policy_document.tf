@@ -61,22 +61,6 @@ data "aws_iam_policy_document" "s3_rw_workflow-export-bagit" {
   }
 }
 
-data "aws_iam_policy_document" "s3_rw_workflow-export-bagit-stage" {
-  statement {
-    actions = [
-      "s3:ListBucket",
-      "s3:GetObject",
-      "s3:PutObject",
-      "s3:DeleteObject",
-    ]
-
-    resources = [
-      aws_s3_bucket.workflow-export-bagit-stage.arn,
-      "${aws_s3_bucket.workflow-export-bagit-stage.arn}/*",
-    ]
-  }
-}
-
 data "aws_iam_policy_document" "s3_rw_workflow-harvesting-results" {
   statement {
     actions = [
@@ -103,18 +87,6 @@ data "aws_iam_policy_document" "allow_external_export-bagit_access" {
   statement {
     actions   = ["s3:GetObject*"]
     resources = [aws_s3_bucket.workflow-export-bagit.arn, "${aws_s3_bucket.workflow-export-bagit.arn}/*"]
-
-    principals {
-      type = "AWS"
-      identifiers = local.bagit_access_principles
-    }
-  }
-}
-
-data "aws_iam_policy_document" "allow_external_export-bagit-stage_access" {
-  statement {
-    actions   = ["s3:GetObject*"]
-    resources = [aws_s3_bucket.workflow-export-bagit-stage.arn, "${aws_s3_bucket.workflow-export-bagit-stage.arn}/*"]
 
     principals {
       type = "AWS"
