@@ -97,11 +97,11 @@ variable "asg_max" {
 }
 
 variable "instance_type" {
-  default = "c5.xlarge"
+  default = "c5.4xlarge"
 }
 
 variable "ebs_size" {
-  default = "50"
+  default = "300"
 }
 
 # Misc
