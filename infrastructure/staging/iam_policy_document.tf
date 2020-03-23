@@ -23,8 +23,8 @@ data "aws_iam_policy_document" "s3_read_workflow-configuration" {
     ]
 
     resources = [
-      aws_s3_bucket.workflow-configuration.arn,
-      "${aws_s3_bucket.workflow-configuration.arn}/*",
+      aws_s3_bucket.workflow-stage-configuration.arn,
+      "${aws_s3_bucket.workflow-stage-configuration.arn}/*",
     ]
   }
 }
@@ -39,13 +39,13 @@ data "aws_iam_policy_document" "s3_rw_workflow-data" {
     ]
 
     resources = [
-      aws_s3_bucket.workflow-data.arn,
-      "${aws_s3_bucket.workflow-data.arn}/*",
+      aws_s3_bucket.workflow-stage-data.arn,
+      "${aws_s3_bucket.workflow-stage-data.arn}/*",
     ]
   }
 }
 
-data "aws_iam_policy_document" "s3_rw_workflow-export-bagit" {
+data "aws_iam_policy_document" "s3_rw_workflow-export-bagit-stage" {
   statement {
     actions = [
       "s3:ListBucket",
@@ -55,8 +55,8 @@ data "aws_iam_policy_document" "s3_rw_workflow-export-bagit" {
     ]
 
     resources = [
-      aws_s3_bucket.workflow-export-bagit.arn,
-      "${aws_s3_bucket.workflow-export-bagit.arn}/*",
+      aws_s3_bucket.workflow-export-bagit-stage.arn,
+      "${aws_s3_bucket.workflow-export-bagit-stage.arn}/*",
     ]
   }
 }
@@ -70,8 +70,8 @@ data "aws_iam_policy_document" "s3_rw_workflow-harvesting-results" {
     ]
 
     resources = [
-      aws_s3_bucket.workflow-harvesting-results.arn,
-      "${aws_s3_bucket.workflow-harvesting-results.arn}/*",
+      aws_s3_bucket.workflow-stage-harvesting-results.arn,
+      "${aws_s3_bucket.workflow-stage-harvesting-results.arn}/*",
     ]
   }
 }
@@ -83,10 +83,10 @@ locals {
   ]
 }
 
-data "aws_iam_policy_document" "allow_external_export-bagit_access" {
+data "aws_iam_policy_document" "allow_external_export-bagit-stage_access" {
   statement {
     actions   = ["s3:GetObject*"]
-    resources = [aws_s3_bucket.workflow-export-bagit.arn, "${aws_s3_bucket.workflow-export-bagit.arn}/*"]
+    resources = [aws_s3_bucket.workflow-export-bagit-stage.arn, "${aws_s3_bucket.workflow-export-bagit-stage.arn}/*"]
 
     principals {
       type = "AWS"
@@ -105,8 +105,8 @@ data "aws_iam_policy_document" "s3_workflow-upload" {
     ]
 
     resources = [
-      aws_s3_bucket.workflow-upload.arn,
-      "${aws_s3_bucket.workflow-upload.arn}/*",
+      aws_s3_bucket.workflow-stage-upload.arn,
+      "${aws_s3_bucket.workflow-stage-upload.arn}/*",
     ]
   }
 }
@@ -140,7 +140,7 @@ data "aws_iam_policy_document" "s3_editorial_photography_allow_restore" {
   }
 }
 
-data "aws_iam_policy_document" "assume_lambda_role" {
+data "aws_iam_policy_document" "assume_lambda_stage_role" {
   statement {
     actions = [
       "sts:AssumeRole",
@@ -175,8 +175,8 @@ data "aws_iam_policy_document" "cloudwatch_logs" {
     ]
 
     resources = [
-      aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_ep.arn,
-      aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_digitised.arn,
+      aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_stage_ep.arn,
+      aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_stage_digitised.arn,
     ]
   }
 }

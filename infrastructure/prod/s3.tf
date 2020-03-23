@@ -84,29 +84,6 @@ resource "aws_s3_bucket_policy" "workflow-export-bagit-external-access-policy" {
   policy = data.aws_iam_policy_document.allow_external_export-bagit_access.json
 }
 
-resource "aws_s3_bucket" "workflow-export-bagit-stage" {
-  bucket = "wellcomecollection-workflow-export-bagit-stage"
-  acl    = "private"
-
-  lifecycle {
-    prevent_destroy = true
-  }
-
-  lifecycle_rule {
-    id      = "expire_all_objects"
-    enabled = true
-
-    expiration {
-      days = 10
-    }
-  }
-}
-
-resource "aws_s3_bucket_policy" "workflow-export-bagit-stage-external-access-policy" {
-  bucket = aws_s3_bucket.workflow-export-bagit-stage.id
-  policy = data.aws_iam_policy_document.allow_external_export-bagit-stage_access.json
-}
-
 resource "aws_s3_bucket" "workflow-harvesting-results" {
   bucket = "wellcomecollection-workflow-harvesting-results"
   acl    = "private"

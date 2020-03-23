@@ -1,5 +1,7 @@
 module "goobi" {
   source = "../modules/goobi"
+  name   = "workflow-stage"
+  prefix = "workflow-stage"
 
   vpc_id              = module.network.vpc_id
   public_subnets      = module.network.public_subnets
@@ -25,12 +27,12 @@ module "goobi" {
     DB_PASSWORD     = module.goobi_rds_cluster.password
     DB_HA           = "aurora:"
     CONFIGSOURCE    = "s3"
-    AWS_S3_BUCKET   = aws_s3_bucket.workflow-configuration.bucket
+    AWS_S3_BUCKET   = aws_s3_bucket.workflow-stage-configuration.bucket
     SERVERNAME      = var.domain_name
     HTTPS_DOMAIN    = var.domain_name
     APP_PATH        = "goobi"
     APP_CONTAINER   = "localhost"
-    S3_DATA_BUCKET  = aws_s3_bucket.workflow-data.bucket
+    S3_DATA_BUCKET  = aws_s3_bucket.workflow-stage-data.bucket
     WORKING_STORAGE = "/ebs"
   }
 
@@ -52,7 +54,7 @@ module "goobi" {
   goobi_ebs_container_path = "/ebs"
 
   goobi_app_cpu    = "6144"
-  goobi_app_memory = "7168"
+  goobi_app_memory = "3072"
 
   goobi_sidecar_cpu    = "128"
   goobi_sidecar_memory = "256"
@@ -78,13 +80,13 @@ module "goobi" {
     DB_PASSWORD     = module.goobi_rds_cluster.password
     DB_HA           = "aurora:"
     CONFIGSOURCE    = "s3"
-    AWS_S3_BUCKET   = aws_s3_bucket.workflow-configuration.bucket
+    AWS_S3_BUCKET   = aws_s3_bucket.workflow-stage-configuration.bucket
     SERVERNAME      = var.domain_name
     HTTPS_DOMAIN    = var.domain_name
     APP_PATH        = "itm"
     APP_CONTAINER   = "localhost"
     WORKING_STORAGE = "/ebs"
-    S3_DATA_BUCKET  = aws_s3_bucket.workflow-data.bucket
+    S3_DATA_BUCKET  = aws_s3_bucket.workflow-stage-data.bucket
   }
 
   itm_app_env_vars_length = "14"
@@ -104,8 +106,8 @@ module "goobi" {
   itm_efs_container_path = "/efs"
   itm_ebs_container_path = "/ebs"
 
-  itm_app_cpu    = "1024"
-  itm_app_memory = "4096"
+  itm_app_cpu    = "512"
+  itm_app_memory = "1024"
 
   itm_sidecar_cpu    = "128"
   itm_sidecar_memory = "256"
@@ -141,12 +143,12 @@ module "goobi" {
     DB_PASSWORD                  = module.goobi_rds_cluster.password
     DB_HA                        = "aurora:"
     CONFIGSOURCE                 = "s3"
-    AWS_S3_BUCKET                = aws_s3_bucket.workflow-configuration.bucket
+    AWS_S3_BUCKET                = aws_s3_bucket.workflow-stage-configuration.bucket
     SERVERNAME                   = var.domain_name
     HTTPS_DOMAIN                 = var.domain_name
     APP_PATH                     = "harvester"
     APP_CONTAINER                = "localhost"
-    S3_BUCKET_HARVESTING_RESULTS = aws_s3_bucket.workflow-harvesting-results.bucket
+    S3_BUCKET_HARVESTING_RESULTS = aws_s3_bucket.workflow-stage-harvesting-results.bucket
   }
 
   harvester_app_env_vars_length = "13"
@@ -167,7 +169,7 @@ module "goobi" {
   harvester_ebs_container_path = "/ebs"
 
   harvester_app_cpu    = "512"
-  harvester_app_memory = "2048"
+  harvester_app_memory = "1024"
 
   harvester_sidecar_cpu    = "128"
   harvester_sidecar_memory = "256"
@@ -187,7 +189,7 @@ module "goobi" {
 module "load_balancer" {
   source = "../modules/load_balancer"
 
-  name = "workflow"
+  name = "workflow-stage"
 
   vpc_id         = module.network.vpc_id
   public_subnets = module.network.public_subnets
@@ -201,160 +203,25 @@ module "load_balancer" {
   lb_controlled_ingress_cidrs = ["0.0.0.0/0"]
 }
 
-module "production_iam" {
-  source = "../modules/production"
-}
+# module "production_iam" {
+#   source = "../modules/production"
+# }
 
-# shell_server_1 handles altoconvert jobs and thus needs ~7GB of RAM
+# the staging environment needs only one shellserver - it handles all jobtypes
 module "shell_server_1" {
   source = "../modules/shell_server"
 
-  name = "shell_server_1"
+  name = "workflow-stage-shell_server_1"
   
   shell_server_cpu    = "1024"
-  shell_server_memory = "7168"
+  shell_server_memory = "2000"
 
   shell_server_env_vars = {
     CONFIGSOURCE    = "s3"
-    AWS_S3_BUCKET   = aws_s3_bucket.workflow-configuration.bucket
+    AWS_S3_BUCKET   = aws_s3_bucket.workflow-stage-configuration.bucket
     WORKING_STORAGE = "/ebs"
-    S3_DATA_BUCKET  = aws_s3_bucket.workflow-data.bucket
+    S3_DATA_BUCKET  = aws_s3_bucket.workflow-stage-data.bucket
     SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_1_config.properties"
-  }
-
-  shell_server_env_vars_length = "5"
-
-  shell_server_namespace_id = module.goobi.goobi_namespace_id
-
-  ebs_host_path = module.goobi.goobi_ebs_host_path
-  efs_host_path = module.goobi.goobi_efs_host_path
-
-  cluster_id = module.goobi.goobi_cluster_id
-
-  vpc_id          = module.network.vpc_id
-  private_subnets = module.network.private_subnets
-
-  service_egress_security_group_id = aws_security_group.service_egress.id
-  interservice_security_group_id   = aws_security_group.interservice.id
-
-  region     = var.region
-
-  shell_server_container_image = var.shell_server_container_image
-  shell_server_container_port  = "80"
-
-
-  shell_server_efs_container_path = "/efs"
-  shell_server_ebs_container_path = "/ebs"
-
-  shell_server_deployment_minimum_healthy_percent = "0"
-  shell_server_deployment_maximum_percent         = "100"
-}
-
-# shell_server_2 handles bagit and iaparser jobs
-module "shell_server_2" {
-  source = "../modules/shell_server"
-
-  name = "shell_server_2"
-
-  shell_server_cpu    = "1024"
-  shell_server_memory = "3027"
-
-  shell_server_env_vars = {
-    CONFIGSOURCE    = "s3"
-    AWS_S3_BUCKET   = aws_s3_bucket.workflow-configuration.bucket
-    WORKING_STORAGE = "/ebs"
-    S3_DATA_BUCKET  = aws_s3_bucket.workflow-data.bucket
-    SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_2_config.properties"
-  }
-
-  shell_server_env_vars_length = "5"
-
-  shell_server_namespace_id = module.goobi.goobi_namespace_id
-
-  ebs_host_path = module.goobi.goobi_ebs_host_path
-  efs_host_path = module.goobi.goobi_efs_host_path
-
-  cluster_id = module.goobi.goobi_cluster_id
-
-  vpc_id          = module.network.vpc_id
-  private_subnets = module.network.private_subnets
-
-  service_egress_security_group_id = aws_security_group.service_egress.id
-  interservice_security_group_id   = aws_security_group.interservice.id
-
-  region     = var.region
-
-  shell_server_container_image = var.shell_server_container_image
-  shell_server_container_port  = "80"
-
-
-  shell_server_efs_container_path = "/efs"
-  shell_server_ebs_container_path = "/ebs"
-
-  shell_server_deployment_minimum_healthy_percent = "0"
-  shell_server_deployment_maximum_percent         = "100"
-}
-
-# shell_server_3 handles the jpeg conversion
-module "shell_server_3" {
-  source = "../modules/shell_server"
-
-  name = "shell_server_3"
-
-  shell_server_cpu    = "1024"
-  shell_server_memory = "3027"
-
-  shell_server_env_vars = {
-    CONFIGSOURCE    = "s3"
-    AWS_S3_BUCKET   = aws_s3_bucket.workflow-configuration.bucket
-    WORKING_STORAGE = "/ebs"
-    S3_DATA_BUCKET  = aws_s3_bucket.workflow-data.bucket
-    SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_3_config.properties"
-  }
-  
-  shell_server_env_vars_length = "5"
-
-  shell_server_namespace_id = module.goobi.goobi_namespace_id
-
-  ebs_host_path = module.goobi.goobi_ebs_host_path
-  efs_host_path = module.goobi.goobi_efs_host_path
-
-  cluster_id = module.goobi.goobi_cluster_id
-
-  vpc_id          = module.network.vpc_id
-  private_subnets = module.network.private_subnets
-
-  service_egress_security_group_id = aws_security_group.service_egress.id
-  interservice_security_group_id   = aws_security_group.interservice.id
-
-  region     = var.region
-
-  shell_server_container_image = var.shell_server_container_image
-  shell_server_container_port  = "80"
-
-
-  shell_server_efs_container_path = "/efs"
-  shell_server_ebs_container_path = "/ebs"
-
-  shell_server_deployment_minimum_healthy_percent = "0"
-  shell_server_deployment_maximum_percent         = "100"
-}
-
-# shell_server_4 does the JP2 conversion with lurawave as well as JP2 validation with jpylyzer
-module "shell_server_4" {
-  source = "../modules/shell_server"
-
-  name = "shell_server_4"
-
-  shell_server_cpu    = "1024"
-  shell_server_memory = "3027"
-
-  shell_server_env_vars = {
-    CONFIGSOURCE    = "s3"
-    AWS_S3_BUCKET   = aws_s3_bucket.workflow-configuration.bucket
-    WORKING_STORAGE = "/ebs"
-    S3_DATA_BUCKET  = aws_s3_bucket.workflow-data.bucket
-    SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_4_config.properties"
   }
 
   shell_server_env_vars_length = "5"

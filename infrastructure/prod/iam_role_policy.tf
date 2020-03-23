@@ -13,11 +13,6 @@ resource "aws_iam_role_policy" "ecs_goobi_s3_export_bagit_rw" {
   policy = data.aws_iam_policy_document.s3_rw_workflow-export-bagit.json
 }
 
-resource "aws_iam_role_policy" "ecs_goobi_s3_export_bagit_stage_rw" {
-  role   = module.goobi.goobi_task_role
-  policy = data.aws_iam_policy_document.s3_rw_workflow-export-bagit-stage.json
-}
-
 resource "aws_iam_role_policy" "ecs_goobi_s3_upload" {
   role   = module.goobi.goobi_task_role
   policy = data.aws_iam_policy_document.s3_workflow-upload.json
@@ -71,105 +66,85 @@ resource "aws_iam_role_policy" "ecs_harvester_s3_rw_workflow-harvesting-results"
 
 # shell_server_1
 resource "aws_iam_role_policy" "ecs_shell_server_1_s3_config_read" {
-  role   = module.goobi.shell_server_1_task_role
+  role   = module.shell_server_1.task_role
   policy = data.aws_iam_policy_document.s3_read_workflow-configuration.json
 }
 
 resource "aws_iam_role_policy" "ecs_shell_server_1_s3_data_rw" {
-  role   = module.goobi.shell_server_1_task_role
+  role   = module.shell_server_1.task_role
   policy = data.aws_iam_policy_document.s3_rw_workflow-data.json
 }
 
 resource "aws_iam_role_policy" "ecs_shell_server_1_s3_export_bagit_rw" {
-  role   = module.goobi.shell_server_1_task_role
+  role   = module.shell_server_1.task_role
   policy = data.aws_iam_policy_document.s3_rw_workflow-export-bagit.json
 }
 
-resource "aws_iam_role_policy" "ecs_shell_server_1_s3_export_bagit_stage_rw" {
-  role   = module.goobi.shell_server_1_task_role
-  policy = data.aws_iam_policy_document.s3_rw_workflow-export-bagit-stage.json
-}
-
 resource "aws_iam_role_policy" "ecs_shell_server_1_s3_editorial_photography_upload_external" {
-  role   = module.goobi.shell_server_1_task_role
+  role   = module.shell_server_1.task_role
   policy = data.aws_iam_policy_document.s3_editorial_photography_upload_external.json
 }
 
 # shell_server_2
 resource "aws_iam_role_policy" "ecs_shell_server_2_s3_config_read" {
-  role   = module.goobi.shell_server_2_task_role
+  role   = module.shell_server_2.task_role
   policy = data.aws_iam_policy_document.s3_read_workflow-configuration.json
 }
 
 resource "aws_iam_role_policy" "ecs_shell_server_2_s3_data_rw" {
-  role   = module.goobi.shell_server_2_task_role
+  role   = module.shell_server_2.task_role
   policy = data.aws_iam_policy_document.s3_rw_workflow-data.json
 }
 
 resource "aws_iam_role_policy" "ecs_shell_server_2_s3_export_bagit_rw" {
-  role   = module.goobi.shell_server_2_task_role
+  role   = module.shell_server_2.task_role
   policy = data.aws_iam_policy_document.s3_rw_workflow-export-bagit.json
 }
 
-resource "aws_iam_role_policy" "ecs_shell_server_2_s3_export_bagit_stage_rw" {
-  role   = module.goobi.shell_server_2_task_role
-  policy = data.aws_iam_policy_document.s3_rw_workflow-export-bagit-stage.json
-}
-
 resource "aws_iam_role_policy" "ecs_shell_server_2_s3_editorial_photography_upload_external" {
-  role   = module.goobi.shell_server_2_task_role
+  role   = module.shell_server_2.task_role
   policy = data.aws_iam_policy_document.s3_editorial_photography_upload_external.json
 }
 
 # shell_server_3
 resource "aws_iam_role_policy" "ecs_shell_server_3_s3_config_read" {
-  role   = module.goobi.shell_server_3_task_role
+  role   = module.shell_server_3.task_role
   policy = data.aws_iam_policy_document.s3_read_workflow-configuration.json
 }
 
 resource "aws_iam_role_policy" "ecs_shell_server_3_s3_data_rw" {
-  role   = module.goobi.shell_server_3_task_role
+  role   = module.shell_server_3.task_role
   policy = data.aws_iam_policy_document.s3_rw_workflow-data.json
 }
 
 resource "aws_iam_role_policy" "ecs_shell_server_3_s3_export_bagit_rw" {
-  role   = module.goobi.shell_server_3_task_role
+  role   = module.shell_server_3.task_role
   policy = data.aws_iam_policy_document.s3_rw_workflow-export-bagit.json
 }
 
-resource "aws_iam_role_policy" "ecs_shell_server_3_s3_export_bagit_stage_rw" {
-  role   = module.goobi.shell_server_3_task_role
-  policy = data.aws_iam_policy_document.s3_rw_workflow-export-bagit-stage.json
-}
-
 resource "aws_iam_role_policy" "ecs_shell_server_3_s3_editorial_photography_upload_external" {
-  role   = module.goobi.shell_server_3_task_role
+  role   = module.shell_server_3.task_role
   policy = data.aws_iam_policy_document.s3_editorial_photography_upload_external.json
 }
 
 # shell_server_4
 resource "aws_iam_role_policy" "ecs_shell_server_4_s3_config_read" {
-  role   = module.goobi.shell_server_4_task_role
+  role   = module.shell_server_4.task_role
   policy = data.aws_iam_policy_document.s3_read_workflow-configuration.json
 }
 
 resource "aws_iam_role_policy" "ecs_shell_server_4_s3_data_rw" {
-  role   = module.goobi.shell_server_4_task_role
+  role   = module.shell_server_4.task_role
   policy = data.aws_iam_policy_document.s3_rw_workflow-data.json
 }
 
 resource "aws_iam_role_policy" "ecs_shell_server_4_s3_export_bagit_rw" {
-  role   = module.goobi.shell_server_4_task_role
+  role   = module.shell_server_4.task_role
   policy = data.aws_iam_policy_document.s3_rw_workflow-export-bagit.json
 }
 
-resource "aws_iam_role_policy" "ecs_shell_server_4_s3_export_bagit_stage_rw" {
-  role   = module.goobi.shell_server_4_task_role
-  policy = data.aws_iam_policy_document.s3_rw_workflow-export-bagit-stage.json
-}
-
 resource "aws_iam_role_policy" "ecs_shell_server_4_s3_editorial_photography_upload_external" {
-  role   = module.goobi.shell_server_4_task_role
+  role   = module.shell_server_4.task_role
   policy = data.aws_iam_policy_document.s3_editorial_photography_upload_external.json
 }
 
