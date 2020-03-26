@@ -89,7 +89,7 @@ data "aws_iam_policy_document" "allow_external_export-bagit_access" {
     resources = [aws_s3_bucket.workflow-export-bagit.arn, "${aws_s3_bucket.workflow-export-bagit.arn}/*"]
 
     principals {
-      type = "AWS"
+      type        = "AWS"
       identifiers = local.bagit_access_principles
     }
   }
