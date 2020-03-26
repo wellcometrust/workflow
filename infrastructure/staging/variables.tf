@@ -67,6 +67,22 @@ variable "lambda_updatetemplateid_digitised" {
   type = string
 }
 
+variable "lambda_api_endpoint_av" {
+  type = string
+}
+
+variable "lambda_token_av" {
+  type = string
+}
+
+variable "lambda_templateid_av" {
+  type = string
+}
+
+variable "lambda_updatetemplateid_av" {
+  type = string
+}
+
 # RDS
 
 variable "rds_username" {
