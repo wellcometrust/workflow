@@ -32,9 +32,10 @@ module "goobi" {
     APP_CONTAINER   = "localhost"
     S3_DATA_BUCKET  = aws_s3_bucket.workflow-data.bucket
     WORKING_STORAGE = "/ebs"
+    TZ              = "Europe/London"
   }
 
-  goobi_app_env_vars_length = "14"
+  goobi_app_env_vars_length = "15"
 
   goobi_sidecar_container_image = var.goobi_sidecar_container_image
   goobi_sidecar_container_port  = "80"
@@ -44,9 +45,10 @@ module "goobi" {
     HTTPS_DOMAIN  = var.domain_name
     APP_PATH      = "goobi"
     APP_CONTAINER = "localhost"
+    TZ            = "Europe/London"
   }
 
-  goobi_sidecar_env_vars_length = "4"
+  goobi_sidecar_env_vars_length = "5"
 
   goobi_efs_container_path = "/efs"
   goobi_ebs_container_path = "/ebs"
@@ -85,9 +87,10 @@ module "goobi" {
     APP_CONTAINER   = "localhost"
     WORKING_STORAGE = "/ebs"
     S3_DATA_BUCKET  = aws_s3_bucket.workflow-data.bucket
+    TZ              = "Europe/London"
   }
 
-  itm_app_env_vars_length = "14"
+  itm_app_env_vars_length = "15"
 
   itm_sidecar_container_image = var.itm_sidecar_container_image
   itm_sidecar_container_port  = "80"
@@ -97,9 +100,10 @@ module "goobi" {
     SERVERNAME    = var.domain_name
     HTTPS_DOMAIN  = var.domain_name
     APP_PATH      = "itm"
+    TZ            = "Europe/London"
   }
 
-  itm_sidecar_env_vars_length = "4"
+  itm_sidecar_env_vars_length = "5"
 
   itm_efs_container_path = "/efs"
   itm_ebs_container_path = "/ebs"
@@ -147,9 +151,10 @@ module "goobi" {
     APP_PATH                     = "harvester"
     APP_CONTAINER                = "localhost"
     S3_BUCKET_HARVESTING_RESULTS = aws_s3_bucket.workflow-harvesting-results.bucket
+    TZ                           = "Europe/London"
   }
 
-  harvester_app_env_vars_length = "13"
+  harvester_app_env_vars_length = "14"
 
   harvester_sidecar_container_image = var.harvester_sidecar_container_image
   harvester_sidecar_container_port  = "80"
@@ -159,6 +164,7 @@ module "goobi" {
     HTTPS_DOMAIN  = var.domain_name
     APP_PATH      = "harvester"
     APP_CONTAINER = "localhost"
+    TZ            = "Europe/London"
   }
 
   harvester_sidecar_env_vars_length = "4"
@@ -220,9 +226,10 @@ module "shell_server_1" {
     WORKING_STORAGE    = "/ebs"
     S3_DATA_BUCKET     = aws_s3_bucket.workflow-data.bucket
     SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_1_config.properties"
+    TZ                 = "Europe/London"
   }
 
-  shell_server_env_vars_length = "5"
+  shell_server_env_vars_length = "6"
 
   shell_server_namespace_id = module.goobi.goobi_namespace_id
 
@@ -265,9 +272,10 @@ module "shell_server_2" {
     WORKING_STORAGE    = "/ebs"
     S3_DATA_BUCKET     = aws_s3_bucket.workflow-data.bucket
     SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_2_config.properties"
+    TZ                 = "Europe/London"
   }
 
-  shell_server_env_vars_length = "5"
+  shell_server_env_vars_length = "6"
 
   shell_server_namespace_id = module.goobi.goobi_namespace_id
 
@@ -310,9 +318,10 @@ module "shell_server_3" {
     WORKING_STORAGE    = "/ebs"
     S3_DATA_BUCKET     = aws_s3_bucket.workflow-data.bucket
     SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_3_config.properties"
+    TZ                 = "Europe/London"
   }
 
-  shell_server_env_vars_length = "5"
+  shell_server_env_vars_length = "6"
 
   shell_server_namespace_id = module.goobi.goobi_namespace_id
 
@@ -355,9 +364,10 @@ module "shell_server_4" {
     WORKING_STORAGE    = "/ebs"
     S3_DATA_BUCKET     = aws_s3_bucket.workflow-data.bucket
     SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_4_config.properties"
+    TZ                 = "Europe/London"
   }
 
-  shell_server_env_vars_length = "5"
+  shell_server_env_vars_length = "6"
 
   shell_server_namespace_id = module.goobi.goobi_namespace_id
 
