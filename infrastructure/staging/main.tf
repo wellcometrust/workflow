@@ -225,7 +225,7 @@ module "shell_server_1" {
   shell_server_env_vars = {
     CONFIGSOURCE       = "s3"
     AWS_S3_BUCKET      = aws_s3_bucket.workflow-stage-configuration.bucket
-    WORKING_STORAGE    = "/ebs"
+    WORKING_STORAGE    = "/efs/tmp_shellserver1"
     S3_DATA_BUCKET     = aws_s3_bucket.workflow-stage-data.bucket
     SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_1_config.properties"
     TZ                 = "Europe/London"
