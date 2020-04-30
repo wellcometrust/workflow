@@ -56,7 +56,7 @@ module "goobi" {
   goobi_ebs_container_path = "/ebs"
 
   goobi_app_cpu    = "6144"
-  goobi_app_memory = "3072"
+  goobi_app_memory = "12288"
 
   goobi_sidecar_cpu    = "128"
   goobi_sidecar_memory = "256"
