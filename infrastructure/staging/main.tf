@@ -223,15 +223,16 @@ module "shell_server_1" {
   shell_server_memory = "2000"
 
   shell_server_env_vars = {
-    CONFIGSOURCE       = "s3"
-    AWS_S3_BUCKET      = aws_s3_bucket.workflow-stage-configuration.bucket
-    WORKING_STORAGE    = "/efs/tmp_shellserver1"
-    S3_DATA_BUCKET     = aws_s3_bucket.workflow-stage-data.bucket
-    SHELLSERVER_CONFIG = "/opt/digiverso/shellserver/conf/shellserver_1_config.properties"
-    TZ                 = "Europe/London"
+    CONFIGSOURCE            = "s3"
+    AWS_S3_BUCKET           = aws_s3_bucket.workflow-stage-configuration.bucket
+    WORKING_STORAGE         = "/efs/tmp_shellserver1"
+    S3_DATA_BUCKET          = aws_s3_bucket.workflow-stage-data.bucket
+    SHELLSERVER_CONFIG      = "/opt/digiverso/shellserver/conf/shellserver_1_config.properties"
+    TZ                      = "Europe/London"
+    CLEANUP_WORKING_STORAGE = "true"
   }
 
-  shell_server_env_vars_length = "6"
+  shell_server_env_vars_length = "7"
 
   shell_server_namespace_id = module.goobi.goobi_namespace_id
 
