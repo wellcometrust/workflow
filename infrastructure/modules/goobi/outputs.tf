@@ -26,6 +26,10 @@ output "efs_arn" {
   value = module.efs.efs_arn
 }
 
+output "efs_id" {
+  value = module.efs.efs_id
+}
+
 output "goobi_namespace_id" {
   value = aws_service_discovery_private_dns_namespace.namespace.id
 }
@@ -40,4 +44,8 @@ output "goobi_efs_host_path" {
 
 output "goobi_cluster_id" {
   value = aws_ecs_cluster.cluster.id
+}
+
+output "goobi_cluster_arn" {
+  value = aws_ecs_cluster.cluster.arn
 }
