@@ -215,47 +215,29 @@ module "load_balancer" {
 
 # the staging environment needs only one shellserver - it handles all jobtypes
 module "shell_server_1" {
-  source = "../modules/shell_server"
+  source = "../modules/stack/shell_server"
 
-  name = "workflow-stage-shell_server_1"
+  name = "workflow-stage-shellserver_1"
 
-  shell_server_cpu    = "1024"
-  shell_server_memory = "2000"
+  cpu    = "1024"
+  memory = "2048"
 
-  shell_server_env_vars = {
-    CONFIGSOURCE            = "s3"
-    AWS_S3_BUCKET           = aws_s3_bucket.workflow-stage-configuration.bucket
-    WORKING_STORAGE         = "/efs/tmp_shellserver1"
-    S3_DATA_BUCKET          = aws_s3_bucket.workflow-stage-data.bucket
-    SHELLSERVER_CONFIG      = "/opt/digiverso/shellserver/conf/shellserver_1_config.properties"
-    TZ                      = "Europe/London"
-    CLEANUP_WORKING_STORAGE = "true"
-  }
+  configuration_bucket_name = aws_s3_bucket.workflow-stage-configuration.bucket
+  working_storage_path      = "/efs/tmp_shellserver1"
+  data_bucket_name          = aws_s3_bucket.workflow-stage-data.bucket
+  configuration_file_path   = "/opt/digiverso/shellserver/conf/shellserver_1_config.properties"
 
-  shell_server_env_vars_length = "7"
+  cluster_arn = module.goobi.goobi_cluster_arn
 
-  shell_server_namespace_id = module.goobi.goobi_namespace_id
+  subnets = module.network.private_subnets
 
-  ebs_host_path = module.goobi.goobi_ebs_host_path
-  efs_host_path = module.goobi.goobi_efs_host_path
+  security_group_ids = [
+    aws_security_group.service_egress.id,
+    aws_security_group.interservice.id,
+    aws_security_group.efs.id
+  ]
 
-  cluster_id = module.goobi.goobi_cluster_id
-
-  vpc_id          = module.network.vpc_id
-  private_subnets = module.network.private_subnets
-
-  service_egress_security_group_id = aws_security_group.service_egress.id
-  interservice_security_group_id   = aws_security_group.interservice.id
-
-  region = var.region
+  efs_id = module.goobi.efs_id
 
   shell_server_container_image = var.shell_server_container_image
-  shell_server_container_port  = "80"
-
-
-  shell_server_efs_container_path = "/efs"
-  shell_server_ebs_container_path = "/ebs"
-
-  shell_server_deployment_minimum_healthy_percent = "0"
-  shell_server_deployment_maximum_percent         = "100"
 }
