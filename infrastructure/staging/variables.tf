@@ -139,6 +139,6 @@ variable "ep_upload_external_bucket" {
 }
 
 variable "storage_archive_bucket" {
-  default = "wellcomecollection-storage-archive"
+  default = "wellcomecollection-storage-staging"
 }
 
