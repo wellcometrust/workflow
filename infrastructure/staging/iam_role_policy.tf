@@ -81,6 +81,11 @@ resource "aws_iam_role_policy" "ecs_shell_server_1_s3_export_bagit_stage_rw" {
   policy = data.aws_iam_policy_document.s3_rw_workflow-export-bagit-stage.json
 }
 
+resource "aws_iam_role_policy" "ecs_shell_server_1_s3_storage_archive_access" {
+  role   = module.shell_server_1.task_role
+  policy = data.aws_iam_policy_document.allow_storage_archive_access.json
+}
+
 resource "aws_iam_role_policy" "ecs_shell_server_1_s3_editorial_photography_upload_external" {
   role   = module.shell_server_1.task_role
   policy = data.aws_iam_policy_document.s3_editorial_photography_upload_external.json
