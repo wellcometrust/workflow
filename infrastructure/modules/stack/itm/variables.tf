@@ -101,3 +101,7 @@ variable "healthcheck_path" {
 variable "alb_listener_arn" {
   type = string
 }
+
+variable "data_bucket_name" {
+  type = string
+}

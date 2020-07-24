@@ -31,20 +31,21 @@ module "app_container_definition" {
   }
 
   environment = {
-    CONFIGSOURCE                 = "s3"
-    AWS_S3_BUCKET                = var.configuration_bucket_name
-    TZ                           = "Europe/London"
-    DB_SERVER                    = var.db_server
-    DB_PORT                      = var.db_port
-    DB_NAME                      = var.db_name
-    DB_USER                      = var.db_user
-    DB_PASSWORD                  = var.db_password
-    DB_HA                        = "aurora:"
-    WORKING_STORAGE              = "/efs/tmp_itm"
-    SERVERNAME                   = var.host_name
-    HTTPS_DOMAIN                 = var.host_name
-    APP_PATH                     = "itm"
-    APP_CONTAINER                = "localhost"
+    CONFIGSOURCE    = "s3"
+    AWS_S3_BUCKET   = var.configuration_bucket_name
+    TZ              = "Europe/London"
+    DB_SERVER       = var.db_server
+    DB_PORT         = var.db_port
+    DB_NAME         = var.db_name
+    DB_USER         = var.db_user
+    DB_PASSWORD     = var.db_password
+    DB_HA           = "aurora:"
+    WORKING_STORAGE = "/efs/tmp_itm"
+    SERVERNAME      = var.host_name
+    HTTPS_DOMAIN    = var.host_name
+    APP_PATH        = "itm"
+    APP_CONTAINER   = "localhost"
+    S3_DATA_BUCKET  = var.data_bucket_name
   }
 }
 
