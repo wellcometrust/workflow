@@ -1,25 +1,7 @@
 # App configuration
 
-variable "goobi_app_container_image" {
-}
-
-variable "goobi_sidecar_container_image" {
-}
-
-variable "itm_app_container_image" {
-}
-
-variable "itm_sidecar_container_image" {
-}
-
 variable "itm_source_ips" {
   type = list(string)
-}
-
-variable "harvester_app_container_image" {
-}
-
-variable "harvester_sidecar_container_image" {
 }
 
 variable "harvester_source_ips" {
@@ -153,4 +135,3 @@ variable "ep_upload_external_bucket" {
 variable "storage_archive_bucket" {
   default = "wellcomecollection-storage-staging"
 }
-
