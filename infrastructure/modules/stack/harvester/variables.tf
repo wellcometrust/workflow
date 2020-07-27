@@ -76,7 +76,7 @@ variable "service_discovery_namespace_id" {
 
 variable "container_port" {
   type    = string
-  default = "8009"
+  default = "80"
 }
 
 variable "source_ips" {

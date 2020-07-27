@@ -9,13 +9,6 @@ module "app_container_definition" {
     sourceVolume  = "efs"
   }]
 
-  port_mappings = [
-    {
-      containerPort = var.container_port,
-      hostPort      = var.container_port,
-      protocol      = "tcp"
-    }
-  ]
 
   log_configuration = {
     logDriver = "awslogs"
@@ -31,28 +24,36 @@ module "app_container_definition" {
   }
 
   environment = {
-    CONFIGSOURCE                 = "s3"
-    AWS_S3_BUCKET                = var.configuration_bucket_name
-    TZ                           = "Europe/London"
-    DB_SERVER                    = var.db_server
-    DB_PORT                      = var.db_port
-    DB_NAME                      = var.db_name
-    DB_USER                      = var.db_user
-    DB_PASSWORD                  = var.db_password
-    DB_HA                        = "aurora:"
-    WORKING_STORAGE              = "/efs/tmp_goobi"
-    SERVERNAME                   = var.host_name
-    HTTPS_DOMAIN                 = var.host_name
-    APP_PATH                     = "goobi"
-    APP_CONTAINER                = "localhost"
+    CONFIGSOURCE    = "s3"
+    AWS_S3_BUCKET   = var.configuration_bucket_name
+    TZ              = "Europe/London"
+    DB_SERVER       = var.db_server
+    DB_PORT         = var.db_port
+    DB_NAME         = var.db_name
+    DB_USER         = var.db_user
+    DB_PASSWORD     = var.db_password
+    DB_HA           = "aurora:"
+    WORKING_STORAGE = "/efs/tmp_goobi"
+    SERVERNAME      = var.host_name
+    HTTPS_DOMAIN    = var.host_name
+    APP_PATH        = "goobi"
+    APP_CONTAINER   = "localhost"
   }
 }
 
 module "proxy_container_definition" {
   source = "git::https://github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/container_definition?ref=v3.0.0"
 
-  name  = var.name
+  name  = "${var.name}_proxy"
   image = var.proxy_container_image
+
+  port_mappings = [
+    {
+      containerPort = var.container_port,
+      hostPort      = var.container_port,
+      protocol      = "tcp"
+    }
+  ]
 
   log_configuration = {
     logDriver = "awslogs"
@@ -97,10 +98,6 @@ module "task_definition" {
   task_name    = var.name
 }
 
-// TODO Port mappings
-
-// TODO health check
-
 module "service" {
   source = "git::https://github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/service?ref=v3.0.0"
 
@@ -109,7 +106,7 @@ module "service" {
 
   task_definition_arn = module.task_definition.arn
 
-  container_name = module.app_container_definition.name
+  container_name = module.proxy_container_definition.name
   subnets        = var.subnets
 
   service_discovery_namespace_id = var.service_discovery_namespace_id

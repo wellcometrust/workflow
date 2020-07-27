@@ -72,7 +72,7 @@ variable "service_discovery_namespace_id" {
 
 variable "container_port" {
   type    = string
-  default = "8009"
+  default = "80"
 }
 
 variable "source_ips" {
@@ -82,7 +82,7 @@ variable "source_ips" {
 
 variable "path_pattern" {
   type    = string
-  default = "/itm/*"
+  default = "/goobi/*"
 }
 
 variable "host_name" {
@@ -95,7 +95,7 @@ variable "vpc_id" {
 
 variable "healthcheck_path" {
   type    = string
-  default = "/itm/index.xhtml"
+  default = "/goobi/index.xhtml"
 }
 
 variable "alb_listener_arn" {
