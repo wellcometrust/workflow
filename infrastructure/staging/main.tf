@@ -90,6 +90,8 @@ module "harvester" {
   vpc_id = module.network.vpc_id
 
   alb_listener_arn = module.load_balancer.https_listener_arn
+
+  service_discovery_namespace_id = aws_service_discovery_private_dns_namespace.namespace.id
 }
 
 module "itm" {
@@ -129,6 +131,8 @@ module "itm" {
   vpc_id = module.network.vpc_id
 
   alb_listener_arn = module.load_balancer.https_listener_arn
+
+  service_discovery_namespace_id = aws_service_discovery_private_dns_namespace.namespace.id
 }
 
 module "goobi" {
@@ -167,4 +171,6 @@ module "goobi" {
   vpc_id = module.network.vpc_id
 
   alb_listener_arn = module.load_balancer.https_listener_arn
+
+  service_discovery_namespace_id = aws_service_discovery_private_dns_namespace.namespace.id
 }
