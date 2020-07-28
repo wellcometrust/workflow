@@ -30,13 +30,29 @@ data "aws_ssm_parameter" "proxy_container_image" {
   name = "/workflow/images/stage/proxy"
 }
 
+data "aws_ssm_parameter" "lambda_api_endpoint_ep" {
+  name = "/workflow/config/stage/lambda_api_endpoint_ep"
+}
+
+data "aws_ssm_parameter" "lambda_api_endpoint_digitised" {
+  name = "/workflow/config/stage/lambda_api_endpoint_digitised"
+}
+
+data "aws_ssm_parameter" "lambda_api_endpoint_av" {
+  name = "/workflow/config/stage/lambda_api_endpoint_av"
+}
+
 locals {
-  admin_cidr_ingress           = "${split(",", data.aws_ssm_parameter.admin_cidr_ingress.value)}"
-  itm_source_ips               = "${split(",", data.aws_ssm_parameter.itm_source_ips.value)}"
-  harvester_source_ips         = "${split(",", data.aws_ssm_parameter.harvester_source_ips.value)}"
-  shell_server_container_image = data.aws_ssm_parameter.shell_server_container_image.value
-  goobi_container_image        = data.aws_ssm_parameter.goobi_container_image.value
-  harvester_container_image    = data.aws_ssm_parameter.harvester_container_image.value
-  itm_container_image          = data.aws_ssm_parameter.itm_container_image.value
-  proxy_container_image        = data.aws_ssm_parameter.proxy_container_image.value
+  admin_cidr_ingress            = "${split(",", data.aws_ssm_parameter.admin_cidr_ingress.value)}"
+  itm_source_ips                = "${split(",", data.aws_ssm_parameter.itm_source_ips.value)}"
+  harvester_source_ips          = "${split(",", data.aws_ssm_parameter.harvester_source_ips.value)}"
+  shell_server_container_image  = data.aws_ssm_parameter.shell_server_container_image.value
+  goobi_container_image         = data.aws_ssm_parameter.goobi_container_image.value
+  harvester_container_image     = data.aws_ssm_parameter.harvester_container_image.value
+  itm_container_image           = data.aws_ssm_parameter.itm_container_image.value
+  proxy_container_image         = data.aws_ssm_parameter.proxy_container_image.value
+  lambda_api_endpoint_ep        = data.aws_ssm_parameter.lambda_api_endpoint_ep.value
+  lambda_api_endpoint_digitised = data.aws_ssm_parameter.lambda_api_endpoint_digitised.value
+  lambda_api_endpoint_av        = data.aws_ssm_parameter.lambda_api_endpoint_av.value
+
 }

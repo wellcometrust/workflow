@@ -1,8 +1,5 @@
 
 # Lambda
-variable "lambda_api_endpoint_ep" {
-  type = string
-}
 
 variable "lambda_token_ep" {
   type = string
@@ -21,10 +18,6 @@ variable "lambda_hotfolder" {
   default = "hotfolder"
 }
 
-variable "lambda_api_endpoint_digitised" {
-  type = string
-}
-
 variable "lambda_token_digitised" {
   type = string
 }
@@ -34,10 +27,6 @@ variable "lambda_templateid_digitised" {
 }
 
 variable "lambda_updatetemplateid_digitised" {
-  type = string
-}
-
-variable "lambda_api_endpoint_av" {
   type = string
 }
 
