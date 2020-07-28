@@ -62,28 +62,6 @@ variable "rds_password" {
 }
 
 
-# Cluster
-
-variable "asg_min" {
-  default = "1"
-}
-
-variable "asg_desired" {
-  default = "1"
-}
-
-variable "asg_max" {
-  default = "2"
-}
-
-variable "instance_type" {
-  default = "c5.4xlarge"
-}
-
-variable "ebs_size" {
-  default = "300"
-}
-
 # Misc
 
 variable "profile" {
