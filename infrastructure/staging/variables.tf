@@ -85,9 +85,6 @@ variable "rds_username" {
 variable "rds_password" {
 }
 
-variable "rds_admin_cidr_ingress" {
-}
-
 variable "admin_cidr_ingress" {
   type = list(string)
 }
