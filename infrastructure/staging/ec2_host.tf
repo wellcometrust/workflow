@@ -22,7 +22,7 @@ resource "aws_security_group" "ssh_controlled_ingress" {
     to_port   = 22
     from_port = 22
 
-    cidr_blocks = var.admin_cidr_ingress
+    cidr_blocks = local.admin_cidr_ingress
   }
 
   lifecycle {

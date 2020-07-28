@@ -1,27 +1,3 @@
-# App configuration
-
-variable "itm_source_ips" {
-  type = list(string)
-}
-
-variable "harvester_source_ips" {
-  type = list(string)
-}
-
-variable "shell_server_container_image" {
-}
-
-variable "goobi_container_image" {
-}
-
-variable "harvester_container_image" {
-}
-
-variable "itm_container_image" {
-}
-
-variable "proxy_container_image" {
-}
 
 # Lambda
 variable "lambda_api_endpoint_ep" {
@@ -85,9 +61,6 @@ variable "rds_username" {
 variable "rds_password" {
 }
 
-variable "admin_cidr_ingress" {
-  type = list(string)
-}
 
 # Cluster
 

@@ -50,7 +50,7 @@ module "shell_server_1" {
 
   efs_id = module.efs.efs_id
 
-  shell_server_container_image = var.shell_server_container_image
+  shell_server_container_image = local.shell_server_container_image
 }
 
 module "harvester" {
@@ -74,8 +74,8 @@ module "harvester" {
 
   efs_id = module.efs.efs_id
 
-  harvester_container_image = var.harvester_container_image
-  proxy_container_image     = var.proxy_container_image
+  harvester_container_image = local.harvester_container_image
+  proxy_container_image     = local.proxy_container_image
 
   db_server   = module.goobi_rds_cluster.host
   db_port     = module.goobi_rds_cluster.port
@@ -85,7 +85,7 @@ module "harvester" {
 
   host_name    = var.domain_name
   path_pattern = "/harvester/*"
-  source_ips   = var.harvester_source_ips
+  source_ips   = local.harvester_source_ips
 
   vpc_id = module.network.vpc_id
 
@@ -115,8 +115,8 @@ module "itm" {
 
   efs_id = module.efs.efs_id
 
-  itm_container_image   = var.itm_container_image
-  proxy_container_image = var.proxy_container_image
+  itm_container_image   = local.itm_container_image
+  proxy_container_image = local.proxy_container_image
 
   db_server   = module.goobi_rds_cluster.host
   db_port     = module.goobi_rds_cluster.port
@@ -126,7 +126,7 @@ module "itm" {
 
   host_name    = var.domain_name
   path_pattern = "/itm/*"
-  source_ips   = var.itm_source_ips
+  source_ips   = local.itm_source_ips
 
   vpc_id = module.network.vpc_id
 
@@ -156,8 +156,8 @@ module "goobi" {
 
   efs_id = module.efs.efs_id
 
-  goobi_container_image = var.goobi_container_image
-  proxy_container_image = var.proxy_container_image
+  goobi_container_image = local.goobi_container_image
+  proxy_container_image = local.proxy_container_image
 
   db_server   = module.goobi_rds_cluster.host
   db_port     = module.goobi_rds_cluster.port
