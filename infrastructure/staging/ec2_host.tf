@@ -15,7 +15,7 @@ resource "aws_instance" "access_host" {
 resource "aws_security_group" "ssh_controlled_ingress" {
   description = "controls direct access to application instances"
   vpc_id      = module.network.vpc_id
-  name        = "workflow_stage_ssh_controlled_ingress_${random_id.sg_append.hex}"
+  name        = "${local.environment_name}_ssh_controlled_ingress_${random_id.sg_append.hex}"
 
   ingress {
     protocol  = "tcp"
@@ -33,7 +33,7 @@ resource "aws_security_group" "ssh_controlled_ingress" {
 resource "aws_security_group" "access_host_full_egress" {
   description = "allows full gress to access host"
   vpc_id      = module.network.vpc_id
-  name        = "workflow_stage_access_host_full_egress_${random_id.sg_append.hex}"
+  name        = "${local.environment_name}_access_host_full_egress_${random_id.sg_append.hex}"
 
   egress {
     protocol  = "-1"
@@ -60,7 +60,7 @@ data "aws_ami" "amazon-linux-2" {
 
 resource "random_id" "sg_append" {
   keepers = {
-    sg_id = "workflow-stage"
+    sg_id = local.environment_name
   }
 
   byte_length = 8

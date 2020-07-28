@@ -28,7 +28,7 @@ module "load_balancer" {
 module "shell_server_1" {
   source = "../modules/stack/shell_server"
 
-  name = "workflow-stage-shellserver_1"
+  name = "${local.environment_name}-shellserver_1"
 
   cpu    = "1024"
   memory = "2048"
@@ -56,7 +56,7 @@ module "shell_server_1" {
 module "harvester" {
   source = "../modules/stack/harvester"
 
-  name = "workflow-stage-harvester"
+  name = "${local.environment_name}-harvester"
 
   configuration_bucket_name = aws_s3_bucket.workflow-stage-configuration.bucket
   result_bucket_name        = aws_s3_bucket.workflow-stage-harvesting-results.bucket
@@ -97,7 +97,7 @@ module "harvester" {
 module "itm" {
   source = "../modules/stack/itm"
 
-  name = "workflow-stage-itm"
+  name = "${local.environment_name}-itm"
 
   data_bucket_name          = aws_s3_bucket.workflow-stage-data.bucket
   configuration_bucket_name = aws_s3_bucket.workflow-stage-configuration.bucket
@@ -138,7 +138,7 @@ module "itm" {
 module "goobi" {
   source = "../modules/stack/goobi"
 
-  name = "workflow-stage-goobi"
+  name = "${local.environment_name}-goobi"
 
   data_bucket_name          = aws_s3_bucket.workflow-stage-data.bucket
   configuration_bucket_name = aws_s3_bucket.workflow-stage-configuration.bucket
