@@ -5,14 +5,6 @@ variable "lambda_token_ep" {
   type = string
 }
 
-variable "lambda_templateid_ep" {
-  type = string
-}
-
-variable "lambda_updatetemplateid_ep" {
-  type = string
-}
-
 variable "lambda_hotfolder" {
   type    = string
   default = "hotfolder"
@@ -22,23 +14,7 @@ variable "lambda_token_digitised" {
   type = string
 }
 
-variable "lambda_templateid_digitised" {
-  type = string
-}
-
-variable "lambda_updatetemplateid_digitised" {
-  type = string
-}
-
 variable "lambda_token_av" {
-  type = string
-}
-
-variable "lambda_templateid_av" {
-  type = string
-}
-
-variable "lambda_updatetemplateid_av" {
   type = string
 }
 
