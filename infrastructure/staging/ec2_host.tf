@@ -10,6 +10,12 @@ resource "aws_instance" "access_host" {
   subnet_id                   = element(module.network.public_subnets, 0)
   associate_public_ip_address = true
   #   user_data = 
+
+  lifecycle {
+    ignore_changes = [
+      ami
+    ]
+  }
 }
 
 resource "aws_security_group" "ssh_controlled_ingress" {
@@ -47,6 +53,7 @@ resource "aws_security_group" "access_host_full_egress" {
     create_before_destroy = true
   }
 }
+
 data "aws_ami" "amazon-linux-2" {
   most_recent = true
   owners      = ["amazon"]
