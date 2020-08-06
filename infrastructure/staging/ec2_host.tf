@@ -1,7 +1,7 @@
 resource "aws_instance" "access_host" {
   ami           = data.aws_ami.amazon-linux-2.id
-  instance_type = "t2.micro"
-  key_name      = "wellcomedigitalworkflow"
+  instance_type = var.access_host_instance_type
+  key_name      = var.access_host_key_name
   vpc_security_group_ids = [
     aws_security_group.ssh_controlled_ingress.id,
     aws_security_group.efs.id,
