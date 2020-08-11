@@ -5,25 +5,12 @@ variable "lambda_token_ep" {
   type = string
 }
 
-variable "lambda_hotfolder" {
-  type    = string
-  default = "hotfolder"
-}
-
 variable "lambda_token_digitised" {
   type = string
 }
 
 variable "lambda_token_av" {
   type = string
-}
-
-# RDS
-
-variable "rds_username" {
-}
-
-variable "rds_password" {
 }
 
 
