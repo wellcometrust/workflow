@@ -66,6 +66,14 @@ data "aws_ssm_parameter" "lambda_updatetemplateid_av" {
   name = "/workflow/config/stage/lambda_updatetemplateid_av"
 }
 
+data "aws_ssm_parameter" "rds_username" {
+  name = "/aws/reference/secretsmanager/workflow/stage/rds_username"
+}
+
+data "aws_ssm_parameter" "rds_password" {
+  name = "/aws/reference/secretsmanager/workflow/stage/rds_password"
+}
+
 
 locals {
   admin_cidr_ingress                = "${split(",", data.aws_ssm_parameter.admin_cidr_ingress.value)}"
@@ -85,4 +93,6 @@ locals {
   lambda_api_endpoint_av            = data.aws_ssm_parameter.lambda_api_endpoint_av.value
   lambda_templateid_av              = data.aws_ssm_parameter.lambda_templateid_av.value
   lambda_updatetemplateid_av        = data.aws_ssm_parameter.lambda_updatetemplateid_av.value
+  rds_username                      = data.aws_ssm_parameter.rds_username.value
+  rds_password                      = data.aws_ssm_parameter.rds_password.value
 }
