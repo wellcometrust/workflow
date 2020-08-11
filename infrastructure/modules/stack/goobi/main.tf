@@ -30,8 +30,6 @@ module "app_container_definition" {
     DB_SERVER       = var.db_server
     DB_PORT         = var.db_port
     DB_NAME         = var.db_name
-    DB_USER         = var.db_user
-    DB_PASSWORD     = var.db_password
     DB_HA           = "aurora:"
     WORKING_STORAGE = "/efs/tmp_goobi"
     SERVERNAME      = var.host_name
@@ -39,6 +37,8 @@ module "app_container_definition" {
     APP_PATH        = "goobi"
     APP_CONTAINER   = "localhost"
   }
+
+  secrets = local.secrets
 }
 
 module "proxy_container_definition" {
@@ -120,4 +120,10 @@ module "service" {
 
   container_port = var.container_port
 
+}
+
+module "credentials_permissions" {
+  source    = "git::https://github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/secrets?ref=v3.0.0"
+  secrets   = local.secrets
+  role_name = module.task_definition.task_execution_role_name
 }

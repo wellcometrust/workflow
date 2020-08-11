@@ -31,11 +31,11 @@ variable "db_port" {
   type = number
 }
 
-variable "db_user" {
+variable "db_user_key" {
   type = string
 }
 
-variable "db_password" {
+variable "db_password_key" {
   type = string
 }
 
