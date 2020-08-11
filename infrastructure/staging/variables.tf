@@ -1,19 +1,3 @@
-
-# Lambda
-
-variable "lambda_token_ep" {
-  type = string
-}
-
-variable "lambda_token_digitised" {
-  type = string
-}
-
-variable "lambda_token_av" {
-  type = string
-}
-
-
 # Misc
 
 variable "profile" {

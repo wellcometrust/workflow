@@ -22,7 +22,7 @@ resource "aws_lambda_function" "lambda_s3_trigger_goobi_stage_ep" {
   environment {
     variables = {
       API_ENDPOINT     = local.lambda_api_endpoint_ep
-      TOKEN            = var.lambda_token_ep
+      TOKEN            = local.lambda_token_ep
       TEMPLATEID       = local.lambda_templateid_ep
       UPDATETEMPLATEID = local.lambda_updatetemplateid_ep
       HOTFOLDER        = "hotfolder"
@@ -72,7 +72,7 @@ resource "aws_lambda_function" "lambda_s3_trigger_goobi_stage_digitised" {
   environment {
     variables = {
       API_ENDPOINT     = local.lambda_api_endpoint_digitised
-      TOKEN            = var.lambda_token_digitised
+      TOKEN            = local.lambda_token_digitised
       TEMPLATEID       = local.lambda_templateid_digitised
       UPDATETEMPLATEID = local.lambda_updatetemplateid_digitised
       HOTFOLDER        = "hotfolder"
@@ -122,7 +122,7 @@ resource "aws_lambda_function" "lambda_s3_trigger_goobi_stage_av" {
   environment {
     variables = {
       API_ENDPOINT     = local.lambda_api_endpoint_av
-      TOKEN            = var.lambda_token_av
+      TOKEN            = local.lambda_token_av
       TEMPLATEID       = local.lambda_templateid_av
       UPDATETEMPLATEID = local.lambda_updatetemplateid_av
       HOTFOLDER        = "hotfolder"
