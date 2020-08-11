@@ -118,11 +118,11 @@ module "itm" {
   itm_container_image   = local.itm_container_image
   proxy_container_image = local.proxy_container_image
 
-  db_server   = module.goobi_rds_cluster.host
-  db_port     = module.goobi_rds_cluster.port
-  db_name     = "itm"
-  db_user     = module.goobi_rds_cluster.username
-  db_password = module.goobi_rds_cluster.password
+  db_server       = module.goobi_rds_cluster.host
+  db_port         = module.goobi_rds_cluster.port
+  db_name         = "itm"
+  db_user_key     = local.db_user_key
+  db_password_key = local.db_password_key
 
   host_name    = var.domain_name
   path_pattern = "/itm/*"
