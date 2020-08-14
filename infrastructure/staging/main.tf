@@ -140,6 +140,9 @@ module "goobi" {
 
   name = "${local.environment_name}-goobi"
 
+  cpu    = "2048"
+  memory = "8192"
+
   data_bucket_name          = aws_s3_bucket.workflow-stage-data.bucket
   configuration_bucket_name = aws_s3_bucket.workflow-stage-configuration.bucket
 
