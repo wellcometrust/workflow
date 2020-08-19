@@ -169,7 +169,7 @@ module "shell_server_1" {
   data_bucket_name          = aws_s3_bucket.workflow-data.bucket
   configuration_file_path   = "/opt/digiverso/shellserver/conf/shellserver_1_config.properties"
 
-  cluster_arn = module.goobi.goobi_cluster_arn
+  cluster_arn = aws_ecs_cluster.cluster.arn
 
   subnets = module.network.private_subnets
 
@@ -198,7 +198,7 @@ module "shell_server_2" {
   data_bucket_name          = aws_s3_bucket.workflow-data.bucket
   configuration_file_path   = "/opt/digiverso/shellserver/conf/shellserver_2_config.properties"
 
-  cluster_arn = module.goobi.goobi_cluster_arn
+  cluster_arn = aws_ecs_cluster.cluster.arn
 
   subnets = module.network.private_subnets
 
@@ -227,7 +227,7 @@ module "shell_server_3" {
   data_bucket_name          = aws_s3_bucket.workflow-data.bucket
   configuration_file_path   = "/opt/digiverso/shellserver/conf/shellserver_3_config.properties"
 
-  cluster_arn = module.goobi.goobi_cluster_arn
+  cluster_arn = aws_ecs_cluster.cluster.arn
 
   subnets = module.network.private_subnets
 
@@ -256,7 +256,7 @@ module "shell_server_4" {
   data_bucket_name          = aws_s3_bucket.workflow-data.bucket
   configuration_file_path   = "/opt/digiverso/shellserver/conf/shellserver_4_config.properties"
 
-  cluster_arn = module.goobi.goobi_cluster_arn
+  cluster_arn = aws_ecs_cluster.cluster.arn
 
   subnets = module.network.private_subnets
 
