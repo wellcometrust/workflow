@@ -62,21 +62,21 @@ data "aws_ssm_parameter" "lambda_token_digitised" {
   name = "/workflow/config/prod/lambda_token_digitised"
 }
 
-data "aws_ssm_parameter" "lambda_api_endpoint_av" {
-  name = "/workflow/config/prod/lambda_api_endpoint_av"
-}
+# data "aws_ssm_parameter" "lambda_api_endpoint_av" {
+#   name = "/workflow/config/prod/lambda_api_endpoint_av"
+# }
 
-data "aws_ssm_parameter" "lambda_templateid_av" {
-  name = "/workflow/config/prod/lambda_templateid_av"
-}
+# data "aws_ssm_parameter" "lambda_templateid_av" {
+#   name = "/workflow/config/prod/lambda_templateid_av"
+# }
 
-data "aws_ssm_parameter" "lambda_updatetemplateid_av" {
-  name = "/workflow/config/prod/lambda_updatetemplateid_av"
-}
+# data "aws_ssm_parameter" "lambda_updatetemplateid_av" {
+#   name = "/workflow/config/prod/lambda_updatetemplateid_av"
+# }
 
-data "aws_ssm_parameter" "lambda_token_av" {
-  name = "/workflow/config/prod/lambda_token_av"
-}
+# data "aws_ssm_parameter" "lambda_token_av" {
+#   name = "/workflow/config/prod/lambda_token_av"
+# }
 
 data "aws_ssm_parameter" "rds_username" {
   name = "/aws/reference/secretsmanager/workflow/prod/rds_username"
@@ -103,10 +103,10 @@ locals {
   lambda_templateid_digitised       = data.aws_ssm_parameter.lambda_templateid_digitised.value
   lambda_updatetemplateid_digitised = data.aws_ssm_parameter.lambda_updatetemplateid_digitised.value
   lambda_token_digitised            = data.aws_ssm_parameter.lambda_token_digitised.value
-  lambda_api_endpoint_av            = data.aws_ssm_parameter.lambda_api_endpoint_av.value
-  lambda_templateid_av              = data.aws_ssm_parameter.lambda_templateid_av.value
-  lambda_updatetemplateid_av        = data.aws_ssm_parameter.lambda_updatetemplateid_av.value
-  lambda_token_av                   = data.aws_ssm_parameter.lambda_token_av.value
-  rds_username                      = data.aws_ssm_parameter.rds_username.value
-  rds_password                      = data.aws_ssm_parameter.rds_password.value
+  # lambda_api_endpoint_av            = data.aws_ssm_parameter.lambda_api_endpoint_av.value
+  # lambda_templateid_av              = data.aws_ssm_parameter.lambda_templateid_av.value
+  # lambda_updatetemplateid_av        = data.aws_ssm_parameter.lambda_updatetemplateid_av.value
+  # lambda_token_av                   = data.aws_ssm_parameter.lambda_token_av.value
+  rds_username = data.aws_ssm_parameter.rds_username.value
+  rds_password = data.aws_ssm_parameter.rds_password.value
 }
