@@ -8,7 +8,6 @@ resource "aws_iam_role_policy" "ecs_goobi_s3_data_rw" {
   policy = data.aws_iam_policy_document.s3_rw_workflow-data.json
 }
 
-
 resource "aws_iam_role_policy" "ecs_goobi_s3_export_bagit_stage_rw" {
   role   = module.goobi.task_role
   policy = data.aws_iam_policy_document.s3_rw_workflow-export-bagit-stage.json
