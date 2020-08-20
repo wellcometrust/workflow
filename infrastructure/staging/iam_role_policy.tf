@@ -96,12 +96,12 @@ resource "aws_iam_role_policy" "lambda_s3_upload_rw" {
   policy = data.aws_iam_policy_document.s3_workflow-upload.json
 }
 
-resource "aws_iam_role_policy" "lambda_stage_iam_role_vpc_permissions" {
+resource "aws_iam_role_policy" "lambda_vpc_permissions" {
   role   = aws_iam_role.lambda_stage_iam_role.name
   policy = data.aws_iam_policy_document.lambda_vpc_permissions.json
 }
 
-resource "aws_iam_role_policy" "lambda_stage_iam_role_cloudwatch_permissions" {
+resource "aws_iam_role_policy" "lambda_cloudwatch_permissions" {
   role   = aws_iam_role.lambda_stage_iam_role.name
   policy = data.aws_iam_policy_document.cloudwatch_logs.json
 }
