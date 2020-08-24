@@ -2,8 +2,8 @@ module "goobi_rds_cluster" {
   source                  = "../modules/rds"
   cluster_identifier      = "goobi"
   database_name           = "goobi"
-  username                = var.rds_username
-  password                = var.rds_password
+  username                = local.rds_username
+  password                = local.rds_password
   vpc_id                  = module.network.vpc_id
   vpc_subnet_ids          = module.network.private_subnets
   instance_class          = "db.r5.large"

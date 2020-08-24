@@ -34,6 +34,9 @@ output "load_balancer_https_listener_arn" {
   value = module.load_balancer.https_listener_arn
 }
 
+output "public_ip_ssh" {
+  value = aws_instance.access_host.public_ip
+}
 # workflow upload users
 
 # output "production_iha_id" {

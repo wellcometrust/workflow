@@ -21,10 +21,10 @@ resource "aws_lambda_function" "lambda_s3_trigger_goobi_stage_ep" {
 
   environment {
     variables = {
-      API_ENDPOINT     = var.lambda_api_endpoint_ep
-      TOKEN            = var.lambda_token_ep
-      TEMPLATEID       = var.lambda_templateid_ep
-      UPDATETEMPLATEID = var.lambda_updatetemplateid_ep
+      API_ENDPOINT     = local.lambda_api_endpoint_ep
+      TOKEN            = local.lambda_token_ep
+      TEMPLATEID       = local.lambda_templateid_ep
+      UPDATETEMPLATEID = local.lambda_updatetemplateid_ep
       HOTFOLDER        = "hotfolder"
     }
   }
@@ -71,10 +71,10 @@ resource "aws_lambda_function" "lambda_s3_trigger_goobi_stage_digitised" {
 
   environment {
     variables = {
-      API_ENDPOINT     = var.lambda_api_endpoint_digitised
-      TOKEN            = var.lambda_token_digitised
-      TEMPLATEID       = var.lambda_templateid_digitised
-      UPDATETEMPLATEID = var.lambda_updatetemplateid_digitised
+      API_ENDPOINT     = local.lambda_api_endpoint_digitised
+      TOKEN            = local.lambda_token_digitised
+      TEMPLATEID       = local.lambda_templateid_digitised
+      UPDATETEMPLATEID = local.lambda_updatetemplateid_digitised
       HOTFOLDER        = "hotfolder"
     }
   }
@@ -121,10 +121,10 @@ resource "aws_lambda_function" "lambda_s3_trigger_goobi_stage_av" {
 
   environment {
     variables = {
-      API_ENDPOINT     = var.lambda_api_endpoint_av
-      TOKEN            = var.lambda_token_av
-      TEMPLATEID       = var.lambda_templateid_av
-      UPDATETEMPLATEID = var.lambda_updatetemplateid_av
+      API_ENDPOINT     = local.lambda_api_endpoint_av
+      TOKEN            = local.lambda_token_av
+      TEMPLATEID       = local.lambda_templateid_av
+      UPDATETEMPLATEID = local.lambda_updatetemplateid_av
       HOTFOLDER        = "hotfolder"
     }
   }
