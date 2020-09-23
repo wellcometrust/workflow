@@ -5,6 +5,9 @@ resource "aws_efs_file_system" "efs" {
   creation_token   = "${var.name}_efs"
   performance_mode = var.performance_mode
 
+  throughput_mode                 = var.throughput_mode
+  provisioned_throughput_in_mibps = var.provisioned_throughput_in_mibps
+
   tags = {
     Name        = var.name
     backup-plan = "workflow-default"
