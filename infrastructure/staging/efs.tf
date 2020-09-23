@@ -3,6 +3,9 @@ module "efs" {
 
   name = "workflow-stage"
 
+  throughput_mode = "provisioned"
+  provisioned_throughput_in_mibps = "5"
+
   vpc_id  = module.network.vpc_id
   subnets = module.network.private_subnets
 
