@@ -106,7 +106,7 @@ resource "aws_iam_role_policy" "ecs_shell_server_2_s3_editorial_photography_uplo
   policy = data.aws_iam_policy_document.s3_editorial_photography_upload_external.json
 }
 
-resource "aws_iam_role_policy" "ecs_shell_server_1_s3_storage_archive_access" {
+resource "aws_iam_role_policy" "ecs_shell_server_2_s3_storage_archive_access" {
   role   = module.shell_server_2.task_role
   policy = data.aws_iam_policy_document.allow_storage_archive_access.json
 }
