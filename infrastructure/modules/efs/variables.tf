@@ -25,3 +25,12 @@ variable "num_subnets" {
   description = "Number of subnets"
 }
 
+variable "throughput_mode" {
+  description = "EFS throughput mode (bursting or provisioned)"
+  default     = "bursting"
+}
+
+variable "provisioned_throughput_in_mibps" {
+  description = "EFS provisioned througput in MiB/s, if using provisioned throughput mode"
+  default     = null
+}
