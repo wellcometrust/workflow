@@ -177,3 +177,10 @@ module "goobi" {
 
   service_discovery_namespace_id = aws_service_discovery_private_dns_namespace.namespace.id
 }
+
+# SQS Queues
+module "queues" {
+  source = "../modules/stack/queues"
+
+  name = "${local.environment_name}"
+}
