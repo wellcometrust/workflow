@@ -161,7 +161,7 @@ module "shell_server_1" {
 
   name = "workflow-shellserver_1"
 
-  cpu    = "1024"
+  cpu    = "2048"
   memory = "7168"
 
   configuration_bucket_name = aws_s3_bucket.workflow-configuration.bucket
@@ -190,7 +190,7 @@ module "shell_server_2" {
 
   name = "workflow-shellserver_2"
 
-  cpu    = "1024"
+  cpu    = "2048"
   memory = "3072"
 
   configuration_bucket_name = aws_s3_bucket.workflow-configuration.bucket
@@ -219,7 +219,7 @@ module "shell_server_3" {
 
   name = "workflow-shellserver_3"
 
-  cpu    = "1024"
+  cpu    = "2048"
   memory = "3072"
 
   configuration_bucket_name = aws_s3_bucket.workflow-configuration.bucket
@@ -248,7 +248,7 @@ module "shell_server_4" {
 
   name = "workflow-shellserver_4"
 
-  cpu    = "1024"
+  cpu    = "2048"
   memory = "3072"
 
   configuration_bucket_name = aws_s3_bucket.workflow-configuration.bucket
