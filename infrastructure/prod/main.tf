@@ -191,7 +191,7 @@ module "shell_server_2" {
   name = "workflow-shellserver_2"
 
   cpu    = "2048"
-  memory = "3072"
+  memory = "4096"
 
   configuration_bucket_name = aws_s3_bucket.workflow-configuration.bucket
   working_storage_path      = "/efs/tmp_shellserver2"
@@ -220,7 +220,7 @@ module "shell_server_3" {
   name = "workflow-shellserver_3"
 
   cpu    = "2048"
-  memory = "3072"
+  memory = "4096"
 
   configuration_bucket_name = aws_s3_bucket.workflow-configuration.bucket
   working_storage_path      = "/efs/tmp_shellserver3"
@@ -249,7 +249,7 @@ module "shell_server_4" {
   name = "workflow-shellserver_4"
 
   cpu    = "2048"
-  memory = "3072"
+  memory = "4096"
 
   configuration_bucket_name = aws_s3_bucket.workflow-configuration.bucket
   working_storage_path      = "/efs/tmp_shellserver4"
