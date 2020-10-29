@@ -103,9 +103,9 @@ resource "aws_cloudwatch_log_group" "cloudwatch_log_group_s3_trigger_goobi_stage
   retention_in_days = "14"
 }
 
-resource "aws_lambda_function" "lambda_s3_trigger_goobi_stage_av" {
+resource "aws_lambda_function" "lambda_s3_trigger_goobi_stage_video" {
   description   = "lambda to call Goobi API for import after successful S3 upload"
-  function_name = "s3_trigger_goobi_stage_av"
+  function_name = "s3_trigger_goobi_stage_video"
 
   s3_bucket         = data.aws_s3_bucket_object.lambda_s3_trigger_goobi_package.bucket
   s3_key            = data.aws_s3_bucket_object.lambda_s3_trigger_goobi_package.key
@@ -121,10 +121,10 @@ resource "aws_lambda_function" "lambda_s3_trigger_goobi_stage_av" {
 
   environment {
     variables = {
-      API_ENDPOINT     = local.lambda_api_endpoint_av
-      TOKEN            = local.lambda_token_av
-      TEMPLATEID       = local.lambda_templateid_av
-      UPDATETEMPLATEID = local.lambda_updatetemplateid_av
+      API_ENDPOINT     = local.lambda_api_endpoint_video
+      TOKEN            = local.lambda_token_video
+      TEMPLATEID       = local.lambda_templateid_video
+      UPDATETEMPLATEID = local.lambda_updatetemplateid_video
       HOTFOLDER        = "hotfolder"
     }
   }
@@ -139,16 +139,16 @@ resource "aws_lambda_function" "lambda_s3_trigger_goobi_stage_av" {
   }
 }
 
-resource "aws_lambda_permission" "allow_event_s3_trigger_goobi_stage_av" {
+resource "aws_lambda_permission" "allow_event_s3_trigger_goobi_stage_video" {
   statement_id  = "AllowExecutionFromS3Bucket"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.lambda_s3_trigger_goobi_stage_av.arn
+  function_name = aws_lambda_function.lambda_s3_trigger_goobi_stage_video.arn
   principal     = "s3.amazonaws.com"
   source_arn    = aws_s3_bucket.workflow-stage-upload.arn
 }
 
-resource "aws_cloudwatch_log_group" "cloudwatch_log_group_s3_trigger_goobi_stage_av" {
-  name = "/aws/lambda/s3_trigger_goobi_stage_av"
+resource "aws_cloudwatch_log_group" "cloudwatch_log_group_s3_trigger_goobi_stage_video" {
+  name = "/aws/lambda/s3_trigger_goobi_stage_video"
 
   retention_in_days = "14"
 }
