@@ -30,8 +30,8 @@ module "shell_server_1" {
 
   name = "${local.environment_name}-shellserver_1"
 
-  cpu    = "1024"
-  memory = "2048"
+  cpu    = "2048"
+  memory = "4096"
 
   configuration_bucket_name = aws_s3_bucket.workflow-stage-configuration.bucket
   working_storage_path      = "/efs/tmp_shellserver1"
