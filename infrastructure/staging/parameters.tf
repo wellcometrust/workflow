@@ -14,6 +14,10 @@ data "aws_ssm_parameter" "shell_server_container_image" {
   name = "/workflow/images/stage/shellserver"
 }
 
+data "aws_ssm_parameter" "worker_node_container_image" {
+  name = "/workflow/images/stage/workernode"
+}
+
 data "aws_ssm_parameter" "goobi_container_image" {
   name = "/workflow/images/stage/goobi"
 }
@@ -107,6 +111,7 @@ locals {
   itm_source_ips                    = "${split(",", data.aws_ssm_parameter.itm_source_ips.value)}"
   harvester_source_ips              = "${split(",", data.aws_ssm_parameter.harvester_source_ips.value)}"
   shell_server_container_image      = data.aws_ssm_parameter.shell_server_container_image.value
+  worker_node_container_image       = data.aws_ssm_parameter.worker_node_container_image.value
   goobi_container_image             = data.aws_ssm_parameter.goobi_container_image.value
   harvester_container_image         = data.aws_ssm_parameter.harvester_container_image.value
   itm_container_image               = data.aws_ssm_parameter.itm_container_image.value
