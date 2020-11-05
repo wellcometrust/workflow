@@ -23,13 +23,13 @@ module "container_definition" {
   }
 
   environment = {
-    CONFIGSOURCE                = "s3"
-    AWS_S3_BUCKET               = var.configuration_bucket_name
-    GOOBI_EXTERNAL_JOB_QUEUE    = var.goobi_external_job_queue
-    GOOBI_EXTERNAL_STATUS_QUEUE = var.goobi_external_status_queue
-    WORKING_STORAGE             = var.working_storage_path
-    S3_DATA_BUCKET              = var.data_bucket_name
-    TZ                          = "Europe/London"
+    CONFIGSOURCE                 = "s3"
+    AWS_S3_BUCKET                = var.configuration_bucket_name
+    GOOBI_EXTERNAL_JOB_QUEUE     = var.goobi_external_job_queue
+    GOOBI_EXTERNAL_COMMAND_QUEUE = var.goobi_external_status_queue
+    WORKING_STORAGE              = var.working_storage_path
+    S3_DATA_BUCKET               = var.data_bucket_name
+    TZ                           = "Europe/London"
   }
 
 }
