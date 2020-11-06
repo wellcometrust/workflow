@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "read_write_queue" {
     ]
 
     resources = [
-      aws_sqs_queue.goobi_external.arn,
+      aws_sqs_queue.goobi_job.arn,
       aws_sqs_queue.goobi_command.arn
     ]
   }

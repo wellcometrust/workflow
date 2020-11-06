@@ -1,5 +1,5 @@
-resource "aws_sqs_queue" "goobi_external" {
-  name = "${var.name}_goobi_external.fifo"
+resource "aws_sqs_queue" "goobi_job" {
+  name = "${var.name}_goobi_job.fifo"
 
   fifo_queue = true
 

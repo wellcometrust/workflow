@@ -194,11 +194,11 @@ module "worker_node_1" {
   cpu    = "2048"
   memory = "4096"
 
-  working_storage_path        = "/efs/tmp_workernode1"
-  data_bucket_name            = aws_s3_bucket.workflow-stage-data.bucket
-  configuration_bucket_name   = aws_s3_bucket.workflow-stage-configuration.bucket
-  goobi_external_job_queue    = module.queues.queue_external_name
-  goobi_external_status_queue = module.queues.queue_command_name
+  working_storage_path         = "/efs/tmp_workernode1"
+  data_bucket_name             = aws_s3_bucket.workflow-stage-data.bucket
+  configuration_bucket_name    = aws_s3_bucket.workflow-stage-configuration.bucket
+  goobi_external_job_queue     = module.queues.queue_job_name
+  goobi_external_command_queue = module.queues.queue_command_name
 
   cluster_arn = aws_ecs_cluster.cluster.arn
 

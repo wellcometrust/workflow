@@ -15,7 +15,7 @@ variable "goobi_external_job_queue" {
   default = "goobi_external"
 }
 
-variable "goobi_external_status_queue" {
+variable "goobi_external_command_queue" {
   type    = string
   default = "goobi_command"
 }
