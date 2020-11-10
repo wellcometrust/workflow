@@ -105,3 +105,13 @@ variable "alb_listener_arn" {
 variable "data_bucket_name" {
   type = string
 }
+
+variable "goobi_external_job_queue" {
+  type    = string
+  default = null
+}
+
+variable "goobi_external_command_queue" {
+  type    = string
+  default = null
+}

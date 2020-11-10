@@ -24,19 +24,21 @@ module "app_container_definition" {
   }
 
   environment = {
-    CONFIGSOURCE    = "s3"
-    AWS_S3_BUCKET   = var.configuration_bucket_name
-    TZ              = "Europe/London"
-    DB_SERVER       = var.db_server
-    DB_PORT         = var.db_port
-    DB_NAME         = var.db_name
-    DB_HA           = "aurora:"
-    WORKING_STORAGE = "/efs/tmp_goobi"
-    SERVERNAME      = var.host_name
-    HTTPS_DOMAIN    = var.host_name
-    APP_PATH        = "goobi"
-    APP_CONTAINER   = "localhost"
-    S3_DATA_BUCKET  = var.data_bucket_name
+    CONFIGSOURCE                 = "s3"
+    AWS_S3_BUCKET                = var.configuration_bucket_name
+    TZ                           = "Europe/London"
+    DB_SERVER                    = var.db_server
+    DB_PORT                      = var.db_port
+    DB_NAME                      = var.db_name
+    DB_HA                        = "aurora:"
+    WORKING_STORAGE              = "/efs/tmp_goobi"
+    SERVERNAME                   = var.host_name
+    HTTPS_DOMAIN                 = var.host_name
+    APP_PATH                     = "goobi"
+    APP_CONTAINER                = "localhost"
+    S3_DATA_BUCKET               = var.data_bucket_name
+    GOOBI_EXTERNAL_JOB_QUEUE     = var.goobi_external_job_queue
+    GOOBI_EXTERNAL_COMMAND_QUEUE = var.goobi_external_command_queue
   }
 
   secrets = local.secrets
