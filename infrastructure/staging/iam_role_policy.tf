@@ -23,6 +23,11 @@ resource "aws_iam_role_policy" "ecs_goobi_s3_editorial_photography_upload_extern
   policy = data.aws_iam_policy_document.s3_editorial_photography_upload_external.json
 }
 
+resource "aws_iam_role_policy" "ecs_goobi_read_write_queue" {
+  role   = module.goobi.task_role
+  policy = module.queues.read_write_policy
+}
+
 # Objects written to the editorial photography bucket get lifecycled
 # to Glacier after about three months.
 #
