@@ -16,7 +16,7 @@ module "container_definition" {
       "awslogs-group"         = "ecs/${var.name}",
       "awslogs-region"        = "eu-west-1",
       "awslogs-create-group"  = "true",
-      "awslogs-stream-prefix" = "${var.name}"
+      "awslogs-stream-prefix" = var.name
     }
 
     secretOptions = null
