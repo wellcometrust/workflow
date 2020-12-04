@@ -3,6 +3,7 @@ resource "aws_sqs_queue" "goobi_job" {
 
   fifo_queue                  = true
   content_based_deduplication = true
+  visibility_timeout_seconds  = 43200
 }
 
 resource "aws_sqs_queue" "goobi_command" {
@@ -10,4 +11,5 @@ resource "aws_sqs_queue" "goobi_command" {
 
   fifo_queue                  = true
   content_based_deduplication = true
+  visibility_timeout_seconds  = 43200
 }
