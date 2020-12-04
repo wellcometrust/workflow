@@ -107,9 +107,9 @@ data "aws_ssm_parameter" "rds_password" {
 }
 
 locals {
-  admin_cidr_ingress                = "${split(",", data.aws_ssm_parameter.admin_cidr_ingress.value)}"
-  itm_source_ips                    = "${split(",", data.aws_ssm_parameter.itm_source_ips.value)}"
-  harvester_source_ips              = "${split(",", data.aws_ssm_parameter.harvester_source_ips.value)}"
+  admin_cidr_ingress                = split(",", data.aws_ssm_parameter.admin_cidr_ingress.value)
+  itm_source_ips                    = split(",", data.aws_ssm_parameter.itm_source_ips.value)
+  harvester_source_ips              = split(",", data.aws_ssm_parameter.harvester_source_ips.value)
   shell_server_container_image      = data.aws_ssm_parameter.shell_server_container_image.value
   worker_node_container_image       = data.aws_ssm_parameter.worker_node_container_image.value
   goobi_container_image             = data.aws_ssm_parameter.goobi_container_image.value
