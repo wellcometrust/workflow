@@ -184,7 +184,7 @@ module "goobi" {
 module "queues" {
   source = "../modules/stack/queues"
 
-  name = "${local.environment_name}"
+  name = local.environment_name
 }
 
 
