@@ -34,6 +34,7 @@ module "container_definition" {
     GOOBI_EXTERNAL_JOB_QUEUE     = var.goobi_external_job_queue
     GOOBI_EXTERNAL_COMMAND_QUEUE = var.goobi_external_command_queue
     WORKING_STORAGE              = var.working_storage_path
+    WORKING_STORAGE_FAST         = var.working_storage_fast_path
     S3_DATA_BUCKET               = var.data_bucket_name
     TZ                           = "Europe/London"
   }

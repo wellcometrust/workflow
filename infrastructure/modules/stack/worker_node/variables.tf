@@ -24,6 +24,12 @@ variable "working_storage_path" {
   type = string
 }
 
+variable "working_storage_fast_path" {
+  type    = string
+  default = "/var/scratch/"
+}
+
+
 variable "data_bucket_name" {
   type = string
 }
