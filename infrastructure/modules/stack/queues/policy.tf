@@ -6,6 +6,7 @@ data "aws_iam_policy_document" "read_write_queue" {
       "sqs:GetQueueUrl",
       "sqs:SendMessage",
       "sqs:ReceiveMessage",
+      "sqs:ChangeMessageVisibility"
     ]
 
     resources = [
