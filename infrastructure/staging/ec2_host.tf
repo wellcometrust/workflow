@@ -10,7 +10,7 @@ resource "aws_instance" "access_host" {
   subnet_id                   = element(module.network.public_subnets, 0)
   associate_public_ip_address = true
   #   user_data = 
-	
+
   tags = {
     Name = "goobi-access-host-staging"
   }
