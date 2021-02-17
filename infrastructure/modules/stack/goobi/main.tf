@@ -39,6 +39,7 @@ module "app_container_definition" {
     S3_DATA_BUCKET               = var.data_bucket_name
     GOOBI_EXTERNAL_JOB_QUEUE     = var.goobi_external_job_queue
     GOOBI_EXTERNAL_COMMAND_QUEUE = var.goobi_external_command_queue
+    GOOBI_EXTERNAL_JOB_DLQ       = var.goobi_external_job_dlq
   }
 
   secrets = local.secrets
