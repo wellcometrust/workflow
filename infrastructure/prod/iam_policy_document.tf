@@ -177,6 +177,8 @@ data "aws_iam_policy_document" "cloudwatch_logs" {
     resources = [
       aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_ep.arn,
       aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_digitised.arn,
+      aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_video.arn,
+      aws_cloudwatch_log_group.cloudwatch_log_group_s3_trigger_goobi_audio.arn,
     ]
   }
 }
