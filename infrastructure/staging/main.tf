@@ -202,6 +202,7 @@ module "worker_node_1" {
   configuration_bucket_name    = aws_s3_bucket.workflow-stage-configuration.bucket
   goobi_external_job_queue     = module.queues.queue_job_name
   goobi_external_command_queue = module.queues.queue_command_name
+  goobi_hostname               = "${module.goobi.name}.${aws_service_discovery_private_dns_namespace.namespace.name}"
 
   cluster_arn = aws_ecs_cluster.cluster.arn
 

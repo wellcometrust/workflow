@@ -10,6 +10,10 @@ variable "worker_node_container_image" {
   type = string
 }
 
+variable "goobi_hostname" {
+  type = string
+}
+
 variable "goobi_external_job_queue" {
   type    = string
   default = "goobi_external"
