@@ -143,8 +143,11 @@ module "goobi" {
   cpu    = "2048"
   memory = "8192"
 
-  data_bucket_name          = aws_s3_bucket.workflow-stage-data.bucket
-  configuration_bucket_name = aws_s3_bucket.workflow-stage-configuration.bucket
+  data_bucket_name             = aws_s3_bucket.workflow-stage-data.bucket
+  configuration_bucket_name    = aws_s3_bucket.workflow-stage-configuration.bucket
+  goobi_external_job_queue     = module.queues.queue_job_name
+  goobi_external_command_queue = module.queues.queue_command_name
+  goobi_external_job_dlq       = module.queues.dlq_job_name
 
   cluster_arn = aws_ecs_cluster.cluster.arn
 
@@ -176,4 +179,42 @@ module "goobi" {
   alb_listener_arn = module.load_balancer.https_listener_arn
 
   service_discovery_namespace_id = aws_service_discovery_private_dns_namespace.namespace.id
+}
+
+# SQS Queues
+module "queues" {
+  source = "../modules/stack/queues"
+
+  name = local.environment_name
+}
+
+
+module "worker_node_1" {
+  source = "../modules/stack/worker_node"
+
+  name = "${local.environment_name}-workernode_1"
+
+  cpu    = "2048"
+  memory = "6144"
+
+  working_storage_path         = "/efs/tmp_workernode1"
+  data_bucket_name             = aws_s3_bucket.workflow-stage-data.bucket
+  configuration_bucket_name    = aws_s3_bucket.workflow-stage-configuration.bucket
+  goobi_external_job_queue     = module.queues.queue_job_name
+  goobi_external_command_queue = module.queues.queue_command_name
+  goobi_hostname               = "${module.goobi.name}.${aws_service_discovery_private_dns_namespace.namespace.name}"
+
+  cluster_arn = aws_ecs_cluster.cluster.arn
+
+  subnets = module.network.private_subnets
+
+  security_group_ids = [
+    aws_security_group.service_egress.id,
+    aws_security_group.interservice.id,
+    aws_security_group.efs.id
+  ]
+
+  efs_id = module.efs.efs_id
+
+  worker_node_container_image = local.worker_node_container_image
 }
