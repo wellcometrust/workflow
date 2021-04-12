@@ -7,8 +7,11 @@ module "app_container_definition" {
   mount_points = [{
     containerPath = "/efs/"
     sourceVolume  = "efs"
+    },
+    {
+      containerPath = "/var/scratch"
+      sourceVolume  = "scratch"
   }]
-
 
   log_configuration = {
     logDriver = "awslogs"
@@ -96,6 +99,11 @@ module "task_definition" {
     name           = "efs"
     file_system_id = var.efs_id
     root_directory = "/"
+  }]
+
+  volumes = [{
+    name      = "scratch"
+    host_path = ""
   }]
 
   launch_types = ["FARGATE"]
