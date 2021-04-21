@@ -227,7 +227,7 @@ module "worker_node_1_autoscaling_cloudwatch" {
 
   name_prefix = "worker_node_scaling"
 
-  min_capacity = 1
+  min_capacity = 0
   max_capacity = 5
 
   cluster_name = "workflow-stage"
