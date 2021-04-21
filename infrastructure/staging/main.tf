@@ -227,14 +227,14 @@ module "worker_node_1_autoscaling_cloudwatch" {
 
   name_prefix = "worker_node_scaling"
 
-  min_capacity = 0
+  min_capacity = 1
   max_capacity = 5
 
   cluster_name = aws_ecs_cluster.cluster.name
   service_name = module.worker_node_1.name
 
-  high_threshold = 1
-  low_threshold = 1
+  high_threshold = 5
+  low_threshold = 5
 
   scale_up_step_adjustment = [
     {
