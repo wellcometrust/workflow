@@ -230,8 +230,8 @@ module "worker_node_1_autoscaling_cloudwatch" {
   min_capacity = 0
   max_capacity = 5
 
-  cluster_name = "workflow-stage"
-  service_name = "worker_node_1"
+  cluster_name = aws_ecs_cluster.cluster.name
+  service_name = module.worker_node_1.name
 
   scale_up_step_adjustment = [
     {
@@ -260,7 +260,7 @@ module "worker_node_1_autoscaling_cloudwatch" {
           stat        = "Maximum"
 
           dimensions = {
-            QueueName = "goobi_job"
+            QueueName = module.queues.queue_job_name
           }
         }
       ]
