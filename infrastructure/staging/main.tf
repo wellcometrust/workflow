@@ -267,6 +267,7 @@ module "worker_node_1_autoscaling_cloudwatch" {
           }
         }
       ]
+      return_data = true
     }
   ]
 }
