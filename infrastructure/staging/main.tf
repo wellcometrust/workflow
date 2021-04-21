@@ -218,3 +218,52 @@ module "worker_node_1" {
 
   worker_node_container_image = local.worker_node_container_image
 }
+
+module "worker_node_1_autoscaling_cloudwatch" {
+  source = "umotif-public/ecs-service-autoscaling-cloudwatch/aws"
+  version = "~> 2.0.0"
+
+  enabled = true
+
+  name_prefix = "worker_node_scaling"
+
+  min_capacity = 1
+  max_capacity = 5
+
+  cluster_name = "workflow-stage"
+  service_name = "worker_node_1"
+
+  scale_up_step_adjustment = [
+    {
+      scaling_adjustment          = 1
+      metric_interval_lower_bound = 0
+      metric_interval_upper_bound = "" # indicates inifinity
+    }
+  ]
+
+  scale_down_step_adjustment = [
+    {
+      scaling_adjustment          = -4
+      metric_interval_upper_bound = 0
+      metric_interval_lower_bound = ""
+    }
+  ]
+
+  metric_query = [
+    {
+      id = "visible"
+      metric = [
+        {
+          namespace   = "AWS/SQS"
+          metric_name = "ApproximateNumberOfMessagesVisible"
+          period      = 60
+          stat        = "Maximum"
+
+          dimensions = {
+            QueueName = "goobi_job"
+          }
+        }
+      ]
+    }
+  ]
+}
