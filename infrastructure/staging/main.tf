@@ -220,7 +220,7 @@ module "worker_node_1" {
 }
 
 module "worker_node_1_autoscaling_cloudwatch" {
-  source = "umotif-public/ecs-service-autoscaling-cloudwatch/aws"
+  source  = "umotif-public/ecs-service-autoscaling-cloudwatch/aws"
   version = "~> 2.0.0"
 
   enabled = true
@@ -233,8 +233,8 @@ module "worker_node_1_autoscaling_cloudwatch" {
   cluster_name = aws_ecs_cluster.cluster.name
   service_name = module.worker_node_1.name
 
-  high_threshold = 5
-  low_threshold = 5
+  high_threshold = 1.0001 #this is exact until we decide to have more than 10,000 instances
+  low_threshold  = 0.9999 #this is exact until we decide to have more than 10,000 instances
 
   scale_up_step_adjustment = [
     {
@@ -254,6 +254,12 @@ module "worker_node_1_autoscaling_cloudwatch" {
 
   metric_query = [
     {
+      id          = "workerNodeScaleMetric"
+      expression  = "(notVisible/numWorkerNodes)+visible"
+      label       = "worker node scaling indicator"
+      return_data = true
+    },
+    {
       id = "visible"
       metric = [
         {
@@ -267,7 +273,36 @@ module "worker_node_1_autoscaling_cloudwatch" {
           }
         }
       ]
-      return_data = true
+    },
+    {
+      id = "notVisible"
+      metric = [
+        {
+          namespace   = "AWS/SQS"
+          metric_name = "ApproximateNumberOfMessagesNotVisible"
+          period      = 60
+          stat        = "Maximum"
+
+          dimensions = {
+            QueueName = module.queues.queue_job_name
+          }
+        }
+      ]
+    },
+    {
+      id = "numWorkerNodes"
+      metric = [
+        {
+          namespace   = "AWS/ECS"
+          metric_name = "CPUUtilization"
+          period      = 60
+          stat        = "SampleCount"
+          dimensions = {
+            ClusterName = aws_ecs_cluster.cluster.name
+            ServiceName = module.worker_node_1.name
+          }
+        }
+      ]
     }
   ]
 }
