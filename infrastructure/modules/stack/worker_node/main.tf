@@ -10,6 +10,10 @@ module "container_definition" {
       sourceVolume  = "efs"
     },
     {
+      containerPath = "/workingstorage/"
+      sourceVolume  = "workingstorage-efs"
+    },
+    {
       containerPath = "/var/scratch"
       sourceVolume  = "scratch"
     }
@@ -56,7 +60,13 @@ module "task_definition" {
     name           = "efs"
     file_system_id = var.efs_id
     root_directory = "/"
-  }]
+  },
+  {
+    name           = "workingstorage-efs"
+    file_system_id = var.working_storage_efs_id
+    root_directory = "/"
+  }
+  ]
 
   volumes = [{
     name = "scratch"

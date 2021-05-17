@@ -197,7 +197,7 @@ module "worker_node_1" {
   cpu    = "2048"
   memory = "6144"
 
-  working_storage_path         = "/efs/tmp_workernode1"
+  working_storage_path         = "/workingstorage/tmp_workernode1"
   data_bucket_name             = aws_s3_bucket.workflow-stage-data.bucket
   configuration_bucket_name    = aws_s3_bucket.workflow-stage-configuration.bucket
   goobi_external_job_queue     = module.queues.queue_job_name
@@ -215,6 +215,7 @@ module "worker_node_1" {
   ]
 
   efs_id = module.efs.efs_id
+  working_storage_efs_id = module.efs-workernode.efs_id
 
   worker_node_container_image = local.worker_node_container_image
 }
