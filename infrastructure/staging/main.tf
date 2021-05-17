@@ -246,7 +246,7 @@ module "worker_node_1_autoscaling_cloudwatch" {
 
   scale_down_step_adjustment = [
     {
-      scaling_adjustment          = -4
+      scaling_adjustment          = -1
       metric_interval_upper_bound = 0
       metric_interval_lower_bound = ""
     }
