@@ -3,7 +3,8 @@ resource "aws_sqs_queue" "goobi_job" {
 
   fifo_queue                  = true
   content_based_deduplication = true
-  visibility_timeout_seconds  = 43200
+  visibility_timeout_seconds  = 300
+  delay_seconds               = 5
   redrive_policy = jsonencode(
     {
       deadLetterTargetArn = aws_sqs_queue.goobi_job_dlq.arn,
@@ -16,13 +17,13 @@ resource "aws_sqs_queue" "goobi_job_dlq" {
 
   fifo_queue                  = true
   content_based_deduplication = true
-  visibility_timeout_seconds  = 43200
+  visibility_timeout_seconds  = 60
 }
 resource "aws_sqs_queue" "goobi_command" {
   name = "${var.name}_goobi_command.fifo"
 
   fifo_queue                  = true
   content_based_deduplication = true
-  visibility_timeout_seconds  = 43200
+  visibility_timeout_seconds  = 60
 }
 
