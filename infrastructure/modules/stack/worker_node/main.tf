@@ -83,4 +83,6 @@ module "service" {
 
   deployment_minimum_healthy_percent = 0
   deployment_maximum_percent         = 100
+
+  desired_task_count = 1
 }
