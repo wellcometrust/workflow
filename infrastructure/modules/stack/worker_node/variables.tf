@@ -56,6 +56,10 @@ variable "efs_id" {
   type = string
 }
 
+variable "working_storage_efs_id" {
+  type = string
+}
+
 variable "cluster_arn" {
   type = string
 }
