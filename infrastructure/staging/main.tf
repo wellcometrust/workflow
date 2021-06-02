@@ -214,19 +214,16 @@ module "worker_node_1" {
     aws_security_group.efs.id
   ]
 
-  efs_id = module.efs.efs_id
+  efs_id                 = module.efs.efs_id
   working_storage_efs_id = module.efs-workernode.efs_id
 
   worker_node_container_image = local.worker_node_container_image
 }
 
-module "worker_node_1_autoscaling_cloudwatch" {
-  source  = "umotif-public/ecs-service-autoscaling-cloudwatch/aws"
-  version = "~> 2.0.0"
+module "worker_node_1_autoscaling" {
+  source = "git::github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/autoscaling?ref=v3.5.2"
 
-  enabled = true
-
-  name_prefix = "worker_node_scaling"
+  name = "worker_node_scaling"
 
   min_capacity = 1
   max_capacity = 5
@@ -234,76 +231,68 @@ module "worker_node_1_autoscaling_cloudwatch" {
   cluster_name = aws_ecs_cluster.cluster.name
   service_name = module.worker_node_1.name
 
-  high_threshold = 1.0001 #this is exact until we decide to have more than 10,000 instances
-  low_threshold  = 0.9999 #this is exact until we decide to have more than 10,000 instances
+  scale_down_adjustment = -4
+  scale_up_adjustment   = 1
+}
 
-  scale_up_step_adjustment = [
-    {
-      scaling_adjustment          = 1
-      metric_interval_lower_bound = 0
-      metric_interval_upper_bound = "" # indicates inifinity
+resource "aws_cloudwatch_metric_alarm" "high" {
+  count = 1
+
+  alarm_name          = "workernode-scaling-alarm-high"
+  alarm_description   = "Alarm monitors high utilization for scaling up"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 1
+  threshold           = 1
+  alarm_actions       = [module.worker_node_1_autoscaling.scale_up_arn]
+
+  namespace   = "AWS/SQS"
+  metric_name = "ApproximateNumberOfMessagesVisible"
+  period      = "60"
+  statistic   = "Maximum"
+  dimensions = {
+    QueueName = module.queues.queue_job_name
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "low" {
+  count = 1
+
+  alarm_name          = "workernode-scaling-alarm-low"
+  alarm_description   = "Alarm monitors low utilization for scaling down"
+  comparison_operator = "LessThanOrEqualToThreshold"
+  evaluation_periods  = 1
+  threshold           = 0
+  alarm_actions       = [module.worker_node_1_autoscaling.scale_down_arn]
+
+  metric_query {
+    id          = "workernode_scale_down"
+    expression  = "visible+invisible"
+    label       = "Visible plus invisible messages"
+    return_data = "true"
+  }
+
+  metric_query {
+    id = "visible"
+    metric {
+      namespace   = "AWS/SQS"
+      metric_name = "ApproximateNumberOfMessagesVisible"
+      period      = "60"
+      stat        = "Maximum"
+      dimensions = {
+        QueueName = module.queues.queue_job_name
+      }
     }
-  ]
-
-  scale_down_step_adjustment = [
-    {
-      scaling_adjustment          = -1
-      metric_interval_upper_bound = 0
-      metric_interval_lower_bound = ""
+  }
+  metric_query {
+    id = "invisible"
+    metric {
+      namespace   = "AWS/SQS"
+      metric_name = "ApproximateNumberOfMessagesNotVisible"
+      period      = "60"
+      stat        = "Maximum"
+      dimensions = {
+        QueueName = module.queues.queue_job_name
+      }
     }
-  ]
-
-  metric_query = [
-    {
-      id          = "workerNodeScaleMetric"
-      expression  = "(notVisible/numWorkerNodes)+visible"
-      label       = "worker node scaling indicator"
-      return_data = true
-    },
-    {
-      id = "visible"
-      metric = [
-        {
-          namespace   = "AWS/SQS"
-          metric_name = "ApproximateNumberOfMessagesVisible"
-          period      = 60
-          stat        = "Maximum"
-
-          dimensions = {
-            QueueName = module.queues.queue_job_name
-          }
-        }
-      ]
-    },
-    {
-      id = "notVisible"
-      metric = [
-        {
-          namespace   = "AWS/SQS"
-          metric_name = "ApproximateNumberOfMessagesNotVisible"
-          period      = 60
-          stat        = "Maximum"
-
-          dimensions = {
-            QueueName = module.queues.queue_job_name
-          }
-        }
-      ]
-    },
-    {
-      id = "numWorkerNodes"
-      metric = [
-        {
-          namespace   = "AWS/ECS"
-          metric_name = "CPUUtilization"
-          period      = 60
-          stat        = "SampleCount"
-          dimensions = {
-            ClusterName = aws_ecs_cluster.cluster.name
-            ServiceName = module.worker_node_1.name
-          }
-        }
-      ]
-    }
-  ]
+  }
 }
