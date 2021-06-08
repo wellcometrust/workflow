@@ -122,6 +122,9 @@ module "goobi" {
 
   data_bucket_name          = aws_s3_bucket.workflow-data.bucket
   configuration_bucket_name = aws_s3_bucket.workflow-configuration.bucket
+  goobi_external_job_queue     = module.queues.queue_job_name
+  goobi_external_command_queue = module.queues.queue_command_name
+  goobi_external_job_dlq       = module.queues.dlq_job_name
 
   cluster_arn = aws_ecs_cluster.cluster.arn
 
@@ -269,4 +272,121 @@ module "shell_server_4" {
   efs_id = module.efs.efs_id
 
   shell_server_container_image = local.shell_server_container_image
+}
+
+
+# SQS Queues
+module "queues" {
+  source = "../modules/stack/queues"
+
+  name = local.environment_name
+}
+
+
+module "worker_node_1" {
+  source = "../modules/stack/worker_node"
+
+  name = "${local.environment_name}-workernode_1"
+
+  cpu    = "2048"
+  memory = "6144"
+
+  working_storage_path         = "/workingstorage/tmp_workernode1"
+  data_bucket_name             = aws_s3_bucket.workflow-data.bucket
+  configuration_bucket_name    = aws_s3_bucket.workflow-configuration.bucket
+  goobi_external_job_queue     = module.queues.queue_job_name
+  goobi_external_command_queue = module.queues.queue_command_name
+  goobi_hostname               = "${module.goobi.name}.${aws_service_discovery_private_dns_namespace.namespace.name}"
+
+  cluster_arn = aws_ecs_cluster.cluster.arn
+
+  subnets = module.network.private_subnets
+
+  security_group_ids = [
+    aws_security_group.service_egress.id,
+    aws_security_group.interservice.id,
+    aws_security_group.efs.id
+  ]
+
+  efs_id                 = module.efs.efs_id
+  working_storage_efs_id = module.efs-workernode.efs_id
+
+  worker_node_container_image = local.worker_node_container_image
+}
+
+module "worker_node_1_autoscaling" {
+  source = "git::github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/autoscaling?ref=v3.5.2"
+
+  name = "worker_node_scaling"
+
+  min_capacity = 1
+  max_capacity = 5
+
+  cluster_name = aws_ecs_cluster.cluster.name
+  service_name = module.worker_node_1.name
+
+  scale_down_adjustment = -4
+  scale_up_adjustment   = 1
+}
+
+resource "aws_cloudwatch_metric_alarm" "high" {
+  count = 1
+
+  alarm_name          = "workernode-scaling-alarm-high"
+  alarm_description   = "Alarm monitors high utilization for scaling up"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 1
+  threshold           = 1
+  alarm_actions       = [module.worker_node_1_autoscaling.scale_up_arn]
+
+  namespace   = "AWS/SQS"
+  metric_name = "ApproximateNumberOfMessagesVisible"
+  period      = "60"
+  statistic   = "Maximum"
+  dimensions = {
+    QueueName = module.queues.queue_job_name
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "low" {
+  count = 1
+
+  alarm_name          = "workernode-scaling-alarm-low"
+  alarm_description   = "Alarm monitors low utilization for scaling down"
+  comparison_operator = "LessThanOrEqualToThreshold"
+  evaluation_periods  = 1
+  threshold           = 0
+  alarm_actions       = [module.worker_node_1_autoscaling.scale_down_arn]
+
+  metric_query {
+    id          = "workernode_scale_down"
+    expression  = "visible+invisible"
+    label       = "Visible plus invisible messages"
+    return_data = "true"
+  }
+
+  metric_query {
+    id = "visible"
+    metric {
+      namespace   = "AWS/SQS"
+      metric_name = "ApproximateNumberOfMessagesVisible"
+      period      = "60"
+      stat        = "Maximum"
+      dimensions = {
+        QueueName = module.queues.queue_job_name
+      }
+    }
+  }
+  metric_query {
+    id = "invisible"
+    metric {
+      namespace   = "AWS/SQS"
+      metric_name = "ApproximateNumberOfMessagesNotVisible"
+      period      = "60"
+      stat        = "Maximum"
+      dimensions = {
+        QueueName = module.queues.queue_job_name
+      }
+    }
+  }
 }

@@ -30,6 +30,10 @@ data "aws_ssm_parameter" "proxy_container_image" {
   name = "/workflow/images/prod/proxy"
 }
 
+data "aws_ssm_parameter" "worker_node_container_image" {
+  name = "/workflow/images/prod/workernode"
+}
+
 data "aws_ssm_parameter" "lambda_api_endpoint_ep" {
   name = "/workflow/config/prod/lambda_api_endpoint_ep"
 }
@@ -101,6 +105,7 @@ data "aws_ssm_parameter" "rds_password" {
   name = "/aws/reference/secretsmanager/workflow/prod/rds_password"
 }
 
+
 locals {
   admin_cidr_ingress                = split(",", data.aws_ssm_parameter.admin_cidr_ingress.value)
   itm_source_ips                    = split(",", data.aws_ssm_parameter.itm_source_ips.value)
@@ -110,6 +115,7 @@ locals {
   harvester_container_image         = data.aws_ssm_parameter.harvester_container_image.value
   itm_container_image               = data.aws_ssm_parameter.itm_container_image.value
   proxy_container_image             = data.aws_ssm_parameter.proxy_container_image.value
+  worker_node_container_image       = data.aws_ssm_parameter.worker_node_container_image.value
   lambda_api_endpoint_ep            = data.aws_ssm_parameter.lambda_api_endpoint_ep.value
   lambda_templateid_ep              = data.aws_ssm_parameter.lambda_templateid_ep.value
   lambda_updatetemplateid_ep        = data.aws_ssm_parameter.lambda_updatetemplateid_ep.value
