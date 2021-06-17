@@ -223,7 +223,7 @@ module "worker_node_1" {
 module "worker_node_1_autoscaling" {
   source = "git::github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/autoscaling?ref=v3.5.2"
 
-  name = "worker_node_scaling"
+  name = "${local.environment_name}-worker_node_scaling"
 
   min_capacity = 1
   max_capacity = 5
@@ -238,7 +238,7 @@ module "worker_node_1_autoscaling" {
 resource "aws_cloudwatch_metric_alarm" "high" {
   count = 1
 
-  alarm_name          = "workernode-scaling-alarm-high"
+  alarm_name          = "${local.environment_name}-workernode-scaling-alarm-high"
   alarm_description   = "Alarm monitors high utilization for scaling up"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 1
@@ -257,7 +257,7 @@ resource "aws_cloudwatch_metric_alarm" "high" {
 resource "aws_cloudwatch_metric_alarm" "low" {
   count = 1
 
-  alarm_name          = "workernode-scaling-alarm-low"
+  alarm_name          = "${local.environment_name}-workernode-scaling-alarm-low"
   alarm_description   = "Alarm monitors low utilization for scaling down"
   comparison_operator = "LessThanOrEqualToThreshold"
   evaluation_periods  = 1
