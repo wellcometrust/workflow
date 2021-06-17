@@ -17,7 +17,7 @@ module "efs" {
 module "efs-workernode" {
   source = "../modules/efs"
 
-  name = "workflow-stage-workernode-storage"
+  name = "workflow-workernode-storage"
 
   throughput_mode = "bursting"
 
