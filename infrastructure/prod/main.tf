@@ -334,8 +334,8 @@ resource "aws_cloudwatch_metric_alarm" "high" {
 
   alarm_name          = "${local.environment_name}-workernode-scaling-alarm-high"
   alarm_description   = "Alarm monitors high utilization for scaling up"
-  comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = 1
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 5
   threshold           = 1
   alarm_actions       = [module.worker_node_1_autoscaling.scale_up_arn]
 
