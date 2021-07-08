@@ -203,7 +203,7 @@ module "worker_node_1_autoscaling" {
   name = "${local.environment_name}-worker_node_scaling"
 
   min_capacity = 1
-  max_capacity = 5
+  max_capacity = 10
 
   cluster_name = aws_ecs_cluster.cluster.name
   service_name = module.worker_node_1.name
