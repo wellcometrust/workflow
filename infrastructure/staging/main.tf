@@ -24,35 +24,6 @@ module "load_balancer" {
 #   source = "../modules/production"
 # }
 
-# the staging environment needs only one shellserver - it handles all jobtypes
-module "shell_server_1" {
-  source = "../modules/stack/shell_server"
-
-  name = "${local.environment_name}-shellserver_1"
-
-  cpu    = "2048"
-  memory = "4096"
-
-  configuration_bucket_name = aws_s3_bucket.workflow-stage-configuration.bucket
-  working_storage_path      = "/efs/tmp_shellserver1"
-  data_bucket_name          = aws_s3_bucket.workflow-stage-data.bucket
-  configuration_file_path   = "/opt/digiverso/shellserver/conf/shellserver_1_config.properties"
-
-  cluster_arn = aws_ecs_cluster.cluster.arn
-
-  subnets = module.network.private_subnets
-
-  security_group_ids = [
-    aws_security_group.service_egress.id,
-    aws_security_group.interservice.id,
-    aws_security_group.efs.id
-  ]
-
-  efs_id = module.efs.efs_id
-
-  shell_server_container_image = local.shell_server_container_image
-}
-
 module "harvester" {
   source = "../modules/stack/harvester"
 

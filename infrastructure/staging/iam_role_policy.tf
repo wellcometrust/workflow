@@ -69,32 +69,6 @@ resource "aws_iam_role_policy" "ecs_harvester_s3_rw_workflow-harvesting-results"
   policy = data.aws_iam_policy_document.s3_rw_workflow-harvesting-results.json
 }
 
-# shell_server_1
-resource "aws_iam_role_policy" "ecs_shell_server_1_s3_config_read" {
-  role   = module.shell_server_1.task_role
-  policy = data.aws_iam_policy_document.s3_read_workflow-configuration.json
-}
-
-resource "aws_iam_role_policy" "ecs_shell_server_1_s3_data_rw" {
-  role   = module.shell_server_1.task_role
-  policy = data.aws_iam_policy_document.s3_rw_workflow-data.json
-}
-
-resource "aws_iam_role_policy" "ecs_shell_server_1_s3_export_bagit_stage_rw" {
-  role   = module.shell_server_1.task_role
-  policy = data.aws_iam_policy_document.s3_rw_workflow-export-bagit-stage.json
-}
-
-resource "aws_iam_role_policy" "ecs_shell_server_1_s3_storage_archive_access" {
-  role   = module.shell_server_1.task_role
-  policy = data.aws_iam_policy_document.allow_storage_archive_access.json
-}
-
-resource "aws_iam_role_policy" "ecs_shell_server_1_s3_editorial_photography_upload_external" {
-  role   = module.shell_server_1.task_role
-  policy = data.aws_iam_policy_document.s3_editorial_photography_upload_external.json
-}
-
 resource "aws_iam_role_policy" "lambda_s3_upload_rw" {
   name   = "lambda_s3_upload"
   role   = aws_iam_role.lambda_stage_iam_role.name
