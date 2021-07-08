@@ -10,10 +10,6 @@ data "aws_ssm_parameter" "harvester_source_ips" {
   name = "/workflow/config/prod/harvester_source_ips"
 }
 
-data "aws_ssm_parameter" "shell_server_container_image" {
-  name = "/workflow/images/prod/shellserver"
-}
-
 data "aws_ssm_parameter" "goobi_container_image" {
   name = "/workflow/images/prod/goobi"
 }
@@ -110,7 +106,6 @@ locals {
   admin_cidr_ingress                = split(",", data.aws_ssm_parameter.admin_cidr_ingress.value)
   itm_source_ips                    = split(",", data.aws_ssm_parameter.itm_source_ips.value)
   harvester_source_ips              = split(",", data.aws_ssm_parameter.harvester_source_ips.value)
-  shell_server_container_image      = data.aws_ssm_parameter.shell_server_container_image.value
   goobi_container_image             = data.aws_ssm_parameter.goobi_container_image.value
   harvester_container_image         = data.aws_ssm_parameter.harvester_container_image.value
   itm_container_image               = data.aws_ssm_parameter.itm_container_image.value
