@@ -71,3 +71,11 @@ variable "subnets" {
 variable "security_group_ids" {
   type = list(string)
 }
+
+variable "ia_username_key" {
+  type = string
+}
+
+variable "ia_password_key" {
+  type = string
+}

@@ -54,6 +54,9 @@ module "harvester" {
   db_user_key     = local.db_user_key
   db_password_key = local.db_password_key
 
+  ia_username_key = local.ia_username_key
+  ia_password_key = local.ia_password_key
+
   host_name    = var.domain_name
   path_pattern = "/harvester/*"
   source_ips   = local.harvester_source_ips
@@ -187,6 +190,9 @@ module "worker_node_1" {
 
   efs_id                 = module.efs.efs_id
   working_storage_efs_id = module.efs-workernode.efs_id
+
+  ia_username_key = local.ia_username_key
+  ia_password_key = local.ia_password_key
 
   worker_node_container_image = local.worker_node_container_image
 }

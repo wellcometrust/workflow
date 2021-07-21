@@ -105,3 +105,11 @@ variable "healthcheck_path" {
 variable "alb_listener_arn" {
   type = string
 }
+
+variable "ia_username_key" {
+  type = string
+}
+
+variable "ia_password_key" {
+  type = string
+}
