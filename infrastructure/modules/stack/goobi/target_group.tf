@@ -12,6 +12,6 @@ resource "aws_alb_target_group" "itm" {
   health_check {
     protocol = "HTTP"
     path     = var.healthcheck_path
-    matcher  = "200"
+    matcher  = "200-399"
   }
 }
