@@ -98,3 +98,9 @@ module "service" {
 
   desired_task_count = 1
 }
+
+module "credentials_permissions" {
+  source    = "git::https://github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/secrets?ref=v3.0.0"
+  secrets   = local.secrets
+  role_name = module.task_definition.task_execution_role_name
+}
